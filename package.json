@@ -1,0 +1,20 @@
+{
+  "name": "website-performance-analysis-lighthouse-draft",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Website Performance Analysis tool using Google Lighthouse",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "M. Ali Koeken",
+  "license": "ISC",
+  "dependencies": {
+    "@sitespeed.io/throttle": "^5.0.0",
+    "chrome-launcher": "^0.15.2",
+    
+    "lighthouse": "^10.2.0",
+    "npm": "^9.6.7",
+    "uuid": "^8.1.0"
+  }
+}
