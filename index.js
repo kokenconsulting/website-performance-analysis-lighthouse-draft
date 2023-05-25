@@ -37,7 +37,6 @@ export function cpuSlowDownMultiplierImpactAnalysis(appInfo, sessionId, reportFo
 }
 
 export async function runAnalysisWithExternalThrottling(appInfo, url, reportFolder, sessionId = null, cpuSlowdownMultiplierArray = null, networkSpeedArray = null) {
-  logInfo(`runAnalysisWithExternalThrottling`);
   //if sessionid is null, generate a uuid4
   if (sessionId == null) {
     sessionId = uuidv4();
