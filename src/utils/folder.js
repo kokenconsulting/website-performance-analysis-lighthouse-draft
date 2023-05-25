@@ -62,7 +62,9 @@ export var prepareAppVersionFolder = function (appInfo, reportFolder) {
     const appFolder = prepareRunsFolder(appInfo, reportFolder)
     //versionFolderName string consists of v prefix and appinfo.version
     const versionFolderName = `v${appInfo.version}`;
-    const appVersionFolder = path.join(appFolder, versionFolderName);
+    //lets not save the session under a version anymore
+    //const appVersionFolder = path.join(appFolder, versionFolderName);
+    const appVersionFolder = appFolder;
     if (!fs.existsSync(appVersionFolder)) {
         fs.mkdirSync(appVersionFolder);
     }
@@ -107,5 +109,10 @@ export var prepareSessionReportFolder = function (appInfo, sessionId, reportFold
 };
 export function getSessionSummaryOutputPath(appInfo, sessionId, reportFolder) {
     const sessionFolderPath = prepareSessionReportFolder(appInfo, sessionId, reportFolder);
-    return path.join(sessionFolderPath, `${sessionId}_-summary.json`);
+    return path.join(sessionFolderPath, `${sessionId}-summary.json`);
 }
+export function getApplicationSessionListOutputPath(appInfo,reportFolder) {
+    const appFolder = prepareAppFolder(appInfo,reportFolder);
+    return path.join(appFolder, `${appInfo.projectName}-sessionlist.json`);
+}
+

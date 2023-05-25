@@ -27,7 +27,7 @@ npm i -g website-performance-analysis-lighthouse-draft
 
 ```` javascript
 
-import { runAnalysis, AppInfo, logInfo,cpuSlowDownMultiplierImpactAnalysis,generateDataForSession,runAnalysisWithExternalThrottling } from 'website-performance-analysis-lighthouse-draft';
+import { runAnalysis, AppInfo, logInfo,prepareThrottlingChartDataForSession,compileDataForSession,runAnalysisWithExternalThrottling } from 'website-performance-analysis-lighthouse-draft';
 import * as path from 'path';
 import pkg from 'uuid';
 const { v4: uuidv4 } = pkg;
@@ -48,8 +48,8 @@ var reportsFolderAbsolutePath = path.resolve(localReportsFolderPath);
 logInfo(`Saving reports to ${reportsFolderAbsolutePath}`)
 await runAnalysisWithExternalThrottling(appInfo, url, reportsFolderAbsolutePath,sessionId);
 logInfo(`starting summary for ${sessionId}`);
-await generateDataForSession(appInfo, reportsFolderAbsolutePath, sessionId);
-cpuSlowDownMultiplierImpactAnalysis(appInfo,sessionId,reportsFolderAbsolutePath);
+await compileDataForSession(appInfo, reportsFolderAbsolutePath, sessionId);
+prepareThrottlingChartDataForSession(appInfo,sessionId,reportsFolderAbsolutePath);
 
 ````
 

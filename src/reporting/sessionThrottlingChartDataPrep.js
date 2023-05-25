@@ -25,13 +25,13 @@ import * as path from 'path';
  * An array of analysis results for a session.
  * @type {AnalysisResult[]}
  */
-export function cpuSlowDownMultiplierImpactAnalysis(appInfo, sessionId, reportFolder) {
+export function prepareThrottlingChartDataForSession(appInfo, sessionId, reportFolder) {
     const chartDataFolder = prepareChartDataFolderUnderApp(appInfo, reportFolder);
     const sessionSummaryPath = getSessionSummaryOutputPath(appInfo, sessionId, reportFolder);
     const data = fs.readFileSync(sessionSummaryPath, 'utf8');
     //this is a list of analysis results defined under models/analysisResult.js
     const analysisResultList = JSON.parse(data);
-    var cpuSlowDownMultiplierImpactList = generateDataForCPUSlowDownMultiplierImpactAnalysis(appInfo, analysisResultList);
+    var cpuSlowDownMultiplierImpactList = processThrottlingData(appInfo, analysisResultList);
     const chartDataFilePath = path.join(chartDataFolder, `${sessionId}_cpuSlowDownMultiplierImpact.json`);
     fs.writeFileSync(chartDataFilePath, JSON.stringify(cpuSlowDownMultiplierImpactList));
 }
@@ -44,7 +44,7 @@ export function cpuSlowDownMultiplierImpactAnalysis(appInfo, sessionId, reportFo
 //cpuSlowDownMultiplier
 //interactive result
 //speed index
-function generateDataForCPUSlowDownMultiplierImpactAnalysis(appInfo, analysisResultList) {
+function processThrottlingData(appInfo, analysisResultList) {
     //this will be y axis
     const cpuSlowDownMultiplierImpactList = { interactiveResult: {}, speedIndex: {} };
     //this will be x axis
