@@ -1,16 +1,17 @@
 import * as path from 'path';
+import * as fs from 'fs';
 import { logInfo } from '../log/processlogger.js'
 import { AnalysisResult } from '../models/analysisResult.js';
 import { extractNumericValue,  prepareSessionReportFolder, getSessionSummaryOutputPath } from '../utils/folder.js';
 
-export async function compileDataForSession(appInfo, reportFolder, sessionId) {
+export async function createSummaryForSession(appInfo, reportFolder, sessionId) {
     try {
         const analysisResultList = [];
         const sessionRunFolderPath = prepareSessionReportFolder(appInfo, sessionId, reportFolder);
         const files = await getSessionFilePathList(sessionRunFolderPath, sessionId);
 
         for (const filePath of files) {
-            logInfo(`compileDataForSession --- file path is ${filePath}`);
+            logInfo(`createSummaryForSession --- file path is ${filePath}`);
             const data = await fs.promises.readFile(filePath, 'utf8');
             try {
                 const jsonReport = JSON.parse(data);
@@ -21,9 +22,11 @@ export async function compileDataForSession(appInfo, reportFolder, sessionId) {
         }
         const sessionReportOutputPath = getSessionSummaryOutputPath(appInfo, sessionId, reportFolder);
         await fs.promises.writeFile(sessionReportOutputPath, JSON.stringify(analysisResultList), 'utf8');
+        return sessionReportOutputPath;
     } catch (err) {
         console.error('Error:', err);
     }
+    return null;
 }
 
 async function getSessionFilePathList(sessionReportsFolder, filePrefix) {

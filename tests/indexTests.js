@@ -1,6 +1,6 @@
 const {
   AppInfo,
-  compileDataForSession,
+  createSummaryForSession,
   logInfo,
   prepareThrottlingChartDataForSession,
   runAnalysisWithExternalThrottling,
@@ -16,10 +16,10 @@ describe('index.js', () => {
     });
   });
 
-  describe('compileDataForSession', () => {
+  describe('createSummaryForSession', () => {
     it('should generate data for a session with the correct properties', () => {
       const appInfo = new AppInfo('My App', '1.0.0', 'https://myapp.com');
-      const data = compileDataForSession(appInfo);
+      const data = createSummaryForSession(appInfo);
       expect(data.appName).toBe('My App');
       expect(data.appVersion).toBe('1.0.0');
       expect(data.appUrl).toBe('https://myapp.com');

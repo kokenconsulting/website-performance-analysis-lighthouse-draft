@@ -34,6 +34,7 @@ export function prepareThrottlingChartDataForSession(appInfo, sessionId, reportF
     var cpuSlowDownMultiplierImpactList = processThrottlingData(appInfo, analysisResultList);
     const chartDataFilePath = path.join(chartDataFolder, `${sessionId}_cpuSlowDownMultiplierImpact.json`);
     fs.writeFileSync(chartDataFilePath, JSON.stringify(cpuSlowDownMultiplierImpactList));
+    logInfo(`cpuSlowDownMultiplierImpact data file is created and path is ${chartDataFilePath}`);
 }
 
 //function named cpuSlowDownMultiplierImpact analysis will get list of analysis results and return a list of cpuSlowDownMultiplierImpact objects.

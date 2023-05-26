@@ -78,5 +78,6 @@ export function prepareSessionDataForApplication(appInfo, reportFolder, fnGetSpe
     }
     fnPreSave(appInfo, sessionListForApplication);
     fs.writeFileSync(appSpecificPurposeSessionListFilePath, JSON.stringify(sessionListForApplication), 'utf8');
+    logInfo(`Session list written to ${appSpecificPurposeSessionListFilePath}`);
 
 }
