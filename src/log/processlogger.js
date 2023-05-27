@@ -1,6 +1,7 @@
-//this file contains logger functions to capture all the logs 
-// Path: scripts/lighthouse-library/logger.js
+export class ProcessLogger {
+  constructor() {}
 
-export async function logInfo(message) {
+  logInfo(message) {
     console.log(message);
+  }
 }

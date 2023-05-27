@@ -1,7 +1,7 @@
 {
   "name": "website-performance-analysis-lighthouse-draft",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Website Performance Analysis tool using Google Lighthouse",
   "main": "src/index.js",
   "scripts": {

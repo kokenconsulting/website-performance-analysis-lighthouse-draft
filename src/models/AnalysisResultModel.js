@@ -1,4 +1,4 @@
-export class AnalysisResult {
+export class AnalysisResultModel {
     constructor(appInfo, sessionId, initiatedBy, executionEnvironment, startDateTime, endDateTime, networkThrottle, cpuSlowDownMultiplier, loadTimeInteractive, loadTimeSpeedIndex) {
       this.appInfo = appInfo;
       this.sessionId = sessionId;
@@ -10,10 +10,5 @@ export class AnalysisResult {
       this.cpuSlowDownMultiplier = cpuSlowDownMultiplier;
       this.loadTimeInteractive = loadTimeInteractive;
       this.loadTimeSpeedIndex = loadTimeSpeedIndex;
-    }
-  
-    toJson() {
-      //return a json object consisting on non-function properties
-      return JSON.parse(JSON.stringify(this));
     }
   }
