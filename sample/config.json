@@ -11,18 +11,7 @@
   },
   "ThrottlingSettings": {
     "NetworkSpeeds": [
-      {
-        "rttMs": 100,
-        "throughputKbps": 9500
-      },
-      {
-        "rttMs": 100,
-        "throughputKbps": 12500
-      },
-      {
-        "rttMs": 100,
-        "throughputKbps": 19500
-      },
+      
       {
         "rttMs": 100,
         "throughputKbps": 29500

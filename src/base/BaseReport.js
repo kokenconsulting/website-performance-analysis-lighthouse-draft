@@ -31,7 +31,13 @@ export class BaseReport {
     }
     getSessionReportFolderPath(sessionId) {
         //create folders if they don't exist
-        const folderPath = `${this.getAppReportFolderPath()}/${CONSTANTS.SESSION}/${sessionId}`;
+        const folderPath = `${this.getSessionsFolderPath()}/${sessionId}`;
+        this.createFoldersIfNotExist(folderPath)
+        return folderPath;
+    }
+    getSessionsFolderPath() {
+        //create folders if they don't exist
+        const folderPath = `${this.getAppReportFolderPath()}/${CONSTANTS.SESSION}`;
         this.createFoldersIfNotExist(folderPath)
         return folderPath;
     }

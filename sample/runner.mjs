@@ -32,7 +32,7 @@ const sessionConfiguration = new SessionConfiguration(config.Url,config.ReportFo
 
 const logger = new ProcessLogger();
 var sessionEngine = new SessionEngine(sessionConfiguration, logger);
-await sessionEngine.runWithExternalThrottling();
-//await sessionEngine.runWithBuiltInThrottling();
+//await sessionEngine.runWithExternalThrottling();
+await sessionEngine.runWithBuiltInThrottling();
 var sessionListReport = new SessionListReport(sessionConfiguration.webApplication, config.ReportFolderRelativePath, logger);
 sessionListReport.generate();
