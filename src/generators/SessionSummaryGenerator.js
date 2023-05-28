@@ -6,15 +6,15 @@ import { extractNumericValue, prepareSessionReportFolder, getSessionSummaryOutpu
 import { SessionSummaryModel } from '../models/SessionSummaryModel.js';
 
 export class SessionSummaryGenerator {
-    constructor(appInfo, reportFolder) {
-        this.appInfo = appInfo;
+    constructor(webApplication, reportFolder) {
+        this.webApplication = webApplication;
         this.reportFolder = reportFolder;
     }
 
     async generate(sessionId) {
         try {
             const analysisResultList = await this.getAnalysisResultList(files, sessionId);
-            var sessionSummary = new SessionSummaryModel(this.appInfo, analysisResultList);
+            var sessionSummary = new SessionSummaryModel(this.webApplication, analysisResultList);
             const sessionReportOutputPath = await this.writeSessionSummaryToFile(sessionSummary);
             return sessionReportOutputPath;
         } catch (err) {
@@ -40,14 +40,14 @@ export class SessionSummaryGenerator {
     }
 
     async writeSessionSummaryToFile(sessionSummary) {
-        const sessionReportOutputPath = getSessionSummaryOutputPath(appInfo, sessionId, reportFolder);
+        const sessionReportOutputPath = getSessionSummaryOutputPath(webApplication, sessionId, reportFolder);
         await fs.promises.writeFile(sessionReportOutputPath, sessionSummary.toJson(), 'utf8');
         return sessionReportOutputPath;
     }
 
     async getSessionFilePathList(sessionId) {
         var fileList = [];
-        const sessionRunFolderPath = prepareSessionReportFolder(this.appInfo, sessionId, this.reportFolder);
+        const sessionRunFolderPath = prepareSessionReportFolder(this.webApplication, sessionId, this.reportFolder);
         const files = await fs.promises.readdir(sessionRunFolderPath);
         for (const file of files) {
             if (file.startsWith(sessionId)) {

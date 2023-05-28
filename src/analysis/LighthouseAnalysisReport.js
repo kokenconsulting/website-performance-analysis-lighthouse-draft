@@ -3,9 +3,9 @@ import { AnalysisResultModel } from "./AnalysisResultModel.js";
 import * as fs from 'fs';
 
 export class LighthouseAnalysisReport extends BaseReport {
-    constructor(appInfo, reportFolder, logger, sessionId, cpuSlowDownMultiplier = null, networkSpeed = null) {
-        super(appInfo, reportFolder, logger);
-        this.appInfo = appInfo;
+    constructor(webApplication, reportFolder, logger, sessionId, cpuSlowDownMultiplier = null, networkSpeed = null) {
+        super(webApplication, reportFolder, logger);
+        this.webApplication = webApplication;
         this.sessionId = sessionId;
         this.cpuSlowDownMultiplier = cpuSlowDownMultiplier;
         this.networkSpeed = networkSpeed;
@@ -35,7 +35,7 @@ export class LighthouseAnalysisReport extends BaseReport {
         const interactiveResultInMilliseconds = extractedNumericValues["interactive"];
         const speedIndexResultinMilliseconds = extractedNumericValues["speed-index"];
         this.logger.logInfo(`Interactive result is ${interactiveResultInMilliseconds} and speed index result is ${speedIndexResultinMilliseconds}`);
-        return new AnalysisResultModel(this.appInfo, this.sessionId, this.appInfo.initiatedBy, this.appInfo.environment, jsonReport.fetchTime, analysisEndTime, networkSpeed, cpuSlowDownMultiplier, interactiveResultInMilliseconds, speedIndexResultinMilliseconds);
+        return new AnalysisResultModel(this.webApplication, this.sessionId, this.webApplication.initiatedBy, this.webApplication.environment, jsonReport.fetchTime, analysisEndTime, networkSpeed, cpuSlowDownMultiplier, interactiveResultInMilliseconds, speedIndexResultinMilliseconds);
     }
     extractNumericValue(jsonObject) {
         const numericValuesObj = {};

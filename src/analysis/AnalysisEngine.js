@@ -3,9 +3,9 @@ import { LighthouseEngine } from './LighthouseEngine.js';
 import { LighthouseAnalysisReport } from './LighthouseAnalysisReport.js';
 import { BaseEngine } from '../base/BaseEngine.js';
 export class AnalysisEngine extends BaseEngine {
-    constructor(appInfo, url, reportFolder, logger, sessionId) {
+    constructor(webApplication, url, reportFolder, logger, sessionId) {
         super(logger);
-        this.appInfo = appInfo;
+        this.webApplication = webApplication;
         this.url = url;
         this.reportFolder = reportFolder;
         this.sessionId = sessionId;
@@ -18,6 +18,7 @@ export class AnalysisEngine extends BaseEngine {
     async orchestrateAnalysisWithThrottling(isExternalThrottlingUsed, cpuSlowdownMultiplier,networkSpeed) {
         let jsonReport = null;
         this.logger.logInfo(`Starting Analysis Orchestration with Throttling. Session Id: ${this.sessionId}`);
+        this.logger.logInfo(`Session Id: ${this.sessionId}, Cpu Slowdown Multiplier: ${cpuSlowdownMultiplier}, Network Speed: ${JSON.stringify(networkSpeed)}`);
         if (isExternalThrottlingUsed === true) {
             var resettedNetworkSpeed = {
                 rttMs: 0,
@@ -33,7 +34,7 @@ export class AnalysisEngine extends BaseEngine {
         this.logger.logInfo(`Analysis Orchestration - Saving Lighthouse Analysis Report`);
         this.logger.logInfo(`Analysis Orchestration - Saving Lighthouse Analysis Report - Session Id: ${this.sessionId}, Cpu Slowdown Multiplier: ${cpuSlowdownMultiplier}, Network Speed: ${JSON.stringify(networkSpeed)}`);
 
-        var lighthouseReporter = new LighthouseAnalysisReport(this.appInfo, this.reportFolder, this.logger,this.sessionId, cpuSlowdownMultiplier, networkSpeed);
+        var lighthouseReporter = new LighthouseAnalysisReport(this.webApplication, this.reportFolder, this.logger,this.sessionId, cpuSlowdownMultiplier, networkSpeed);
         lighthouseReporter.saveReport(jsonReport);
     }
 }

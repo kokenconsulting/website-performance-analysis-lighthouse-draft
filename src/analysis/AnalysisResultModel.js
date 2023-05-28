@@ -1,6 +1,6 @@
 export class AnalysisResultModel {
-    constructor(appInfo, sessionId, initiatedBy, executionEnvironment, startDateTime, endDateTime, networkThrottle, cpuSlowDownMultiplier, loadTimeInteractive, loadTimeSpeedIndex) {
-      this.appInfo = appInfo;
+    constructor(webApplication, sessionId, initiatedBy, executionEnvironment, startDateTime, endDateTime, networkThrottle, cpuSlowDownMultiplier, loadTimeInteractive, loadTimeSpeedIndex) {
+      this.webApplication = webApplication;
       this.sessionId = sessionId;
       this.initiatedBy = initiatedBy;
       this.executionEnvironment = executionEnvironment;

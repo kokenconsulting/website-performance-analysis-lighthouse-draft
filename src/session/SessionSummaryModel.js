@@ -3,9 +3,9 @@
 
 import { BaseModel } from '../base/BaseModel.js';
 export class SessionSummaryModel extends  BaseModel {
-  constructor(appInfo, analysisResultList) {
+  constructor(webApplication, analysisResultList) {
     super();
-    this.appInfo = appInfo;
+    this.webApplication = webApplication;
     this.analysisResultList = analysisResultList;
   }
 }

@@ -5,9 +5,9 @@ import { getAnalysisReportFileName, prepareChartDataFolderUnderApp, getSessionSu
 import * as path from 'path';
 
 export class ThrottledSessionChartDataGenerator {
-    constructor(sessionId,appInfo, reportFolder) {
+    constructor(sessionId,webApplication, reportFolder) {
         this.sessionId = sessionId;
-        this.appInfo = appInfo;
+        this.webApplication = webApplication;
         this.reportFolder = reportFolder;
 
     }
@@ -19,13 +19,13 @@ export class ThrottledSessionChartDataGenerator {
     }
 
     getSessionSummaryInformation() {
-        const sessionSummaryPath = getSessionSummaryOutputPath(this.appInfo, this.sessionId, this.reportFolder);
+        const sessionSummaryPath = getSessionSummaryOutputPath(this.webApplication, this.sessionId, this.reportFolder);
         const sessionSummaryDataJson = JSON.parse(fs.readFileSync(sessionSummaryPath, 'utf8'));
         return sessionSummaryDataJson;
     }
 
     writeToFile(chartDataFolder, SessionThrottleImpactReportModelList) {
-        const chartDataFolder = prepareChartDataFolderUnderApp(this.appInfo, this.reportFolder);
+        const chartDataFolder = prepareChartDataFolderUnderApp(this.webApplication, this.reportFolder);
         const chartDataFilePath = path.join(chartDataFolder, `${this.sessionId}_SessionThrottleImpactReportModel.json`);
         fs.writeFileSync(chartDataFilePath, JSON.stringify(SessionThrottleImpactReportModelList));
         logInfo(`SessionThrottleImpactReportModel data file is created and path is ${chartDataFilePath}`);
@@ -49,6 +49,6 @@ export class ThrottledSessionChartDataGenerator {
                 networkSpeedList.push(analysisResult.networkThrottle);
             }
         }
-        return new SessionThrottleImpactReportModel(this.appInfo, networkSpeedList, SessionThrottleImpactReportModelList);
+        return new SessionThrottleImpactReportModel(this.webApplication, networkSpeedList, SessionThrottleImpactReportModelList);
     }
 }

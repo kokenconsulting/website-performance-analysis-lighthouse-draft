@@ -1,19 +1,23 @@
-import { start, stop } from '@sitespeed.io/throttle'
 import { BaseEngine } from '../base/BaseEngine.js';
 import { v4 as uuidv4 } from 'uuid';
 import { AnalysisEngine } from '../analysis/AnalysisEngine.js';
-import { standardNetworkSpeeds, cpuSlowdownMultipliers } from '../base/throttling.js';
+import { standardNetworkSpeeds, cpuSlowdownMultipliers } from '../base/ThrottlingSettings.js';
 import { SessionSummaryReport } from '../session/SessionSummaryReport.js';
+import { ThrottlingManager } from './ThrottlingManager.js';
 
 export class SessionEngine extends BaseEngine {
-  constructor(appInfo, url, reportFolder, logger, sessionId = null) {
+  //constructor(webApplication, url, reportFolder, logger, sessionId = null, cpuSlowdownMultiplierArray = null, networkSpeedArray = null) {
+  constructor(sessionConfiguration, logger,sessionId=null) {
     super(logger);
-    this.appInfo = appInfo;
-    this.url = url;
-    this.reportFolder = reportFolder;
+    this.webApplication = sessionConfiguration.webApplication;
+    this.url = sessionConfiguration.url;
+    this.reportFolder = sessionConfiguration.reportFolderRelativePath;
     this.setSessionId(sessionId);
-    this.sessionSummaryReport = new SessionSummaryReport(appInfo, reportFolder, this.logger, this.sessionId);
-    this.AnalysisEngine = new AnalysisEngine(appInfo, url, reportFolder, logger, this.sessionId);
+    this.sessionSummaryReport = new SessionSummaryReport(this.webApplication, this.reportFolder, this.logger, this.sessionId);
+    this.AnalysisEngine = new AnalysisEngine(this.webApplication, this.url, this.reportFolder, this.logger, this.sessionId);
+    //({ cpuSlowdownMultiplierArray, networkSpeedArray } = this.determineThrottlingConfiguration(sessionConfiguration.throttlingSettings));
+    this.cpuSlowdownMultiplierArray = sessionConfiguration.throttlingSettings.cpuSlowDownMultipliers;
+    this.networkSpeedArray = sessionConfiguration.throttlingSettings.networkSpeeds;
   }
   setSessionId(sessionId) {
     if (sessionId == null || sessionId === undefined) {
@@ -24,46 +28,42 @@ export class SessionEngine extends BaseEngine {
     this.logger.logInfo(`Session id is ${this.sessionId}`);
   }
 
-  async runWithBuiltInThrottling(sessionId = null, cpuSlowdownMultiplierArray = null, networkSpeedArray = null) {
-    sessionId = this.setSessionId(sessionId);
-    ({ cpuSlowdownMultiplierArray, networkSpeedArray } = this.setThrottlingValues(cpuSlowdownMultiplierArray, networkSpeedArray));
-
-    for (const networkSpeed of networkSpeedArray) {
-      for (const cpuSlowdownMultiplier of cpuSlowdownMultiplierArray) {
+  async runWithBuiltInThrottling() {
+    for (const networkSpeed of this.networkSpeedArray) {
+      for (const cpuSlowdownMultiplier of this.cpuSlowdownMultiplierArray) {
+        this.logger.logInfo(`cpuSlowdownMultiplier is ${cpuSlowdownMultiplier} and network speed is ${networkSpeed}`);
         await this.AnalysisEngine.orchestrateAnalysisWithThrottling(false, cpuSlowdownMultiplier, networkSpeed);
       }
     }
     this.sessionSummaryReport.generate();
-    return sessionId;
+    return this.sessionId;
   }
 
-  async runWithExternalThrottling(cpuSlowdownMultiplierArray = null, networkSpeedArray = null) {
-    ({ cpuSlowdownMultiplierArray, networkSpeedArray } = this.setThrottlingValues(cpuSlowdownMultiplierArray, networkSpeedArray));
+  async runWithExternalThrottling() {
 
-    for (const networkSpeed of networkSpeedArray) {
+    var throttlingManager = new ThrottlingManager(this.logger);
+    for (const networkSpeed of this.networkSpeedArray) {
       const options = { up: networkSpeed.throughputKbps, down: networkSpeed.throughputKbps, rtt: networkSpeed.rttMs };
       this.logger.logInfo(`Starting @sitespeed.io/throttle throttling with options ${JSON.stringify(options)}`);
-      await start(options);
-      for (const cpuSlowdownMultiplier of cpuSlowdownMultiplierArray) {
+      await throttlingManager.startThrottling(options);
+      for (const cpuSlowdownMultiplier of this.cpuSlowdownMultiplierArray) {
         this.logger.logInfo(`Starting analysis for cpu slowdown multiplier ${cpuSlowdownMultiplier} and network speed ${JSON.stringify(networkSpeed)}`);
         await this.AnalysisEngine.orchestrateAnalysisWithThrottling(true, cpuSlowdownMultiplier, networkSpeed);
       }
       this.logger.logInfo(`Stopping @sitespeed.io/throttle throttling with options ${JSON.stringify(options)}`);
-      await stop();
+      await throttlingManager.stopThrottling();
     }
     this.sessionSummaryReport.generate();
   }
 
 
-
-
-  setThrottlingValues(cpuSlowdownMultiplierArray, networkSpeedArray) {
-    if (cpuSlowdownMultiplierArray == null) {
-      cpuSlowdownMultiplierArray = cpuSlowdownMultipliers;
-    }
-    if (networkSpeedArray == null) {
-      networkSpeedArray = standardNetworkSpeeds;
-    }
-    return { cpuSlowdownMultiplierArray, networkSpeedArray };
-  }
+  // determineThrottlingConfiguration(throttlingSettings) {
+  //   if (throttlingSettings.CPUSlowDownMultipliers == null) {
+  //     cpuSlowdownMultiplierArray = cpuSlowdownMultipliers;
+  //   }
+  //   if (throttlingSettings.NetworkSpeeds == null) {
+  //     networkSpeedArray = standardNetworkSpeeds;
+  //   }
+  //   return { cpuSlowdownMultiplierArray, networkSpeedArray };
+  // }
 }

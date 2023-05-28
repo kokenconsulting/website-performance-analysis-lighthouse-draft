@@ -1,5 +1,5 @@
 const {
-  AppInfo,
+  WebApplication,
   createSummaryForSession,
   logInfo,
   prepareThrottlingChartDataForSession,
@@ -7,19 +7,19 @@ const {
 } = require('./index');
 
 describe('index.js', () => {
-  describe('AppInfo', () => {
-    it('should create an AppInfo object with the correct properties', () => {
-      const appInfo = new AppInfo('My App', '1.0.0', 'https://myapp.com');
-      expect(appInfo.name).toBe('My App');
-      expect(appInfo.version).toBe('1.0.0');
-      expect(appInfo.url).toBe('https://myapp.com');
+  describe('WebApplication', () => {
+    it('should create an WebApplication object with the correct properties', () => {
+      const webApplication = new WebApplication('My App', '1.0.0', 'https://myapp.com');
+      expect(webApplication.name).toBe('My App');
+      expect(webApplication.version).toBe('1.0.0');
+      expect(webApplication.url).toBe('https://myapp.com');
     });
   });
 
   describe('createSummaryForSession', () => {
     it('should generate data for a session with the correct properties', () => {
-      const appInfo = new AppInfo('My App', '1.0.0', 'https://myapp.com');
-      const data = createSummaryForSession(appInfo);
+      const webApplication = new WebApplication('My App', '1.0.0', 'https://myapp.com');
+      const data = createSummaryForSession(webApplication);
       expect(data.appName).toBe('My App');
       expect(data.appVersion).toBe('1.0.0');
       expect(data.appUrl).toBe('https://myapp.com');
@@ -38,10 +38,10 @@ describe('index.js', () => {
 
   describe('prepareThrottlingChartDataForSession', () => {
     it('should return an object with the correct properties', () => {
-      const appInfo = new AppInfo('My App', '1.0.0', 'https://myapp.com');
+      const webApplication = new WebApplication('My App', '1.0.0', 'https://myapp.com');
       const sessionId = '1234';
       const reportFolder = '/path/to/reports';
-      const result = prepareThrottlingChartDataForSession(appInfo, sessionId, reportFolder);
+      const result = prepareThrottlingChartDataForSession(webApplication, sessionId, reportFolder);
       expect(result).toHaveProperty('sessionId', sessionId);
       expect(result).toHaveProperty('reportFolder', reportFolder);
       expect(result).toHaveProperty('results');
@@ -50,7 +50,7 @@ describe('index.js', () => {
 
   describe('runAnalysisWithExternalThrottling', () => {
     it('should run the analysis with the correct parameters', async () => {
-      const appInfo = new AppInfo('My App', '1.0.0', 'https://myapp.com');
+      const webApplication = new WebApplication('My App', '1.0.0', 'https://myapp.com');
       const url = 'https://myapp.com';
       const reportFolder = '/path/to/reports';
       const sessionId = '1234';
@@ -61,18 +61,18 @@ describe('index.js', () => {
       const mockOrchestrateAnalysis = jest.fn().mockResolvedValue(undefined);
       const originalOrchestrateAnalysis = global.orchestrateAnalysisWithBuiltInThrottling;
       global.orchestrateAnalysisWithBuiltInThrottling = mockOrchestrateAnalysis;
-      await runAnalysisWithExternalThrottling(appInfo, url, reportFolder, null, cpuSlowdownMultiplierArray, networkSpeedArray);
+      await runAnalysisWithExternalThrottling(webApplication, url, reportFolder, null, cpuSlowdownMultiplierArray, networkSpeedArray);
       expect(mockFn).not.toHaveBeenCalled();
       expect(mockOrchestrateAnalysis).toHaveBeenCalledTimes(9);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, appInfo, url, 100, 1, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, appInfo, url, 100, 2, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, appInfo, url, 100, 3, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, appInfo, url, 200, 1, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, appInfo, url, 200, 2, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, appInfo, url, 200, 3, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, appInfo, url, 300, 1, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, appInfo, url, 300, 2, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, appInfo, url, 300, 3, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 100, 1, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 100, 2, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 100, 3, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 200, 1, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 200, 2, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 200, 3, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 300, 1, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 300, 2, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 300, 3, reportFolder);
       global.orchestrateAnalysisWithBuiltInThrottling = originalOrchestrateAnalysis;
       spy.mockRestore();
     });

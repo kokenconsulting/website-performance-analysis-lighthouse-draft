@@ -4,16 +4,16 @@ import { SessionSummaryModel } from "./SessionSummaryModel.js";
 import * as fs from 'fs';
 import * as path from 'path';
 export class SessionSummaryReport extends BaseReport {
-    constructor(appInfo, reportFolder, logger,sessionId) {
-        super(appInfo, reportFolder,logger);
-        this.appInfo = appInfo;
+    constructor(webApplication, reportFolder, logger,sessionId) {
+        super(webApplication, reportFolder,logger);
+        this.webApplication = webApplication;
         this.sessionId = sessionId;
         this.sessionSummaryReportFilePath = this.getSessionSummaryReportFilePath(sessionId);
     }
     async generate() {
         try {
             const analysisResultList = await this.getAnalysisResultList();
-            var sessionSummary = new SessionSummaryModel(this.appInfo, analysisResultList);
+            var sessionSummary = new SessionSummaryModel(this.webApplication, analysisResultList);
             this.saveReport(sessionSummary);
         } catch (err) {
             console.error('Error:', err);
@@ -47,7 +47,7 @@ export class SessionSummaryReport extends BaseReport {
                 //TODO - get from proper path
                 var cpuSlowDownMultiplier = jsonReport.configSettings.customSettings.providedCPUSlowDownMultiplier;
                 var networkSpeed = jsonReport.configSettings.customSettings.providedNetworkThrottling;
-                var lighthouseAnalysisReport = new LighthouseAnalysisReport(this.appInfo, this.reportFolder, this.logger, this.sessionId, cpuSlowDownMultiplier, networkSpeed);
+                var lighthouseAnalysisReport = new LighthouseAnalysisReport(this.webApplication, this.reportFolder, this.logger, this.sessionId, cpuSlowDownMultiplier, networkSpeed);
                 var analysisResultReport = lighthouseAnalysisReport.getReportAsAnalysisResultModel();
                 analysisResultList.push(analysisResultReport);
             } catch (error) {

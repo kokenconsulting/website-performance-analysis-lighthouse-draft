@@ -1,0 +1,25 @@
+{
+    "Url": "https://www.google.com",
+    "ReportFolderRelativePath": "./sample/reports",
+    "Application": {
+        "name": "SampleApplication",
+        "version": "1.0.0",
+        "description": "Sample Application",
+        "GitUrl": "",
+        "GitBranch": "master",
+        "Environment": "dev"
+    },
+    "ThrottlingSettings": {
+        "NetworkSpeeds": [
+            [
+                {
+                    "rttMs": 100,
+                    "throughputKbps": 29500
+                }
+            ]
+        ],
+        "CPUSlowDownMultipliers": [
+            0
+        ]
+    }
+}

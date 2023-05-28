@@ -2,16 +2,16 @@ import * as fs from 'fs';
 import { BaseReport } from '../base/BaseReport.js';
 
 export class SessionListReport extends BaseReport {
-    constructor(appInfo, reportFolder,logger) {
-        super(appInfo, reportFolder,logger);
+    constructor(webApplication, reportFolder,logger) {
+        super(webApplication, reportFolder,logger);
         this.sessionList = {
-            appInfo: appInfo,
+            webApplication: webApplication,
             sessions: []
         };
         this.sessionListFilePath = this.getAppSessionListReportFilePath();
     }
     generate() {
-        this.logger.logInfo(`Preparing session list for app ${this.appInfo.projectName}`);
+        this.logger.logInfo(`Preparing session list for app ${this.webApplication.name}`);
         this.prepareSessionDataForApplication();
     }
 
@@ -25,7 +25,7 @@ export class SessionListReport extends BaseReport {
                 sessionId: sessionId,
                 startDateTime: startDateTime,
                 endDateTime: endDateTime,
-                appVersion: this.appInfo.version
+                appVersion: this.webApplication.version
             });
         }
     }
@@ -44,7 +44,7 @@ export class SessionListReport extends BaseReport {
                 continue;
             }
             logInfo(`sessionFolder: ${sessionFolder}`);
-            const sessionSummaryFilePath = getSessionSummaryOutputPath(this.appInfo, sessionFolder, this.reportFolder);
+            const sessionSummaryFilePath = getSessionSummaryOutputPath(this.webApplication, sessionFolder, this.reportFolder);
             const sessionSummaryObject = JSON.parse(fs.readFileSync(sessionSummaryFilePath, 'utf8'));
             addToSessionList(sessionSummaryObject, sessionSummaryFilePath);
         }

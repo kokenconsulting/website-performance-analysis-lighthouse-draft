@@ -3,16 +3,16 @@ import { logInfo } from '../log/processlogger.js';
 import { getApplicationSessionListOutputPath, getSessionSummaryOutputPath, prepareRunsFolder, prepareAppVersionFolder } from '../utils/folder.js';
 
 export class SessionListGenerator {
-    constructor(appInfo, reportFolder) {
-        this.appInfo = appInfo;
+    constructor(webApplication, reportFolder) {
+        this.webApplication = webApplication;
         this.reportFolder = reportFolder;
         this.sessionList = {
-            appInfo: appInfo,
+            webApplication: webApplication,
             sessions: []
         };
     }
     generate() {
-        logInfo(`Preparing session list for app ${this.appInfo.projectName}`);
+        logInfo(`Preparing session list for app ${this.webApplication.name}`);
         this.prepareSessionDataForApplication(getApplicationSessionListOutputPath, addToSessionList, preSave);
     }
 
@@ -26,7 +26,7 @@ export class SessionListGenerator {
                 sessionId: sessionId,
                 startDateTime: startDateTime,
                 endDateTime: endDateTime,
-                appVersion: this.appInfo.version
+                appVersion: this.webApplication.version
             });
         }
     }
@@ -38,19 +38,19 @@ export class SessionListGenerator {
 
 
     prepareSessionDataForApplication(fnGetSpecificAppSessionFilePath, fnSpecificAppSessionFileOperation, fnPreSave) {
-        let appSpecificPurposeSessionListFilePath = fnGetSpecificAppSessionFilePath(this.appInfo, this.reportFolder);
+        let appSpecificPurposeSessionListFilePath = fnGetSpecificAppSessionFilePath(this.webApplication, this.reportFolder);
         logInfo(`appSpecificPurposeSessionListFilePath: ${appSpecificPurposeSessionListFilePath}`)
         if (!fs.existsSync(appSpecificPurposeSessionListFilePath)) {
             fs.writeFileSync(appSpecificPurposeSessionListFilePath, JSON.stringify(this.sessionList), 'utf8');
         }
         const sessionListForApplication = JSON.parse(fs.readFileSync(appSpecificPurposeSessionListFilePath, 'utf8'));
-        const runsFolder = prepareAppVersionFolder(this.appInfo, this.reportFolder);
+        const runsFolder = prepareAppVersionFolder(this.webApplication, this.reportFolder);
         for (const sessionFolder of fs.readdirSync(runsFolder)) {
             if (!sessionFolder.match(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/)) {
                 continue;
             }
             logInfo(`sessionFolder: ${sessionFolder}`);
-            const sessionSummaryFilePath = getSessionSummaryOutputPath(this.appInfo, sessionFolder, this.reportFolder);
+            const sessionSummaryFilePath = getSessionSummaryOutputPath(this.webApplication, sessionFolder, this.reportFolder);
             const sessionSummaryObject = JSON.parse(fs.readFileSync(sessionSummaryFilePath, 'utf8'));
             fnSpecificAppSessionFileOperation(sessionSummaryObject, sessionSummaryFilePath,);
         }

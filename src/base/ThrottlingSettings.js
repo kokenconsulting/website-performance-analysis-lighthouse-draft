@@ -17,3 +17,12 @@ export const standardNetworkSpeeds = [
 ];
 
 export const cpuSlowdownMultipliers = [0];
+
+export class ThrottlingSettings {
+    constructor(networkSpeeds, cpuSlowDownMultipliers) {
+        this.networkSpeeds = networkSpeeds;
+        this.cpuSlowDownMultipliers = cpuSlowDownMultipliers;
+    }
+}
+
+export const StandardThrottlingSettings = new ThrottlingSettings(standardNetworkSpeeds, cpuSlowdownMultipliers);

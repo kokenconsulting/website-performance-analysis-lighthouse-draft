@@ -1,8 +1,8 @@
 
 // app information class that consist of projectname, gitrepourl, gitbranchname
 export class ApplicationSummaryModel {
-  constructor(appInfo, sessionSummaryList) {
-    this.appInfo = appInfo;
+  constructor(webApplication, sessionSummaryList) {
+    this.webApplication = webApplication;
     this.sessionSummaryList = sessionSummaryList;
   }
   toJson() {
