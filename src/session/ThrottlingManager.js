@@ -6,15 +6,13 @@ export class ThrottlingManager {
     this.logger = logger;
   }
 
-  async startThrottling(networkSpeed) {
-    const options = { up: networkSpeed.throughputKbps, down: networkSpeed.throughputKbps, rtt: networkSpeed.rttMs };
+  async startThrottling(options) {
+    //const options = { up: networkSpeed.throughputKbps, down: networkSpeed.throughputKbps, rtt: networkSpeed.rttMs };
     this.logger.logInfo(`Starting @sitespeed.io/throttle throttling with options ${JSON.stringify(options)}`);
     await start(options);
   }
 
-  async stopThrottling(networkSpeed) {
-    const options = { up: networkSpeed.throughputKbps, down: networkSpeed.throughputKbps, rtt: networkSpeed.rttMs };
-    this.logger.logInfo(`Stopping @sitespeed.io/throttle throttling with options ${JSON.stringify(options)}`);
+  async stopThrottling() {
     await stop();
   }
 }

@@ -38,7 +38,7 @@ export class SessionListReport extends BaseReport {
 
     prepareSessionDataForApplication() {
         const appFolderPath = this.getAppReportFolderPath();
-       
+        this.logger.logInfo(`appFolderPath: ${appFolderPath}`);
         for (const sessionFolder of fs.readdirSync(appFolderPath)) {
             if (!sessionFolder.match(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/)) {
                 continue;

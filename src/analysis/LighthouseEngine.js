@@ -34,8 +34,11 @@ export class LighthouseEngine extends BaseEngine {
         lighthouseConfig.settings.customSettings = {};
         if (externalNetworkSpeed != null) {
             lighthouseConfig.settings.externalNetworkSpeed = externalNetworkSpeed;
+            lighthouseConfig.settings.customSettings.providedNetworkThrottling = externalNetworkSpeed;
+        }else{
+            lighthouseConfig.settings.customSettings.providedNetworkThrottling = networkSpeed;
+
         }
-        lighthouseConfig.settings.customSettings.providedNetworkThrottling = networkSpeed;
         lighthouseConfig.settings.customSettings.providedCPUSlowDownMultiplier = cpuSlowdownMultiplier;
 
 
