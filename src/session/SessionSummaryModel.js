@@ -1,13 +1,12 @@
 
 // app information class that consist of projectname, gitrepourl, gitbranchname
-export class SessionSummaryModel {
+
+import { BaseModel } from '../base/BaseModel.js';
+export class SessionSummaryModel extends  BaseModel {
   constructor(appInfo, analysisResultList) {
+    super();
     this.appInfo = appInfo;
     this.analysisResultList = analysisResultList;
-  }
-  toJson() {
-    //return a json object consisting on non-function properties
-    return JSON.parse(JSON.stringify(this));
   }
 }
 

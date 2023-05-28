@@ -1,17 +1,18 @@
-import { BaseReport } from "../base/BaseReport";
-import { LighthouseAnalysisReport } from "../analysis/LighthouseAnalysisReport";
-import { SessionSummaryModel } from "../models/SessionSummaryModel";
-
+import { BaseReport } from "../base/BaseReport.js";
+import { LighthouseAnalysisReport } from "../analysis/LighthouseAnalysisReport.js";
+import { SessionSummaryModel } from "./SessionSummaryModel.js";
+import * as fs from 'fs';
+import * as path from 'path';
 export class SessionSummaryReport extends BaseReport {
-    constructor(appInfo, reportFolder, sessionId) {
-        super(appInfo, reportFolder);
+    constructor(appInfo, reportFolder, logger,sessionId) {
+        super(appInfo, reportFolder,logger);
         this.appInfo = appInfo;
         this.sessionId = sessionId;
-        this.sessionSummaryReportFilePath = this.getSessionSummaryReportFilePath(sessionId, cpuSlowdownMultiplier, networkSpeed);
+        this.sessionSummaryReportFilePath = this.getSessionSummaryReportFilePath(sessionId);
     }
     async generate() {
         try {
-            const analysisResultList = await this.getAnalysisResultList(files, sessionId);
+            const analysisResultList = await this.getAnalysisResultList();
             var sessionSummary = new SessionSummaryModel(this.appInfo, analysisResultList);
             this.saveReport(sessionSummary);
         } catch (err) {
@@ -23,11 +24,12 @@ export class SessionSummaryReport extends BaseReport {
     async getSessionFilePathList() {
         var fileList = [];
         const sessionRunFolderPath = await this.getAnalysisListReportFolderPath(this.sessionId);
+        this.logger.logInfo(`Session run folder path is ${sessionRunFolderPath}`);
         const files = await fs.promises.readdir(sessionRunFolderPath);
         for (const file of files) {
-            if (file.startsWith(sessionId)) {
-                const filePath = path.join(sessionReportsFolder, file);
-                logInfo(`File path is ${filePath}`);
+            if (file.startsWith(this.sessionId)) {
+                const filePath = path.join(sessionRunFolderPath, file);
+                this.logger.logInfo(`File path is ${filePath}`);
                 fileList.push(filePath);
             }
 
@@ -36,16 +38,16 @@ export class SessionSummaryReport extends BaseReport {
     }
 
     async getAnalysisResultList() {
-        const files = getSessionFilePathList()
+        const files = await this.getSessionFilePathList()
         const analysisResultList = [];
         for (const filePath of files) {
             const data = await fs.promises.readFile(filePath, 'utf8');
             try {
                 const jsonReport = JSON.parse(data);
                 //TODO - get from proper path
-                var cpuSlowDownMultiplier = jsonReport['cpuSlowdownMultiplier'];
-                var networkSpeed = jsonReport['networkSpeed'];
-                var lighthouseAnalysisReport = new LighthouseAnalysisReport(this.appInfo, this.reportFolder, this.sessionId, cpuSlowDownMultiplier, networkSpeed);
+                var cpuSlowDownMultiplier = jsonReport.configSettings.customSettings.providedCPUSlowDownMultiplier;
+                var networkSpeed = jsonReport.configSettings.customSettings.providedNetworkThrottling;
+                var lighthouseAnalysisReport = new LighthouseAnalysisReport(this.appInfo, this.reportFolder, this.logger, this.sessionId, cpuSlowDownMultiplier, networkSpeed);
                 var analysisResultReport = lighthouseAnalysisReport.getReportAsAnalysisResultModel();
                 analysisResultList.push(analysisResultReport);
             } catch (error) {
@@ -58,8 +60,8 @@ export class SessionSummaryReport extends BaseReport {
 
     saveReport(sessionSummaryReportObject) {
 
-        fs.writeFileSync(sessionSummaryReportFilePath, JSON.stringify(sessionSummaryReportObject), 'utf8');
-        logInfo(`Analysis report written to ${this.sessionSummaryReportFilePath}`);
+        fs.writeFileSync(this.sessionSummaryReportFilePath, JSON.stringify(sessionSummaryReportObject), 'utf8');
+        this.logger.logInfo(`Analysis report written to ${this.sessionSummaryReportFilePath}`);
     }
 
     getReport() {

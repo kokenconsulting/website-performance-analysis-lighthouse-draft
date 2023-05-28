@@ -1,11 +1,9 @@
 import * as fs from 'fs';
-import { logInfo } from '../log/Processlogger.js';
 import { BaseReport } from '../base/BaseReport.js';
 
 export class SessionListReport extends BaseReport {
-    constructor(appInfo, reportFolder) {
-        this.appInfo = appInfo;
-        this.reportFolder = reportFolder;
+    constructor(appInfo, reportFolder,logger) {
+        super(appInfo, reportFolder,logger);
         this.sessionList = {
             appInfo: appInfo,
             sessions: []
@@ -13,8 +11,8 @@ export class SessionListReport extends BaseReport {
         this.sessionListFilePath = this.getAppSessionListReportFilePath();
     }
     generate() {
-        logInfo(`Preparing session list for app ${this.appInfo.projectName}`);
-        this.prepareSessionDataForApplication(getApplicationSessionListOutputPath, addToSessionList, preSave);
+        this.logger.logInfo(`Preparing session list for app ${this.appInfo.projectName}`);
+        this.prepareSessionDataForApplication();
     }
 
     addToSessionList(sessionSummaryObject) {
@@ -39,8 +37,7 @@ export class SessionListReport extends BaseReport {
 
 
     prepareSessionDataForApplication() {
-        let appFolderPath = this.getAppReportFolderPath();
-        logInfo(`appSpecificPurposeSessionListFilePath: ${appSpecificPurposeSessionListFilePath}`)
+        const appFolderPath = this.getAppReportFolderPath();
        
         for (const sessionFolder of fs.readdirSync(appFolderPath)) {
             if (!sessionFolder.match(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/)) {
@@ -51,13 +48,12 @@ export class SessionListReport extends BaseReport {
             const sessionSummaryObject = JSON.parse(fs.readFileSync(sessionSummaryFilePath, 'utf8'));
             addToSessionList(sessionSummaryObject, sessionSummaryFilePath);
         }
-        sortSessionList();
-        this.saveReport(appSpecificPurposeSessionListFilePath);
+        this.sortSessionList();
+        this.saveReport();
     }
 
-    saveReport(appSpecificPurposeSessionListFilePath) {
+    saveReport() {
         fs.writeFileSync(this.sessionListFilePath, JSON.stringify(this.sessionList), 'utf8');
-        logInfo(`Session list written to ${appSpecificPurposeSessionListFilePath}`);
     }
     getReport() {
         //read file

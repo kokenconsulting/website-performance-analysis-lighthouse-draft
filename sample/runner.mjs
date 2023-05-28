@@ -7,7 +7,9 @@ import {
   from '../src/index.js';
 
 const appInfo = new AppInfo('sample', '1.0.0',"dev","rep","main");
-var sessionEngine = new SessionEngine(appInfo, 'https://www.google.com', 'reports', new ProcessLogger());
-sessionEngine.runWithExternalThrottling();
-var sessionListReport = new SessionListReport(appInfo, 'reports');
+const logger = new ProcessLogger();
+var sessionEngine = new SessionEngine(appInfo, 'https://www.google.com', 'reports',logger );
+//await sessionEngine.runWithExternalThrottling();
+await sessionEngine.runWithBuiltInThrottling();
+var sessionListReport = new SessionListReport(appInfo, 'reports',logger);
 sessionListReport.generate();

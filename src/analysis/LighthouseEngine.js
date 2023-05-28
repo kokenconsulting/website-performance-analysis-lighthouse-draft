@@ -1,14 +1,14 @@
 import * as chromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
-
+import { BaseEngine } from '../base/BaseEngine.js';
 const maxWaitForFcp = 1000000
 const maxWaitForLoad = 2000000
 const formFactor = "desktop"
 
-export class LighthouseEngine {
+export class LighthouseEngine extends BaseEngine {
     constructor(logger) {
-        this.logger = logger;
-     }
+        super(logger)
+    }
 
     async runLighthouse(url, networkSpeed, cpuSlowdownMultiplier, externalNetworkSpeed = null) {
         const chrome = await chromeLauncher.launch({
@@ -31,10 +31,13 @@ export class LighthouseEngine {
                 }
             }
         };
-
+        lighthouseConfig.settings.customSettings = {};
         if (externalNetworkSpeed != null) {
             lighthouseConfig.settings.externalNetworkSpeed = externalNetworkSpeed;
         }
+        lighthouseConfig.settings.customSettings.providedNetworkThrottling = networkSpeed;
+        lighthouseConfig.settings.customSettings.providedCPUSlowDownMultiplier = cpuSlowdownMultiplier;
+
 
         const options = {
             port: chrome.port,

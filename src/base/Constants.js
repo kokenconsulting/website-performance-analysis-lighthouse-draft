@@ -1,6 +1,6 @@
 export class CONSTANTS {
     static get SESSION() {
-        return 'session';
+        return 'sessions';
     }
     static get SESSIONLIST() {
         return 'sessionlist';
