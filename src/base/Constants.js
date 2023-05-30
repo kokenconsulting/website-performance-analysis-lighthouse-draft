@@ -1,9 +1,9 @@
 export class CONSTANTS {
-    static get SESSION() {
-        return 'sessions';
+    static get AUDIT() {
+        return 'audits';
     }
-    static get SESSIONLIST() {
-        return 'sessionlist';
+    static get AUDITLIST() {
+        return 'auditlist';
     }
     static get ANALYSIS() {
         return 'analysis';

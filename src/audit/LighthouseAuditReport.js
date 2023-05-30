@@ -1,16 +1,16 @@
 import { BaseReport } from "../base/BaseReport.js";
-import { AnalysisResultModel } from "./AnalysisResultModel.js";
+import { AuditResultModel } from "./AuditResultModel.js";
 import * as fs from 'fs';
 
-export class LighthouseAnalysisReport extends BaseReport {
-    constructor(webApplication, reportFolder, logger, sessionId, cpuSlowDownMultiplier = null, networkSpeed = null) {
+export class LighthouseAuditReport extends BaseReport {
+    constructor(webApplication, reportFolder, logger, auditInstanceId, cpuSlowDownMultiplier = null, networkSpeed = null) {
         super(webApplication, reportFolder, logger);
         this.webApplication = webApplication;
-        this.sessionId = sessionId;
+        this.auditInstanceId = auditInstanceId;
         this.cpuSlowDownMultiplier = cpuSlowDownMultiplier;
         this.networkSpeed = networkSpeed;
-        this.logger.logInfo(`Creating analysis report for session ${this.sessionId} with cpu slowdown multiplier ${cpuSlowDownMultiplier} and network speed ${networkSpeed}`);
-        this.anaylsisReportPath = this.getAnalysisReportFilePath(this.sessionId, this.cpuSlowDownMultiplier, this.networkSpeed);
+        this.logger.logInfo(`Creating analysis report for session ${this.auditInstanceId} with cpu slowdown multiplier ${cpuSlowDownMultiplier} and network speed ${networkSpeed}`);
+        this.anaylsisReportPath = this.getAnalysisReportFilePath(this.auditInstanceId, this.cpuSlowDownMultiplier, this.networkSpeed);
     }
 
     saveReport(jsonReport) {
@@ -24,8 +24,9 @@ export class LighthouseAnalysisReport extends BaseReport {
         return JSON.parse(data);
     }
 
-    getReportAsAnalysisResultModel() {
+    getReportAsAuditResultModel() {
         //get analysis end time from jsonReport
+        //TODO - ERROR when there is an error in the lighthouse report
         const jsonReport = this.getReport();
         //TODO - get date from report
         const analysisEndTime = new Date();
@@ -35,7 +36,7 @@ export class LighthouseAnalysisReport extends BaseReport {
         const interactiveResultInMilliseconds = extractedNumericValues["interactive"];
         const speedIndexResultinMilliseconds = extractedNumericValues["speed-index"];
         this.logger.logInfo(`Interactive result is ${interactiveResultInMilliseconds} and speed index result is ${speedIndexResultinMilliseconds}`);
-        return new AnalysisResultModel(this.webApplication, this.sessionId, this.webApplication.initiatedBy, this.webApplication.environment, jsonReport.fetchTime, analysisEndTime, networkSpeed, cpuSlowDownMultiplier, interactiveResultInMilliseconds, speedIndexResultinMilliseconds);
+        return new AuditResultModel(this.webApplication, this.auditInstanceId, this.webApplication.initiatedBy, this.webApplication.environment, jsonReport.fetchTime, analysisEndTime, networkSpeed, cpuSlowDownMultiplier, interactiveResultInMilliseconds, speedIndexResultinMilliseconds);
     }
     extractNumericValue(jsonObject) {
         const numericValuesObj = {};

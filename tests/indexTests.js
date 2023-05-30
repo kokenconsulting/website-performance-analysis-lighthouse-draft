@@ -23,7 +23,7 @@ describe('index.js', () => {
       expect(data.appName).toBe('My App');
       expect(data.appVersion).toBe('1.0.0');
       expect(data.appUrl).toBe('https://myapp.com');
-      expect(data.sessionId).toBeDefined();
+      expect(data.auditInstanceId).toBeDefined();
     });
   });
 
@@ -39,10 +39,10 @@ describe('index.js', () => {
   describe('prepareThrottlingChartDataForSession', () => {
     it('should return an object with the correct properties', () => {
       const webApplication = new WebApplication('My App', '1.0.0', 'https://myapp.com');
-      const sessionId = '1234';
+      const auditInstanceId = '1234';
       const reportFolder = '/path/to/reports';
-      const result = prepareThrottlingChartDataForSession(webApplication, sessionId, reportFolder);
-      expect(result).toHaveProperty('sessionId', sessionId);
+      const result = prepareThrottlingChartDataForSession(webApplication, auditInstanceId, reportFolder);
+      expect(result).toHaveProperty('auditInstanceId', auditInstanceId);
       expect(result).toHaveProperty('reportFolder', reportFolder);
       expect(result).toHaveProperty('results');
     });
@@ -53,10 +53,10 @@ describe('index.js', () => {
       const webApplication = new WebApplication('My App', '1.0.0', 'https://myapp.com');
       const url = 'https://myapp.com';
       const reportFolder = '/path/to/reports';
-      const sessionId = '1234';
+      const auditInstanceId = '1234';
       const cpuSlowdownMultiplierArray = [1, 2, 3];
       const networkSpeedArray = [100, 200, 300];
-      const spy = jest.spyOn(global, 'uuidv4').mockReturnValue(sessionId);
+      const spy = jest.spyOn(global, 'uuidv4').mockReturnValue(auditInstanceId);
       const mockFn = jest.fn();
       const mockOrchestrateAnalysis = jest.fn().mockResolvedValue(undefined);
       const originalOrchestrateAnalysis = global.orchestrateAnalysisWithBuiltInThrottling;
@@ -64,15 +64,15 @@ describe('index.js', () => {
       await runAnalysisWithExternalThrottling(webApplication, url, reportFolder, null, cpuSlowdownMultiplierArray, networkSpeedArray);
       expect(mockFn).not.toHaveBeenCalled();
       expect(mockOrchestrateAnalysis).toHaveBeenCalledTimes(9);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 100, 1, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 100, 2, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 100, 3, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 200, 1, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 200, 2, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 200, 3, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 300, 1, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 300, 2, reportFolder);
-      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(sessionId, webApplication, url, 300, 3, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(auditInstanceId, webApplication, url, 100, 1, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(auditInstanceId, webApplication, url, 100, 2, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(auditInstanceId, webApplication, url, 100, 3, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(auditInstanceId, webApplication, url, 200, 1, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(auditInstanceId, webApplication, url, 200, 2, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(auditInstanceId, webApplication, url, 200, 3, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(auditInstanceId, webApplication, url, 300, 1, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(auditInstanceId, webApplication, url, 300, 2, reportFolder);
+      expect(mockOrchestrateAnalysis).toHaveBeenCalledWith(auditInstanceId, webApplication, url, 300, 3, reportFolder);
       global.orchestrateAnalysisWithBuiltInThrottling = originalOrchestrateAnalysis;
       spy.mockRestore();
     });

@@ -1,22 +1,27 @@
 {
-  "Url": "https://www.fedex.com",
-  "ReportFolderRelativePath": "./sample/reports",
-  "Application": {
-    "name": "SampleApplication",
-    "version": "1.0.0",
-    "description": "Sample Application",
-    "GitUrl": "",
-    "GitBranch": "master",
-    "Environment": "dev"
-  },
-  "ThrottlingSettings": {
-    "NetworkSpeeds": [
-      
-      {
-        "rttMs": 100,
-        "throughputKbps": 29500
-      }
-    ],
-    "CPUSlowDownMultipliers": [2,0]
-  }
+    "ReportFolderFullPath": "/Users/4838599/tmp/webpagethrottledaudit",
+    "WebPage": {
+        "Name": "HomePage",
+        "Url": "https://www.google.com",
+        "Description" : "Sample Description"
+    },
+    "Application": {
+        "Name": "SampleApplication",
+        "Version": "1.0.0",
+        "Description": "Sample Application",
+        "GitUrl": "",
+        "GitBranch": "master",
+        "Environment": "dev"
+    },
+    "ThrottlingSettings": {
+        "NetworkSpeeds": [
+            {
+                "rttMs": 100,
+                "throughputKbps": 29500
+            }
+        ],
+        "CPUSlowDownMultipliers": [
+            0,2,4
+        ]
+    }
 }

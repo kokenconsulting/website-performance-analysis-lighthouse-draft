@@ -1,11 +1,11 @@
 import * as chromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
-import { BaseEngine } from '../base/BaseEngine.js';
+import { AuditBase } from '../base/AuditBase.js';
 const maxWaitForFcp = 1000000
 const maxWaitForLoad = 2000000
 const formFactor = "desktop"
 
-export class LighthouseEngine extends BaseEngine {
+export class LighthouseEngine extends AuditBase {
     constructor(logger) {
         super(logger)
     }

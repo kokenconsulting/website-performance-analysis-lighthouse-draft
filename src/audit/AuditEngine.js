@@ -1,24 +1,24 @@
 
 import { LighthouseEngine } from './LighthouseEngine.js';
-import { LighthouseAnalysisReport } from './LighthouseAnalysisReport.js';
-import { BaseEngine } from '../base/BaseEngine.js';
-export class AnalysisEngine extends BaseEngine {
-    constructor(webApplication, url, reportFolder, logger, sessionId) {
+import { LighthouseAuditReport } from './LighthouseAuditReport.js';
+import { AuditBase } from '../base/AuditBase.js';
+export class AuditEngine extends AuditBase {
+    constructor(webApplication, url, reportFolder, logger, auditInstanceId) {
         super(logger);
         this.webApplication = webApplication;
         this.url = url;
         this.reportFolder = reportFolder;
-        this.sessionId = sessionId;
+        this.auditInstanceId = auditInstanceId;
         this.lighthouseEngine = new LighthouseEngine(this.logger);
     }
    
-    getSessionId() {
-        return this.sessionId;
+    getAuditInstanceId() {
+        return this.auditInstanceId;
       }
     async orchestrateAnalysisWithThrottling(isExternalThrottlingUsed, cpuSlowdownMultiplier,networkSpeed) {
         let jsonReport = null;
-        this.logger.logInfo(`Starting Analysis Orchestration with Throttling. Session Id: ${this.sessionId}`);
-        this.logger.logInfo(`Session Id: ${this.sessionId}, Cpu Slowdown Multiplier: ${cpuSlowdownMultiplier}, Network Speed: ${JSON.stringify(networkSpeed)}`);
+        this.logger.logInfo(`Starting Analysis Orchestration with Throttling. Session Id: ${this.auditInstanceId}`);
+        this.logger.logInfo(`Session Id: ${this.auditInstanceId}, Cpu Slowdown Multiplier: ${cpuSlowdownMultiplier}, Network Speed: ${JSON.stringify(networkSpeed)}`);
         if (isExternalThrottlingUsed === true) {
             var resettedNetworkSpeed = {
                 rttMs: 0,
@@ -32,9 +32,9 @@ export class AnalysisEngine extends BaseEngine {
         }
         this.logger.logInfo(`Analysis Orchestration - Lighthouse Analysis completed`);
         this.logger.logInfo(`Analysis Orchestration - Saving Lighthouse Analysis Report`);
-        this.logger.logInfo(`Analysis Orchestration - Saving Lighthouse Analysis Report - Session Id: ${this.sessionId}, Cpu Slowdown Multiplier: ${cpuSlowdownMultiplier}, Network Speed: ${JSON.stringify(networkSpeed)}`);
+        this.logger.logInfo(`Analysis Orchestration - Saving Lighthouse Analysis Report - Session Id: ${this.auditInstanceId}, Cpu Slowdown Multiplier: ${cpuSlowdownMultiplier}, Network Speed: ${JSON.stringify(networkSpeed)}`);
 
-        var lighthouseReporter = new LighthouseAnalysisReport(this.webApplication, this.reportFolder, this.logger,this.sessionId, cpuSlowdownMultiplier, networkSpeed);
+        var lighthouseReporter = new LighthouseAuditReport(this.webApplication, this.reportFolder, this.logger,this.auditInstanceId, cpuSlowdownMultiplier, networkSpeed);
         lighthouseReporter.saveReport(jsonReport);
     }
 }

@@ -41,15 +41,15 @@ const webApplication = new WebApplication(appName, appVersion, githubRepoUrl, gi
 const localReportsFolderPath = './reports'
 
 
-const sessionId = uuidv4();
-logInfo(`session id is ${sessionId}`);
+const auditInstanceId = uuidv4();
+logInfo(`session id is ${auditInstanceId}`);
 
 var reportsFolderAbsolutePath = path.resolve(localReportsFolderPath);
 logInfo(`Saving reports to ${reportsFolderAbsolutePath}`)
-await runAnalysisWithExternalThrottling(webApplication, url, reportsFolderAbsolutePath,sessionId);
-logInfo(`starting summary for ${sessionId}`);
-await createSummaryForSession(webApplication, reportsFolderAbsolutePath, sessionId);
-prepareThrottlingChartDataForSession(webApplication,sessionId,reportsFolderAbsolutePath);
+await runAnalysisWithExternalThrottling(webApplication, url, reportsFolderAbsolutePath,auditInstanceId);
+logInfo(`starting summary for ${auditInstanceId}`);
+await createSummaryForSession(webApplication, reportsFolderAbsolutePath, auditInstanceId);
+prepareThrottlingChartDataForSession(webApplication,auditInstanceId,reportsFolderAbsolutePath);
 
 ````
 

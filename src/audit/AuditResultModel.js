@@ -1,7 +1,7 @@
-export class AnalysisResultModel {
-    constructor(webApplication, sessionId, initiatedBy, executionEnvironment, startDateTime, endDateTime, networkThrottle, cpuSlowDownMultiplier, loadTimeInteractive, loadTimeSpeedIndex) {
+export class AuditResultModel {
+    constructor(webApplication, auditInstanceId, initiatedBy, executionEnvironment, startDateTime, endDateTime, networkThrottle, cpuSlowDownMultiplier, loadTimeInteractive, loadTimeSpeedIndex) {
       this.webApplication = webApplication;
-      this.sessionId = sessionId;
+      this.auditInstanceId = auditInstanceId;
       this.initiatedBy = initiatedBy;
       this.executionEnvironment = executionEnvironment;
       this.startDateTime = startDateTime;

@@ -16,13 +16,13 @@ export class SessionListReport extends BaseReport {
     }
 
     addToSessionList(sessionSummaryObject) {
-        const sessionId = sessionSummaryObject[0].sessionId;
+        const auditInstanceId = sessionSummaryObject[0].auditInstanceId;
         const startDateTime = sessionSummaryObject[0].startDateTime;
         const endDateTime = sessionSummaryObject[0].endDateTime;
-        const sessionExists = this.sessionList.sessions.find(session => session.sessionId === sessionId);
+        const sessionExists = this.sessionList.sessions.find(session => session.auditInstanceId === auditInstanceId);
         if (!sessionExists) {
             this.sessionList.sessions.push({
-                sessionId: sessionId,
+                auditInstanceId: auditInstanceId,
                 startDateTime: startDateTime,
                 endDateTime: endDateTime,
                 appVersion: this.webApplication.version

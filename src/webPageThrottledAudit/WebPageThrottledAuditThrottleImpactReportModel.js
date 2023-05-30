@@ -1,9 +1,9 @@
 
 // app information class that consist of projectname, gitrepourl, gitbranchname
-export class SessionThrottleImpactReportModel {
-  constructor(webApplication, sessionId, networkSpeedList, cpuSlowDownMultiplierResultsList) {
+export class WebPageThrottledAuditThrottleImpactReportModel {
+  constructor(webApplication, auditInstanceId, networkSpeedList, cpuSlowDownMultiplierResultsList) {
     this.webApplication = webApplication;
-    this.sessionId = sessionId;
+    this.auditInstanceId = auditInstanceId;
     this.networkSpeedList = networkSpeedList;
     this.cpuSlowDownMultiplierResultsList = cpuSlowDownMultiplierResultsList;
   }
@@ -16,9 +16,9 @@ export class SessionThrottleImpactReportModel {
 
 // app information class that consist of projectname, gitrepourl, gitbranchname
 export class ApplicationThrottleImpactReportModel {
-  constructor(webApplication,sessionThrottleImpactReportModelList) {
+  constructor(webApplication,WebPageThrottledAuditThrottleImpactReportModelList) {
     this.webApplication = webApplication;
-    this.sessionThrottleImpactReportModelList = sessionThrottleImpactReportModelList;
+    this.WebPageThrottledAuditThrottleImpactReportModelList = WebPageThrottledAuditThrottleImpactReportModelList;
   }
 
   toJson() {

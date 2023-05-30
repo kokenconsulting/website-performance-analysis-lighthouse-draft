@@ -4,4 +4,7 @@ export class ProcessLogger {
   logInfo(message) {
     console.log(message);
   }
+  logError(message,err) {
+    console.error(message,err);
+  }
 }

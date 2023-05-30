@@ -1,9 +1,9 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import { logInfo } from '../log/processlogger.js'
-import { AnalysisResult } from '../models/AnalysisResultModel.js';
+import { AnalysisResult } from '../models/AuditResultModel.js';
 import { extractNumericValue, prepareSessionReportFolder, getSessionSummaryOutputPath } from '../utils/folder.js';
-import { SessionSummaryModel } from '../models/SessionSummaryModel.js';
+import { WebPageThrottledAuditSummaryModel } from '../models/WebPageThrottledAuditSummaryModel.js';
 
 export class SessionSummaryGenerator {
     constructor(webApplication, reportFolder) {
@@ -11,10 +11,10 @@ export class SessionSummaryGenerator {
         this.reportFolder = reportFolder;
     }
 
-    async generate(sessionId) {
+    async generate(auditInstanceId) {
         try {
-            const analysisResultList = await this.getAnalysisResultList(files, sessionId);
-            var sessionSummary = new SessionSummaryModel(this.webApplication, analysisResultList);
+            const analysisResultList = await this.getAnalysisResultList(files, auditInstanceId);
+            var sessionSummary = new WebPageThrottledAuditSummaryModel(this.webApplication, analysisResultList);
             const sessionReportOutputPath = await this.writeSessionSummaryToFile(sessionSummary);
             return sessionReportOutputPath;
         } catch (err) {
@@ -23,15 +23,15 @@ export class SessionSummaryGenerator {
         return null;
 
     }
-    async getAnalysisResultList( sessionId) {
-        const files = await this.getSessionFilePathList(sessionRunFolderPath, sessionId);
+    async getAnalysisResultList( auditInstanceId) {
+        const files = await this.getSessionFilePathList(sessionRunFolderPath, auditInstanceId);
         const analysisResultList = [];
         for (const filePath of files) {
             logInfo(`createSummaryForSession --- file path is ${filePath}`);
             const data = await fs.promises.readFile(filePath, 'utf8');
             try {
                 const jsonReport = JSON.parse(data);
-                analysisResultList.push(createAnalysisResult(sessionId, jsonReport, loadTimeData));
+                analysisResultList.push(createAnalysisResult(auditInstanceId, jsonReport, loadTimeData));
             } catch (error) {
                 console.error('Error parsing JSON:', error);
             }
@@ -40,17 +40,17 @@ export class SessionSummaryGenerator {
     }
 
     async writeSessionSummaryToFile(sessionSummary) {
-        const sessionReportOutputPath = getSessionSummaryOutputPath(webApplication, sessionId, reportFolder);
+        const sessionReportOutputPath = getSessionSummaryOutputPath(webApplication, auditInstanceId, reportFolder);
         await fs.promises.writeFile(sessionReportOutputPath, sessionSummary.toJson(), 'utf8');
         return sessionReportOutputPath;
     }
 
-    async getSessionFilePathList(sessionId) {
+    async getSessionFilePathList(auditInstanceId) {
         var fileList = [];
-        const sessionRunFolderPath = prepareSessionReportFolder(this.webApplication, sessionId, this.reportFolder);
+        const sessionRunFolderPath = prepareSessionReportFolder(this.webApplication, auditInstanceId, this.reportFolder);
         const files = await fs.promises.readdir(sessionRunFolderPath);
         for (const file of files) {
-            if (file.startsWith(sessionId)) {
+            if (file.startsWith(auditInstanceId)) {
                 const filePath = path.join(sessionReportsFolder, file);
                 logInfo(`File path is ${filePath}`);
                 fileList.push(filePath);

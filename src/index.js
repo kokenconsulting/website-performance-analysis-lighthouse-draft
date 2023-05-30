@@ -1,19 +1,18 @@
 
-import { WebApplication } from './application/WebApplication.js';
+import { WebApplication } from './webApplication/WebApplicationModel.js';
 import { ProcessLogger } from './log/Processlogger.js';
-import { SessionEngine } from './session/SessionEngine.js';
-import { SessionListReport } from './application/SessionListReport.js';
-import { SessionConfiguration } from './session/SessionConfiguration.js';
-import { ThrottlingSettings } from './base/ThrottlingSettings.js';
+import { WebPageThrottledAuditEngine } from './webPageThrottledAudit/WebPageThrottledAuditEngine.js';
+import { SessionListReport } from './webApplication/SessionListReport.js';
+import { WebPageThrottledAuditConfiguration } from './webPageThrottledAudit/WebPageThrottledAuditConfiguration.js';
+import { ThrottlingSettings } from './throttling/ThrottlingSettings.js';
+import {WebPageThrottledAuditRunner} from './webPageThrottledAudit/WebPageThrottledAuditRunner.js';
 
 export {
   WebApplication,
   ProcessLogger,
-  SessionEngine,
+  WebPageThrottledAuditRunner,
+  WebPageThrottledAuditEngine,
   SessionListReport,
-  SessionConfiguration,
+  WebPageThrottledAuditConfiguration,
   ThrottlingSettings
 }
-
-
-
