@@ -7,35 +7,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="core.js"></script>
     <script src="throttleSingleAuditChart.js"></script>
+    <script src="throttledAuditDashboard.js"></script>
     <script src="appChart.js"></script>
-    <style>
-        p {
-            font-size: 18px;
-            line-height: 1.5;
-            color: #333;
-        }
-
-        h1 {
-            font-size: 32px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        #dropdown {
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            width: 200px;
-            margin-bottom: 20px;
-        }
-
-        .checkbox-list {
-            display: flex;
-            flex-direction: row;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script>
 
     </script>
@@ -46,7 +20,7 @@
         <h1>Application Chart</h1>
         <p>Different Combo</p>
         <label for="webApplicationKeysList">Select Key:</label>
-        <select id="webApplicationKeysList"></select>
+        <select id="webApplicationKeysList"></select>   
 
         <canvas id="webApplicationAuditChart"></canvas>
     </div>
