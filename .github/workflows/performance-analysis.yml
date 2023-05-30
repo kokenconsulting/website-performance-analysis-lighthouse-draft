@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: npm install
     - name: Build and test
-      run: node --experimental-modules sample/runner.mjs
+      run: node ./sample/runner.mjs
     - name: GIT commit and push all changed files
       env: 
         CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
