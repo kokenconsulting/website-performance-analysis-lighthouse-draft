@@ -17,6 +17,8 @@ jobs:
       run: | 
         git fetch --all
         git checkout main
+        pwd
+        ls -la
     - name: Install dependencies
       run: npm install
     - name: Build and test
