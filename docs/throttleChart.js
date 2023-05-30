@@ -24,7 +24,7 @@ $(document).ready(function () {
 });
 
 function populateSessionDropDownListData(applicationId) {
-    const url = constants.baseUrl + '/' + constants.reportsFolderName + '/' + applicationId + '/' + applicationId + constants.auditlistSuffix;
+    let url = constants.baseUrl + '/' + constants.reportsFolderName + '/' + applicationId + '/' + applicationId + constants.auditlistSuffix;
     url= constants.reportsFolderName + '/' + applicationId + '/' + applicationId + constants.auditlistSuffix;
     console.log("url: " + url);
     // AJAX request to get dropdown data
