@@ -17,11 +17,19 @@
         "NetworkSpeeds": [
             {
                 "rttMs": 100,
-                "throughputKbps": 9500
+                "throughputKbps": 3500
             },
             {
                 "rttMs": 100,
-                "throughputKbps": 12500
+                "throughputKbps": 7500
+            },
+            {
+                "rttMs": 100,
+                "throughputKbps": 15500
+            },
+            {
+                "rttMs": 100,
+                "throughputKbps": 17500
             },
             {
                 "rttMs": 100,
@@ -29,11 +37,19 @@
             },
             {
                 "rttMs": 100,
+                "throughputKbps": 23500
+            },
+            {
+                "rttMs": 100,
+                "throughputKbps": 25500
+            },
+            {
+                "rttMs": 100,
                 "throughputKbps": 29500
             }
         ],
         "CPUSlowDownMultipliers": [
-            0,2
+            0,2,4
         ]
     }
 }

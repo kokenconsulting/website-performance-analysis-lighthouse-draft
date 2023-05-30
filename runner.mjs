@@ -5,6 +5,6 @@ import {
   from './src/index.js';
 
 //get current working directory
-const configFullPath = path.join(process.cwd(), 'sample/config.json');
+const configFullPath = path.join(process.cwd(), 'throttedRunConfig.json');
 const auditRunner = new WebPageThrottledAuditRunner(configFullPath);
-await auditRunner.run(false);
+await auditRunner.run(true);

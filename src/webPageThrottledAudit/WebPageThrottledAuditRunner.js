@@ -37,10 +37,10 @@ export class WebPageThrottledAuditRunner {
     }
 
     async run(useExternalThrottling = true) {
-        // let { summaryPath, chartReportPath } = await this.engine.run(useExternalThrottling);
-        // this.logger.logInfo(`Summary path is ${summaryPath}`);
-        // this.logger.logInfo(`chartReportPath path is ${chartReportPath}`);
-        // this.auditListReport.generate();
+        let { summaryPath, chartReportPath } = await this.engine.run(useExternalThrottling);
+        this.logger.logInfo(`Summary path is ${summaryPath}`);
+        this.logger.logInfo(`chartReportPath path is ${chartReportPath}`);
+        this.auditListReport.generate();
         this.applicationAllResultsReport.generate();
     };
 }
