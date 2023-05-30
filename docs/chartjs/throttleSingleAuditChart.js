@@ -96,10 +96,6 @@ function processResultTypeSpeedIndex(data, currentColorIndex, dataSetValues) {
 }
 
 
-
-
-
-
 function generateChartOnPage(currentColorIndex, data, dataSetValues, sessionId) {
     //currentColorIndex = processResultTypeSpeedIndex(data, currentColorIndex, dataSetValues);
 

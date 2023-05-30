@@ -1,40 +1,33 @@
 
-import { LighthouseEngine } from './LighthouseEngine.js';
-import { LighthouseAuditReport } from './LighthouseAuditReport.js';
-import { AuditBase } from '../base/AuditBase.js';
-export class AuditEngine extends AuditBase {
-    constructor(webApplication, url, reportFolder, logger, auditInstanceId) {
+import { LighthouseAuditEngine } from './LighthouseAuditEngine.js';
+import { AuditReport } from './AuditReport.js';
+import { EngineBase } from '../base/EngineBase.js';
+export class AuditEngine extends EngineBase {
+    constructor(webApplication, url, reportFolder, logger, auditInstanceId, isExternalThrottlingUsed, cpuSlowdownMultiplier, networkSpeed) {
         super(logger);
         this.webApplication = webApplication;
         this.url = url;
         this.reportFolder = reportFolder;
         this.auditInstanceId = auditInstanceId;
-        this.lighthouseEngine = new LighthouseEngine(this.logger);
+        var resettedNetworkSpeed  = {
+            rttMs: 0,
+            throughputKbps: 0
+        };
+        if (isExternalThrottlingUsed === true) {
+            this.lighthouseEngine = new LighthouseAuditEngine(webApplication, reportFolder, logger, auditInstanceId, cpuSlowdownMultiplier, resettedNetworkSpeed,networkSpeed);
+        }else{
+            this.lighthouseEngine = new LighthouseAuditEngine(webApplication, reportFolder, logger, auditInstanceId, cpuSlowdownMultiplier, networkSpeed);
+        }
     }
-   
-    getAuditInstanceId() {
-        return this.auditInstanceId;
-      }
-    async orchestrateAnalysisWithThrottling(isExternalThrottlingUsed, cpuSlowdownMultiplier,networkSpeed) {
+
+    async runAuditWithThrottling() {
         let jsonReport = null;
         this.logger.logInfo(`Starting Analysis Orchestration with Throttling. Session Id: ${this.auditInstanceId}`);
         this.logger.logInfo(`Session Id: ${this.auditInstanceId}, Cpu Slowdown Multiplier: ${cpuSlowdownMultiplier}, Network Speed: ${JSON.stringify(networkSpeed)}`);
-        if (isExternalThrottlingUsed === true) {
-            var resettedNetworkSpeed = {
-                rttMs: 0,
-                throughputKbps: 0
-            }
-            this.logger.logInfo(`Analysis Orchestration - External Throttling used`);
-            jsonReport = await this.lighthouseEngine.runLighthouse(this.url, resettedNetworkSpeed, cpuSlowdownMultiplier, networkSpeed);
-        } else {
-            this.logger.logInfo(`Analysis Orchestration - Lighthouse Built In Throttling used`);
-            jsonReport = await this.lighthouseEngine.runLighthouse(this.url, networkSpeed, cpuSlowdownMultiplier);
-        }
+        jsonReport = await this.lighthouseEngine.runLighthouse(this.url);
         this.logger.logInfo(`Analysis Orchestration - Lighthouse Analysis completed`);
-        this.logger.logInfo(`Analysis Orchestration - Saving Lighthouse Analysis Report`);
         this.logger.logInfo(`Analysis Orchestration - Saving Lighthouse Analysis Report - Session Id: ${this.auditInstanceId}, Cpu Slowdown Multiplier: ${cpuSlowdownMultiplier}, Network Speed: ${JSON.stringify(networkSpeed)}`);
-
-        var lighthouseReporter = new LighthouseAuditReport(this.webApplication, this.reportFolder, this.logger,this.auditInstanceId, cpuSlowdownMultiplier, networkSpeed);
+        var lighthouseReporter = new AuditReport(this.webApplication, this.reportFolder, this.logger, this.auditInstanceId, cpuSlowdownMultiplier, networkSpeed);
         lighthouseReporter.saveReport(jsonReport);
     }
 }

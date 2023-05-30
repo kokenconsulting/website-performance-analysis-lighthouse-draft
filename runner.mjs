@@ -1,10 +1,10 @@
 import * as path from 'path';
 import {
-  WebPageThrottledAuditRunner,
+  WebPageThrottledAuditOrchestrator,
 }
   from './src/index.js';
 
 //get current working directory
 const configFullPath = path.join(process.cwd(), 'throttedRunConfig.json');
-const auditRunner = new WebPageThrottledAuditRunner(configFullPath);
-await auditRunner.run(true);
+const auditRunner = new WebPageThrottledAuditOrchestrator(configFullPath);
+await auditRunner.run(false);

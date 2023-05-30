@@ -1,30 +1,18 @@
-import { AuditBase } from "../base/AuditBase.js";
+import { EngineBase } from "../base/EngineBase.js";
 import { v4 as uuidv4 } from "uuid";
 import { AuditEngine } from "../audit/AuditEngine.js";
 import { WebPageThrottledAuditSummaryReport } from "./WebPageThrottledAuditSummaryReport.js";
 import { WebPageThrottledAuditSummaryChartReport } from "./WebPageThrottledAuditSummaryChartReport_Rename.js";
 import { ThrottlingManager } from "../throttling/ThrottlingManager.js";
 
-export class WebPageThrottledAuditEngine extends AuditBase {
+export class WebPageThrottledAuditEngine extends EngineBase {
   constructor(webPageThrottledAuditConfiguration, logger, auditInstanceId = null) {
     //TODO - Add validation for webPageThrottledAuditConfiguration, logger and auditInstanceId.
     super(logger);
     this.webPageThrottledAuditConfiguration = webPageThrottledAuditConfiguration;
     this.reportFolderFullPath = webPageThrottledAuditConfiguration.reportFolderFullPath;
     this.setAuditInstanceId(auditInstanceId);
-    this.WebPageThrottledAuditSummaryReport = new WebPageThrottledAuditSummaryReport(
-      this.webPageThrottledAuditConfiguration.webApplication,
-      this.webPageThrottledAuditConfiguration.reportFolderFullPath,
-      this.logger,
-      this.auditInstanceId
-    );
-    this.WebPageThrottledAuditSummaryChartReport = new WebPageThrottledAuditSummaryChartReport(
 
-      this.webPageThrottledAuditConfiguration.webApplication,
-      this.webPageThrottledAuditConfiguration.reportFolderFullPath,
-      this.logger,
-      this.auditInstanceId
-    );
     this.AuditEngine = new AuditEngine(
       this.webPageThrottledAuditConfiguration.webApplication,
       this.webPageThrottledAuditConfiguration.webPage.url,
@@ -55,11 +43,11 @@ export class WebPageThrottledAuditEngine extends AuditBase {
       this.logger.logInfo("Running with built throttling");
       auditInstanceId = await this.runWithBuiltInThrottling();
     }
-    const summaryPath = await this.WebPageThrottledAuditSummaryReport.generate();
-    this.logger.logInfo(`Summary report path is ${summaryPath}`);
-    const chartReportPath = this.WebPageThrottledAuditSummaryChartReport.generate();
-    this.logger.logInfo(`Chart report path is ${chartReportPath}`);
-    return { summaryPath, chartReportPath };
+    // const summaryPath = await this.WebPageThrottledAuditSummaryReport.generate();
+    // this.logger.logInfo(`Summary report path is ${summaryPath}`);
+    // const chartReportPath = this.WebPageThrottledAuditSummaryChartReport.generate();
+    // this.logger.logInfo(`Chart report path is ${chartReportPath}`);
+    // return { summaryPath, chartReportPath };
   }
   async runWithBuiltInThrottling() {
     for (const networkSpeed of this.networkSpeedArray) {
@@ -67,7 +55,7 @@ export class WebPageThrottledAuditEngine extends AuditBase {
         this.logger.logInfo(
           `cpuSlowdownMultiplier is ${cpuSlowdownMultiplier} and network speed is ${networkSpeed}`
         );
-        await this.AuditEngine.orchestrateAnalysisWithThrottling(
+        await this.AuditEngine.runAuditWithThrottling(
           false,
           cpuSlowdownMultiplier,
           networkSpeed
@@ -103,7 +91,7 @@ export class WebPageThrottledAuditEngine extends AuditBase {
             networkSpeedItem
           )}`
         );
-        await this.AuditEngine.orchestrateAnalysisWithThrottling(
+        await this.AuditEngine.runAuditWithThrottling(
           true,
           cpuSlowdownMultiplier,
           networkSpeedItem
