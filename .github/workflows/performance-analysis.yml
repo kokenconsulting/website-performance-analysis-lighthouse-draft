@@ -1,0 +1,33 @@
+name: Node.js CI
+on:
+  push:
+    branches: [ docs ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with: 
+        token: ${{ secrets.GH_TOKEN }}
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Install dependencies
+      run: | 
+        git fetch --all
+        git checkout main
+    - name: Install dependencies
+      run: npm install
+    - name: Build and test
+      run: node --experimental-modules sample/runner.mjs
+    - name: GIT commit and push all changed files
+      env: 
+        CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
+        CI_COMMIT_AUTHOR: Continuous Integration
+      run: |
+        git config --global user.name "ci user"
+        git config --global user.email "username@users.noreply.github.com"
+        git add .
+        git commit -a -m "github actions run"
+        git push
