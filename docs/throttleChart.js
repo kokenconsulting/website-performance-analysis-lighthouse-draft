@@ -1,6 +1,6 @@
 var chartObject;
 var constants = {
-    baseUrl: "http://localhost:8000",
+    //baseUrl: "http://localhost:8000",
     auditlistSuffix: "_auditlist.json",
     ThrottleImpactReportFileName: "web-page-throttled-audit-throttle-impact-report.json",
     reportsFolderName: "reports",
@@ -25,6 +25,7 @@ $(document).ready(function () {
 
 function populateSessionDropDownListData(applicationId) {
     const url = constants.baseUrl + '/' + constants.reportsFolderName + '/' + applicationId + '/' + applicationId + constants.auditlistSuffix;
+    url= constants.reportsFolderName + '/' + applicationId + '/' + applicationId + constants.auditlistSuffix;
     console.log("url: " + url);
     // AJAX request to get dropdown data
     $.ajax({
