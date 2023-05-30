@@ -12,14 +12,14 @@ export class WebPageThrottledAuditSummaryReport extends BaseReport {
     }
     async generate() {
         try {
-            const analysisResultList = await this.getAnalysisResultList();
-            var sessionSummary = new WebPageThrottledAuditSummaryModel(this.webApplication, analysisResultList);
-            //before saving the report, remove duplicate web application object from each object in analysisResultList
-            //TODO - remove duplicate web application object from each object in analysisResultList
-            for (const analysisResult of sessionSummary.analysisResultList) {
+            const auditResultList = await this.getAnalysisResultList();
+            var sessionSummary = new WebPageThrottledAuditSummaryModel(this.webApplication, auditResultList);
+            //before saving the report, remove duplicate web application object from each object in auditResultList
+            //TODO - remove duplicate web application object from each object in auditResultList
+            for (const analysisResult of sessionSummary.auditResultList) {
                 delete analysisResult.webApplication;
             }
-            this.saveReport(sessionSummary);
+            return this.saveReport(sessionSummary);
         } catch (err) {
             this.logger.logError('Error:', err);
         }
@@ -44,7 +44,7 @@ export class WebPageThrottledAuditSummaryReport extends BaseReport {
 
     async getAnalysisResultList() {
         const files = await this.getSessionFilePathList()
-        const analysisResultList = [];
+        const auditResultList = [];
         for (const filePath of files) {
             const data = await fs.promises.readFile(filePath, 'utf8');
             try {
@@ -54,12 +54,12 @@ export class WebPageThrottledAuditSummaryReport extends BaseReport {
                 var networkSpeed = jsonReport.configSettings.customSettings.providedNetworkThrottling;
                 var lighthouseAnalysisReport = new LighthouseAuditReport(this.webApplication, this.reportFolder, this.logger, this.auditInstanceId, cpuSlowDownMultiplier, networkSpeed);
                 var analysisResultReport = lighthouseAnalysisReport.getReportAsAuditResultModel();
-                analysisResultList.push(analysisResultReport);
+                auditResultList.push(analysisResultReport);
             } catch (error) {
                 console.error('Error parsing JSON:', error);
             }
         }
-        return analysisResultList;
+        return auditResultList;
     }
 
 
@@ -67,6 +67,7 @@ export class WebPageThrottledAuditSummaryReport extends BaseReport {
 
         fs.writeFileSync(this.WebPageThrottledAuditSummaryReportFilePath, JSON.stringify(WebPageThrottledAuditSummaryReportObject), 'utf8');
         this.logger.logInfo(`Analysis report written to ${this.WebPageThrottledAuditSummaryReportFilePath}`);
+        return this.WebPageThrottledAuditSummaryReportFilePath;
     }
 
     getReport() {

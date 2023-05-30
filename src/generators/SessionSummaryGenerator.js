@@ -13,8 +13,8 @@ export class SessionSummaryGenerator {
 
     async generate(auditInstanceId) {
         try {
-            const analysisResultList = await this.getAnalysisResultList(files, auditInstanceId);
-            var sessionSummary = new WebPageThrottledAuditSummaryModel(this.webApplication, analysisResultList);
+            const auditResultList = await this.getAnalysisResultList(files, auditInstanceId);
+            var sessionSummary = new WebPageThrottledAuditSummaryModel(this.webApplication, auditResultList);
             const sessionReportOutputPath = await this.writeSessionSummaryToFile(sessionSummary);
             return sessionReportOutputPath;
         } catch (err) {
@@ -25,18 +25,18 @@ export class SessionSummaryGenerator {
     }
     async getAnalysisResultList( auditInstanceId) {
         const files = await this.getSessionFilePathList(sessionRunFolderPath, auditInstanceId);
-        const analysisResultList = [];
+        const auditResultList = [];
         for (const filePath of files) {
             logInfo(`createSummaryForSession --- file path is ${filePath}`);
             const data = await fs.promises.readFile(filePath, 'utf8');
             try {
                 const jsonReport = JSON.parse(data);
-                analysisResultList.push(createAnalysisResult(auditInstanceId, jsonReport, loadTimeData));
+                auditResultList.push(createAnalysisResult(auditInstanceId, jsonReport, loadTimeData));
             } catch (error) {
                 console.error('Error parsing JSON:', error);
             }
         }
-        return analysisResultList;
+        return auditResultList;
     }
 
     async writeSessionSummaryToFile(sessionSummary) {

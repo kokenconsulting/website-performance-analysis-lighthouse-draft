@@ -1,5 +1,5 @@
 {
-    "ReportFolderFullPath": "/Users/4838599/tmp/webpagethrottledaudit",
+    "ReportFolderRelativePath": "./docs/reports",
     "WebPage": {
         "Name": "HomePage",
         "Url": "https://www.google.com",
@@ -21,7 +21,7 @@
             }
         ],
         "CPUSlowDownMultipliers": [
-            0,2,4
+            0
         ]
     }
 }

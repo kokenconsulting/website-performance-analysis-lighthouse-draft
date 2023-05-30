@@ -2,6 +2,7 @@ import { AuditBase } from "../base/AuditBase.js";
 import { v4 as uuidv4 } from "uuid";
 import { AuditEngine } from "../audit/AuditEngine.js";
 import { WebPageThrottledAuditSummaryReport } from "./WebPageThrottledAuditSummaryReport.js";
+import { WebPageThrottledAuditSummaryChartReport } from "./WebPageThrottledAuditSummaryChartReport.js";
 import { ThrottlingManager } from "../throttling/ThrottlingManager.js";
 
 export class WebPageThrottledAuditEngine extends AuditBase {
@@ -12,6 +13,13 @@ export class WebPageThrottledAuditEngine extends AuditBase {
     this.reportFolderFullPath = webPageThrottledAuditConfiguration.reportFolderFullPath;
     this.setAuditInstanceId(auditInstanceId);
     this.WebPageThrottledAuditSummaryReport = new WebPageThrottledAuditSummaryReport(
+      this.webPageThrottledAuditConfiguration.webApplication,
+      this.webPageThrottledAuditConfiguration.reportFolderFullPath,
+      this.logger,
+      this.auditInstanceId
+    );
+    this.WebPageThrottledAuditSummaryChartReport = new WebPageThrottledAuditSummaryChartReport(
+
       this.webPageThrottledAuditConfiguration.webApplication,
       this.webPageThrottledAuditConfiguration.reportFolderFullPath,
       this.logger,
@@ -45,8 +53,11 @@ export class WebPageThrottledAuditEngine extends AuditBase {
     } else {
       auditInstanceId = await this.runWithBuiltInThrottling();
     }
-    this.WebPageThrottledAuditSummaryReport.generate();
-    return auditInstanceId;
+    const summaryPath = await this.WebPageThrottledAuditSummaryReport.generate();
+    this.logger.logInfo(`Summary report path is ${summaryPath}`);
+    const chartReportPath = this.WebPageThrottledAuditSummaryChartReport.generate();
+    this.logger.logInfo(`Chart report path is ${chartReportPath}`);
+    return { summaryPath, chartReportPath };
   }
   async runWithBuiltInThrottling() {
     for (const networkSpeed of this.networkSpeedArray) {
@@ -103,6 +114,6 @@ export class WebPageThrottledAuditEngine extends AuditBase {
       );
       await throttlingManager.stopThrottling();
     }
-    
+
   }
 }

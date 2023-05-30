@@ -21,7 +21,7 @@ export class BaseReport {
         this.createFoldersIfNotExist(folderPath)
         return folderPath;
     }
-    getAppSessionListReportFilePath() {
+    getAppAuditListReportFilePath() {
         return `${this.getAppReportFolderPath()}/${this.webApplication.name}_${CONSTANTS.AUDITLIST}.json`;
     }
 
@@ -31,11 +31,11 @@ export class BaseReport {
     }
     getSessionReportFolderPath(auditInstanceId) {
         //create folders if they don't exist
-        const folderPath = `${this.getSessionsFolderPath()}/${auditInstanceId}`;
+        const folderPath = `${this.getAuditFolderPath()}/${auditInstanceId}`;
         this.createFoldersIfNotExist(folderPath)
         return folderPath;
     }
-    getSessionsFolderPath() {
+    getAuditFolderPath() {
         //create folders if they don't exist
         const folderPath = `${this.getAppReportFolderPath()}/${CONSTANTS.AUDIT}`;
         this.createFoldersIfNotExist(folderPath)
@@ -49,6 +49,7 @@ export class BaseReport {
         return folderPath;
     }
 
+
     getWebPageThrottledAuditSummaryReportFilePath(auditInstanceId) {
         //create folders if they don't exist
         return `${this.getSessionReportFolderPath(auditInstanceId)}/${auditInstanceId}_${CONSTANTS.SUMMARY}.json`;
@@ -58,4 +59,17 @@ export class BaseReport {
         //create folders if they don't exist
         return `${this.getAnalysisListReportFolderPath(auditInstanceId)}/${auditInstanceId}_${CONSTANTS.CPU}_${cpuSlowDownMultiplier}_${CONSTANTS.NETWORK}_${networkSpeed.throughputKbps}.json`;
     }
+
+    getChartDataReportFolderPath(auditInstanceId) {
+        //create folders if they don't exist
+        var folderPath = `${this.getSessionReportFolderPath(auditInstanceId)}/${CONSTANTS.CHARTDATA}`
+        this.createFoldersIfNotExist(folderPath)
+        return folderPath;
+    }
+    getWebPageThrottledAuditThrottleImpactReportFilePath(auditInstanceId) {
+        //create folders if they don't exist
+        var filePath = `${this.getChartDataReportFolderPath(auditInstanceId)}/${CONSTANTS.WEB_PAGE_THROTTLED_AUDIT_THROTTLE_IMPACT_REPORT_FILE_NAME}`
+        return filePath;
+    }
+
 }

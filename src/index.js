@@ -2,7 +2,7 @@
 import { WebApplication } from './webApplication/WebApplicationModel.js';
 import { ProcessLogger } from './log/Processlogger.js';
 import { WebPageThrottledAuditEngine } from './webPageThrottledAudit/WebPageThrottledAuditEngine.js';
-import { SessionListReport } from './webApplication/SessionListReport.js';
+import { AuditListReport } from './webApplication/AuditListReport.js';
 import { WebPageThrottledAuditConfiguration } from './webPageThrottledAudit/WebPageThrottledAuditConfiguration.js';
 import { ThrottlingSettings } from './throttling/ThrottlingSettings.js';
 import {WebPageThrottledAuditRunner} from './webPageThrottledAudit/WebPageThrottledAuditRunner.js';
@@ -12,7 +12,7 @@ export {
   ProcessLogger,
   WebPageThrottledAuditRunner,
   WebPageThrottledAuditEngine,
-  SessionListReport,
+  AuditListReport,
   WebPageThrottledAuditConfiguration,
   ThrottlingSettings
 }

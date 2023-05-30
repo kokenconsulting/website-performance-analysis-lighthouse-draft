@@ -4,6 +4,7 @@ import {
 }
   from '../src/index.js';
 
-  //get current working directory
-const confifFullPath = path.join(process.cwd(), 'sample/config.json');
-await new WebPageThrottledAuditRunner(confifFullPath).run(false);
+//get current working directory
+const configFullPath = path.join(process.cwd(), 'sample/config.json');
+const auditRunner = new WebPageThrottledAuditRunner(configFullPath);
+await auditRunner.run(false);

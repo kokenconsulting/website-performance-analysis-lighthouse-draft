@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chart.js Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="throttleChart.js"></script>
+    <style>
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #dropdown {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-list {
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+    <script>
+       
+    </script>
+</head>
+
+<body>
+    <h1>Throttle Chart</h1>
+    <p>This page displays a chart of performance results for different network speeds and CPU slowdowns. Select a
+        session from the dropdown list to view its performance results.</p>
+    <label for="dropdown">Select Session:</label>
+    <select id="dropdown"></select>
+
+    <h2>Graph Options</h2>
+    <h3>CPU Slow Down Multipliers</h3>
+    <div id="cpuSlowDownMultipliersCheckboxList" class="checkbox-list"></div>
+
+    <h3>Type of Values</h3>
+    <div id="typeOfValuesCheckboxList" class="checkbox-list"></div>
+    <canvas id="myChart"></canvas>
+</body>
+
+</html>
