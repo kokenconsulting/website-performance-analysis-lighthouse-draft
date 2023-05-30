@@ -5,7 +5,7 @@ var constants = {
     ThrottleImpactReportFileName: "web-page-throttled-audit-throttle-impact-report.json",
     reportsFolderName: "reports",
     AUDITS_NAME: "audits",
-    CHART_DATA_FOLDER_NAME: "chartData",
+    CHART_DATA_FOLDER_NAME: "chartdata",
     AUDIT_INSTANCE_ID: "auditInstanceId"
 };
 var baseUrl = "localhost:8000";
