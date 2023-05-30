@@ -22,6 +22,7 @@ export class WebPageThrottledAuditSummaryChartReport extends BaseReport {
 
     writeToFile(webPageThrottledAuditThrottleImpactReportModelList) {
         const chartDataFilePath = this.getWebPageThrottledAuditThrottleImpactReportFilePath(this.auditInstanceId)
+        this.logger.logInfo(`WebPageThrottledAuditThrottleImpactReportModel data file is ${chartDataFilePath}`);
         fs.writeFileSync(chartDataFilePath, JSON.stringify(webPageThrottledAuditThrottleImpactReportModelList));
         this.logger.logInfo(`WebPageThrottledAuditThrottleImpactReportModel data file is created and path is ${chartDataFilePath}`);
         return chartDataFilePath;

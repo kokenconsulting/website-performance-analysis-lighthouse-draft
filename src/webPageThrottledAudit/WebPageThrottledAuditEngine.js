@@ -2,7 +2,7 @@ import { AuditBase } from "../base/AuditBase.js";
 import { v4 as uuidv4 } from "uuid";
 import { AuditEngine } from "../audit/AuditEngine.js";
 import { WebPageThrottledAuditSummaryReport } from "./WebPageThrottledAuditSummaryReport.js";
-import { WebPageThrottledAuditSummaryChartReport } from "./WebPageThrottledAuditSummaryChartReport.js";
+import { WebPageThrottledAuditSummaryChartReport } from "./WebPageThrottledAuditSummaryChartReport_Rename.js";
 import { ThrottlingManager } from "../throttling/ThrottlingManager.js";
 
 export class WebPageThrottledAuditEngine extends AuditBase {
