@@ -5,7 +5,7 @@ import { ThrottlingSettings } from '../throttling/ThrottlingSettings.js';
 import { WebApplication } from '../webApplication/WebApplicationModel.js';
 import { WebPageModel } from '../webPage/WebPageModel.js';
 import { WebPageThrottledAuditEngine } from './WebPageThrottledAuditEngine.js';
-import { ProcessLogger } from '../log/Processlogger.js';
+import { ProcessLogger } from '../log/ProcessLogger.js';
 import { AuditListReport } from '../webApplication/AuditListReport.js';
 export class WebPageThrottledAuditRunner {
     //constructor(webApplication, url, reportFolder, logger, auditInstanceId = null, cpuSlowdownMultiplierArray = null, networkSpeedArray = null) {
