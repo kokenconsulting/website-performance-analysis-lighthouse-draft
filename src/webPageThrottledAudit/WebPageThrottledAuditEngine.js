@@ -49,8 +49,10 @@ export class WebPageThrottledAuditEngine extends AuditBase {
   async run(useExternalThrottling = true) {
     let auditInstanceId;
     if (useExternalThrottling === true) {
+      this.logger.logInfo("Running with external throttling");
       auditInstanceId = await this.runWithExternalThrottling();
     } else {
+      this.logger.logInfo("Running with built throttling");
       auditInstanceId = await this.runWithBuiltInThrottling();
     }
     const summaryPath = await this.WebPageThrottledAuditSummaryReport.generate();
