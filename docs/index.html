@@ -5,7 +5,9 @@
     <title>Chart.js Example</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="throttleChart.js"></script>
+    <script src="core.js"></script>
+    <script src="throttleSingleAuditChart.js"></script>
+    <script src="appChart.js"></script>
     <style>
         p {
             font-size: 18px;
@@ -35,24 +37,34 @@
         }
     </style>
     <script>
-       
+
     </script>
 </head>
 
 <body>
-    <h1>Throttle Chart</h1>
-    <p>This page displays a chart of performance results for different network speeds and CPU slowdowns. Select a
-        session from the dropdown list to view its performance results.</p>
-    <label for="dropdown">Select Session:</label>
-    <select id="dropdown"></select>
+    <div>
+        <h1>Application Chart</h1>
+        <p>Different Combo</p>
+        <label for="webApplicationKeysList">Select Key:</label>
+        <select id="webApplicationKeysList"></select>
 
-    <h2>Graph Options</h2>
-    <h3>CPU Slow Down Multipliers</h3>
-    <div id="cpuSlowDownMultipliersCheckboxList" class="checkbox-list"></div>
+        <canvas id="webApplicationAuditChart"></canvas>
+    </div>
+    <div>
+        <h1>Throttle Chart</h1>
+        <p>This page displays a chart of performance results for different network speeds and CPU slowdowns. Select a
+            session from the dropdown list to view its performance results.</p>
+        <label for="dropdown">Select Session:</label>
+        <select id="dropdown"></select>
 
-    <h3>Type of Values</h3>
-    <div id="typeOfValuesCheckboxList" class="checkbox-list"></div>
-    <canvas id="myChart"></canvas>
+        <h2>Graph Options</h2>
+        <h3>CPU Slow Down Multipliers</h3>
+        <div id="cpuSlowDownMultipliersCheckboxList" class="checkbox-list"></div>
+
+        <h3>Type of Values</h3>
+        <div id="typeOfValuesCheckboxList" class="checkbox-list"></div>
+        <canvas id="webPageAuditChart"></canvas>
+    </div>
 </body>
 
 </html>

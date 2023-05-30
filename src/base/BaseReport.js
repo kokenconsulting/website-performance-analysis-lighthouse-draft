@@ -21,6 +21,23 @@ export class BaseReport {
         this.createFoldersIfNotExist(folderPath)
         return folderPath;
     }
+    getAppReportAllResultsFilePath() {
+        const folderPath = `${this.reportFolder}/${this.webApplication.name}/${CONSTANTS.ALL_RESULTS_ALL_KEYS}`;
+        return folderPath;
+    }
+    getApplicationChartDataFolder() {
+        const folderPath = `${this.reportFolder}/${this.webApplication.name}/${CONSTANTS.CHARTDATA}`;
+        this.createFoldersIfNotExist(folderPath)
+        return folderPath;
+    }
+    getApplicationChartDataSpecificFilePath(key) {
+        const filePath = `${this.getApplicationChartDataFolder()}/${key}.json`;
+        return filePath;
+    }
+    getApplicationChartDataAllKeysFilePath() {
+        const filePath = `${this.getAppReportFolderPath()}/${CONSTANTS.ALL_KEYS}`;
+        return filePath;
+    }
     getAppAuditListReportFilePath() {
         return `${this.getAppReportFolderPath()}/${this.webApplication.name}_${CONSTANTS.AUDITLIST}.json`;
     }
@@ -48,7 +65,6 @@ export class BaseReport {
         this.createFoldersIfNotExist(folderPath)
         return folderPath;
     }
-
 
     getWebPageThrottledAuditSummaryReportFilePath(auditInstanceId) {
         //create folders if they don't exist

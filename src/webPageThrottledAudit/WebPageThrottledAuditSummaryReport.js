@@ -13,13 +13,13 @@ export class WebPageThrottledAuditSummaryReport extends BaseReport {
     async generate() {
         try {
             const auditResultList = await this.getAnalysisResultList();
-            var sessionSummary = new WebPageThrottledAuditSummaryModel(this.webApplication, auditResultList);
+            var auditSummary = new WebPageThrottledAuditSummaryModel(this.webApplication, auditResultList);
             //before saving the report, remove duplicate web application object from each object in auditResultList
             //TODO - remove duplicate web application object from each object in auditResultList
-            for (const analysisResult of sessionSummary.auditResultList) {
+            for (const analysisResult of auditSummary.auditResultList) {
                 delete analysisResult.webApplication;
             }
-            return this.saveReport(sessionSummary);
+            return this.saveReport(auditSummary);
         } catch (err) {
             this.logger.logError('Error:', err);
         }

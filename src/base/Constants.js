@@ -2,6 +2,9 @@ export class CONSTANTS {
     static get AUDIT() {
         return 'audits';
     }
+    static get ALL_KEYS() {
+        return 'allkeys.json';
+    }
     static get AUDITLIST() {
         return 'auditlist';
     }
@@ -19,6 +22,9 @@ export class CONSTANTS {
     }
     static get NETWORK() {
         return 'network';
+    }
+    static get ALL_RESULTS_ALL_KEYS() {
+        return 'all-results-all-keys.json';
     }
     static get WEB_PAGE_THROTTLED_AUDIT_THROTTLE_IMPACT_REPORT_FILE_NAME() {
         return 'web-page-throttled-audit-throttle-impact-report.json';
