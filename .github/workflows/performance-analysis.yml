@@ -16,7 +16,7 @@ jobs:
     - name: Install dependencies
       run: | 
         git fetch --all
-        git checkout main
+        git checkout docs
         pwd
         ls -la
     - name: Install dependencies
