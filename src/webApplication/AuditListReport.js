@@ -2,8 +2,8 @@ import * as fs from 'fs';
 import { BaseReport } from '../base/BaseReport.js';
 
 export class AuditListReport extends BaseReport {
-    constructor(webApplication, reportFolder,logger) {
-        super(webApplication, reportFolder,logger);
+    constructor(webPage,webApplication, reportFolder,logger) {
+        super(webPage,webApplication, reportFolder,logger);
         this.auditList = {
             webApplication: webApplication,
             audits: []
@@ -37,7 +37,7 @@ export class AuditListReport extends BaseReport {
 
 
     prepareAuditDataForApplication() {
-        const auditListFolderPath = this.getAuditFolderPath();
+        const auditListFolderPath = this.getWebPageAuditFolderPath();
         this.logger.logInfo(`appFolderPath: ${auditListFolderPath}`);
         for (const auditFolder of fs.readdirSync(auditListFolderPath)) {
             if (!auditFolder.match(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/)) {

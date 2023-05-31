@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import { logInfo } from '../log/processlogger.js'
 import { AnalysisResult } from '../models/AuditResultModel.js';
 import { extractNumericValue, prepareSessionReportFolder, getSessionSummaryOutputPath } from '../utils/folder.js';
-import { WebPageThrottledAuditSummaryModel } from '../models/WebPageThrottledAuditSummaryModel.js';
+import { WebPageThrottledAuditSummaryReportModel } from '../models/WebPageThrottledAuditSummaryReportModel.js';
 
 export class SessionSummaryGenerator {
     constructor(webApplication, reportFolder) {
@@ -14,7 +14,7 @@ export class SessionSummaryGenerator {
     async generate(auditInstanceId) {
         try {
             const auditResultList = await this.getAnalysisResultList(files, auditInstanceId);
-            var sessionSummary = new WebPageThrottledAuditSummaryModel(this.webApplication, auditResultList);
+            var sessionSummary = new WebPageThrottledAuditSummaryReportModel(this.webApplication, auditResultList);
             const sessionReportOutputPath = await this.writeSessionSummaryToFile(sessionSummary);
             return sessionReportOutputPath;
         } catch (err) {

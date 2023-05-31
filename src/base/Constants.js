@@ -23,11 +23,23 @@ export class CONSTANTS {
     static get NETWORK() {
         return 'network';
     }
+    static get LIGHTHOUSE() {
+        return 'lighthouse';
+    }
     static get ALL_RESULTS_ALL_KEYS() {
         return 'all-results-all-keys.json';
     }
-    static get WEB_PAGE_THROTTLED_AUDIT_THROTTLE_IMPACT_REPORT_FILE_NAME() {
+    static get WEB_PAGE_THROTTLED_AUDIT_THROTTLE_IMPACT_CHART_DATA_FILE_NAME() {
         return 'web-page-throttled-audit-throttle-impact-report.json';
+    }
+    static get WEB_PAGE_ENVIRONMENT_AUDIT_LIST_FILE_NAME() {
+        return 'web-page-environment-audit-list-report.json';
+    }
+    static get WEB_PAGE_ENVIRONMENT_LIST_FILE_NAME() {
+        return 'web-page-environment-list-report.json';
+    }
+    static get WEB_PAGE_LIST_FILE_NAME() {
+        return 'web-page-list-report.json';
     }
 }
 

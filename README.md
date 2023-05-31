@@ -21,8 +21,8 @@
                             - <auditInstance>_throttledAudit_chartdata.json
                         - LighthouseFullReports
                             - <auditInstanceId>_cpu_<cpu>_network_<network>_lighthouse_full_report.json 
-                        - LighthouseSummaryReports 
-                            - <auditInstanceId>_cpu_<cpu>_network_<network>_lighthouse_summary_report.json
+                        - AuditReports 
+                            - <auditInstanceId>_cpu_<cpu>_network_<network>_audit_report.json
                         
                 
             

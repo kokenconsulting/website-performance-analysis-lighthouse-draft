@@ -2,11 +2,12 @@
 import { BaseModel } from '../base/BaseModel.js';
 
 export class WebApplication extends BaseModel {
-  constructor(name, version, environment, gitRepoUrl, gitBranchName, initiatedBy) {
+  constructor(id,name, version, environment, gitRepoUrl, gitBranchName, initiatedBy) {
     super();
+    this.id = id;
     this.name = name;
     this.version = version;
-    this.environment = environment;
+   
     this.gitRepoUrl = gitRepoUrl;
     this.gitBranchName = gitBranchName;
     this.initiatedBy = initiatedBy;

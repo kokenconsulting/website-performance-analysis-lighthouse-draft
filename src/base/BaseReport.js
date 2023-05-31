@@ -2,9 +2,10 @@ import * as fs from 'fs';
 import { CONSTANTS } from './Constants.js';
 
 export class BaseReport {
-    constructor(webApplication, reportFolder, logger) {
-        this.reportFolder = reportFolder;
+    constructor(webPage,webApplication, reportFolder, logger) {
+        this.webPage = webPage;
         this.webApplication = webApplication;
+        this.reportFolder = reportFolder;
         this.logger = logger;
     }
 
@@ -16,59 +17,65 @@ export class BaseReport {
             });
         }
     }
-    getAppReportFolderPath() {
-        const folderPath = `${this.reportFolder}/${this.webApplication.name}`;
+    getWebApplicationReportFolderPath() {
+        const folderPath = `${this.reportFolder}/${this.webApplication.id}`;
         this.createFoldersIfNotExist(folderPath)
         return folderPath;
     }
+
+    getWebPageWebPageFolderPath() {
+        //create folders if they don't exist
+        const folderPath = `${this.getWebApplicationReportFolderPath()}/${this.webPage.id}`;
+        this.createFoldersIfNotExist(folderPath)
+        return folderPath;
+    }
+    getWebPageEnvironmentFolderPath() {
+        //create folders if they don't exist
+        const folderPath = `${this.getWebPageWebPageFolderPath()}/${this.webPage.environment}`;
+        this.createFoldersIfNotExist(folderPath)
+        return folderPath;
+    }
+    getWebPageAuditFolderPath() {
+        //create folders if they don't exist
+        const folderPath = `${this.getWebPageEnvironmentFolderPath()}/${CONSTANTS.AUDIT}`;
+        this.createFoldersIfNotExist(folderPath)
+        return folderPath;
+    }
+   
+    getWebPageAuditReportFolderPath(auditInstanceId) {
+        //create folders if they don't exist
+        const folderPath = `${this.getWebPageAuditFolderPath()}/${auditInstanceId}`;
+        this.createFoldersIfNotExist(folderPath)
+        return folderPath;
+    }
+
+
+    getWebPageAuditChartDataFolderPath(auditInstanceId) {
+        const folderPath = `${this.getWebPageAuditReportFolderPath(auditInstanceId)}/${CONSTANTS.CHARTDATA}`;
+        this.createFoldersIfNotExist(folderPath)
+        return folderPath;
+    }
+
     getAppReportAllResultsFilePath() {
-        const folderPath = `${this.reportFolder}/${this.webApplication.name}/${CONSTANTS.ALL_RESULTS_ALL_KEYS}`;
-        return folderPath;
+        const filePath = `${this.reportFolder}/${this.webApplication.name}/${CONSTANTS.ALL_RESULTS_ALL_KEYS}`;
+        return filePath;
     }
-    getApplicationChartDataFolder() {
-        const folderPath = `${this.reportFolder}/${this.webApplication.name}/${CONSTANTS.CHARTDATA}`;
-        this.createFoldersIfNotExist(folderPath)
-        return folderPath;
-    }
+
     getApplicationChartDataSpecificFilePath(key) {
         const filePath = `${this.getApplicationChartDataFolder()}/${key}.json`;
         return filePath;
     }
     getApplicationChartDataAllKeysFilePath() {
-        const filePath = `${this.getAppReportFolderPath()}/${CONSTANTS.ALL_KEYS}`;
+        const filePath = `${this.getWebApplicationReportFolderPath()}/${CONSTANTS.ALL_KEYS}`;
         return filePath;
     }
     getAppAuditListReportFilePath() {
-        return `${this.getAppReportFolderPath()}/${this.webApplication.name}_${CONSTANTS.AUDITLIST}.json`;
+        return `${this.getWebApplicationReportFolderPath()}/${this.webApplication.name}_${CONSTANTS.AUDITLIST}.json`;
     }
 
     getAppSummaryReportFilePath() {
         //create folders if they don't exist
-        return `${this.getAppReportFolderPath()}/${this.webApplication.name}_${CONSTANTS.SUMMARY}.json`;
-    }
-    getSessionReportFolderPath(auditInstanceId) {
-        //create folders if they don't exist
-        const folderPath = `${this.getAuditFolderPath()}/${auditInstanceId}`;
-        this.createFoldersIfNotExist(folderPath)
-        return folderPath;
-    }
-    getAuditFolderPath() {
-        //create folders if they don't exist
-        const folderPath = `${this.getAppReportFolderPath()}/${CONSTANTS.AUDIT}`;
-        this.createFoldersIfNotExist(folderPath)
-        return folderPath;
-    }
-
-    getAnalysisListReportFolderPath(auditInstanceId) {
-        //create folders if they don't exist
-        var folderPath = `${this.getSessionReportFolderPath(auditInstanceId)}/${CONSTANTS.ANALYSIS}`
-        this.createFoldersIfNotExist(folderPath)
-        return folderPath;
-    }
-
-    getWebPageThrottledAuditSummaryReportFilePath(auditInstanceId) {
-        //create folders if they don't exist
-        return `${this.getSessionReportFolderPath(auditInstanceId)}/${auditInstanceId}_${CONSTANTS.SUMMARY}.json`;
+        return `${this.getWebApplicationReportFolderPath()}/${this.webApplication.name}_${CONSTANTS.SUMMARY}.json`;
     }
 
     getAnalysisReportFilePath(auditInstanceId, cpuSlowDownMultiplier, networkSpeed) {
@@ -78,7 +85,7 @@ export class BaseReport {
 
     getChartDataReportFolderPath(auditInstanceId) {
         //create folders if they don't exist
-        var folderPath = `${this.getSessionReportFolderPath(auditInstanceId)}/${CONSTANTS.CHARTDATA}`
+        var folderPath = `${this.getWebPageAuditReportFolderPath(auditInstanceId)}/${CONSTANTS.CHARTDATA}`
         this.createFoldersIfNotExist(folderPath)
         return folderPath;
     }

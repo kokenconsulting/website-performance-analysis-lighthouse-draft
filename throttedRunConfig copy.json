@@ -1,0 +1,57 @@
+{
+    "ReportFolderRelativePath": "./docs/reports",
+    "WebPage": {
+        "Id": "Google_Support_Page",
+        "Name": "Google Support Home Page ",
+        "Url": "https://support.google.com/",
+        "Description" : "Sample Description",
+        "Environment": "dev"
+    },
+    "Application": {
+        "Id": "google.com",
+        "Name": "SampleApplication",
+        "Version": "1.0.0",
+        "Description": "Sample Application",
+        "GitUrl": "",
+        "GitBranch": "master"
+    },
+    "ThrottlingSettings": {
+        "NetworkSpeeds": [
+            {
+                "rttMs": 100,
+                "throughputKbps": 3500
+            },
+            {
+                "rttMs": 100,
+                "throughputKbps": 7500
+            },
+            {
+                "rttMs": 100,
+                "throughputKbps": 15500
+            },
+            {
+                "rttMs": 100,
+                "throughputKbps": 17500
+            },
+            {
+                "rttMs": 100,
+                "throughputKbps": 20500
+            },
+            {
+                "rttMs": 100,
+                "throughputKbps": 23500
+            },
+            {
+                "rttMs": 100,
+                "throughputKbps": 25500
+            },
+            {
+                "rttMs": 100,
+                "throughputKbps": 29500
+            }
+        ],
+        "CPUSlowDownMultipliers": [
+            0,2,4
+        ]
+    }
+}

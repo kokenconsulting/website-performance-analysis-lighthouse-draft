@@ -4,7 +4,8 @@ export class BaseModel {
 
   toJson() {
     //return a json object consisting on non-function properties
-    return JSON.parse(JSON.stringify(this));
+    //return JSON.parse(JSON.stringify(this));
+    return JSON.stringify(this);
   }
 }
 // END: abcde12345
