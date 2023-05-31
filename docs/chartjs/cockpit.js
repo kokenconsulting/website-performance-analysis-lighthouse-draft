@@ -1,9 +1,13 @@
+var mainChartObject;
 class DATA_SOURCES {
     static REPORTS_FOLDER_NAME() {
         return "reports";
     }
     static CHART_DATA_FOLDER_NAME() {
         return "chartdata";
+    }
+    static AUDITS_FOLDER_NAME() {
+        return "audits";
     }
 
     static WEBAPP_LIST_ENDPOINT() {
@@ -20,6 +24,9 @@ class DATA_SOURCES {
     }
     static ENVIRONMENT_THROTTLED_AUDIT_CHART_DATA(webappId, webPageId, env, cpu, network) {
         return `${DATA_SOURCES.REPORTS_FOLDER_NAME()}/${webappId}/${webPageId}/${env}/${DATA_SOURCES.CHART_DATA_FOLDER_NAME()}/cpu_${cpu}_${network}_web-page-environment-specific-throttle-setting-throttle-impact-report.json`
+    }
+    static THROTTLED_AUDIT_SUMMARY_CHART_DATA(webappId, webPageId, env, auditInstanceId) {
+        return `${DATA_SOURCES.REPORTS_FOLDER_NAME()}/${webappId}/${webPageId}/${env}/${DATA_SOURCES.AUDITS_FOLDER_NAME()}/${auditInstanceId}/${DATA_SOURCES.CHART_DATA_FOLDER_NAME()}/web-page-throttled-audit-throttle-impact-report.json`
     }
 }
 
@@ -222,18 +229,21 @@ function generateApplicationChartOnPage(labels, dataSetValues, webAppId, webPage
 
     const chartOptions = {
         onClick: (evt) => {
-            var activePoints = chartObject.getElementsAtEventForMode(evt, 'nearest', { intersect: false });
+            var activePoints = mainChartObject.getElementsAtEventForMode(evt, 'nearest', { intersect: false });
             console.log(activePoints);
             if (activePoints.length) {
                 const firstPoint = activePoints[0];
                 var labelIndex = firstPoint.index;
                 var datasetIndex = firstPoint.datasetIndex;
-                const label = chartObject.data.labels[firstPoint.index];
-                const value = chartObject.data.datasets[firstPoint.datasetIndex].data[firstPoint.index];
+                const label = mainChartObject.data.labels[firstPoint.index];
+                const value = mainChartObject.data.datasets[firstPoint.datasetIndex].data[firstPoint.index];
                 console.log(label);
+                //audit instance id is second part of label split with -
+                const auditInstanceId = label.split("Z-")[1];
                 console.log(value);
                 console.log(datasetIndex);
-                console.log(labelIndex);
+                console.log("audit instance id"+auditInstanceId);
+                setAuditChartData(webAppId, webPageId, env, auditInstanceId)
             }
         },
         interaction: {
@@ -265,10 +275,10 @@ function generateApplicationChartOnPage(labels, dataSetValues, webAppId, webPage
 
     const ctx = document.getElementById(COCKPIT_ELEMENTS.environmentAuditResultsChart.id).getContext("2d");
     //destroy chart if it already exists
-    if (typeof chartObject !== "undefined") {
-        chartObject.destroy();
+    if (typeof mainChartObject !== "undefined") {
+        mainChartObject.destroy();
     }
-    chartObject = new Chart(ctx, {
+    mainChartObject = new Chart(ctx, {
         type: "line",
         events: ['click'],
         data: chartData,

@@ -1,7 +1,7 @@
 // Upon selection of drowdownlist value, call setSessionChart value
-function setAuditChartData(applicationId, auditInstanceId) {
-
-    fetch(constants.reportsFolderName + '/' + applicationId + '/' + constants.AUDITS_NAME + '/' + auditInstanceId + '/' + constants.CHART_DATA_FOLDER_NAME + '/' + constants.ThrottleImpactReportFileName)
+function setAuditChartData(webAppId, webPageId, env, auditInstanceId) {
+    const url = DATA_SOURCES.THROTTLED_AUDIT_SUMMARY_CHART_DATA(webAppId, webPageId, env,auditInstanceId)
+    fetch(url)
         .then(response => response.json())
         .then(data => processCPUSlowDownMultiplierResultsUponRequestSuccess(data, applicationId, auditInstanceId));
 }
