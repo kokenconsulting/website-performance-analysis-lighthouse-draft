@@ -9,6 +9,7 @@
     <script src="chartjs/throttleSingleAuditChart.js"></script>
     <script src="chartjs/throttledAuditDashboard.js"></script>
     <script src="chartjs/appChart.js"></script>
+    <script src="chartjs/cockpit.js"></script>
     <link rel="stylesheet" type="text/css" href="chartjs/style.css">
     <script>
 
@@ -16,19 +17,39 @@
 </head>
 
 <body>
-    <div style="height: 50%;width:50%">
+    
+    <div id="cockpit" style="height: 50%;width:50%">
         <h1>Application Chart</h1>
-        <p>Different Combo</p>
-        <label for="webApplicationKeysList">Select Key:</label>
-        <select id="webApplicationKeysList"></select>   
-        <canvas id="webApplicationAuditChart" style="width: 75%;"></canvas>
+        <div>
+            <label for="webAppListDDL">Select Web App:</label>
+            <select id="webAppListDDL"></select>
+        </div>
+        <div>
+            <label for="webPageListDDL">Select Web Page:</label>
+            <select id="webPageListDDL"></select>
+        </div>
+        <div>
+            <label for="envListDDL">Select Environment:</label>
+            <select id="envListDDL"></select>
+        </div>
+        <div>
+            <label for="cpuOptionsDDL">Select CPU Slow Down Multiplier:</label>
+            <select id="cpuOptionsDDL"></select>
+            <label for="networkThrottleOptionsDDL">Select Network Speed in Kbps:</label>
+            <select id="networkThrottleOptionsDDL"></select>
+        </div>
+    </div>
+    <div>
+        <canvas id="environmentAuditResultsChart" style="width: 75%;"></canvas>
     </div>
     <div style="height: 50%;width:50%">
         <h1>Throttle Chart</h1>
         <p>This page displays a chart of performance results for different network speeds and CPU slowdowns. Select a
             session from the dropdown list to view its performance results.</p>
-        <label for="dropdown">Select Session:</label>
-        <select id="dropdown"></select>
+        <div>
+            <label for="dropdown">Select Session:</label>
+            <select id="dropdown"></select>
+        </div>
 
         <h2>Graph Options</h2>
         <h3>CPU Slow Down Multipliers</h3>
@@ -39,6 +60,8 @@
         <canvas id="webPageAuditChart" style="width: 75%;"></canvas>
 
     </div>
-</body>
-
-</html>
+    <style>
+        select {
+            display: inline-block;
+        }
+    </style>

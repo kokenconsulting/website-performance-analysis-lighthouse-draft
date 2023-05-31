@@ -47,6 +47,9 @@ export class CONSTANTS {
     static get WEB_PAGE_ENVIRONMENT_THROTTLED_AUDIT_THROTTLE_IMPACT_CHART_DATA_FILE_NAME() {
         return 'web-page-environment-throttled-audit-throttle-impact-report.json';
     }
+    static get WEB_PAGE_ENVIRONMENT_THROTTLE_SETTINGS_FILE_NAME(){
+        return 'web-page-environment-throttle-settings.json';
+    }
     static get WEB_PAGE_ENVIRONMENT_SPECIFIC_THROTTLE_SETTING_THROTTLE_IMPACT_CHART_DATA_FILE_NAME_SUFFIX() {
         return 'web-page-environment-specific-throttle-setting-throttle-impact-report.json';
     }

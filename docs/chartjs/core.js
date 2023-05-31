@@ -8,6 +8,7 @@ var constants = {
     ALL_KEYS: "allkeys.json",
     AUDIT_INSTANCE_ID: "auditInstanceId"
 };
+
 var baseUrl = "localhost:8000";
 var applicationId = "Google_Support_Page";
 var colorList = ["red", "blue", "green", "orange", "purple", "yellow", "pink", "brown", "grey", "black"];

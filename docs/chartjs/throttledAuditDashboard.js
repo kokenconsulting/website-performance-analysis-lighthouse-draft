@@ -1,10 +1,10 @@
 
 $(document).ready(function () {
-    populateSessionDropDownListData(applicationId);
-    $('#dropdown').change(function () {
-        var sessionId = $(this).val();
-        setAuditChartData(applicationId, sessionId);
-    });
+    // populateSessionDropDownListData(applicationId);
+    // $('#dropdown').change(function () {
+    //     var sessionId = $(this).val();
+    //     setAuditChartData(applicationId, sessionId);
+    // });
 });
 
 function populateSessionDropDownListData(applicationId) {

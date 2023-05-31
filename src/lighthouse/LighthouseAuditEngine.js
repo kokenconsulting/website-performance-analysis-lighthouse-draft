@@ -13,7 +13,12 @@ export class LighthouseAuditEngine extends EngineBase {
         this.networkSpeed =networkSpeed;
         this.cpuSlowdownMultiplier =cpuSlowdownMultiplier;
         this.externalNetworkSpeed = externalNetworkSpeed;
-        this.report = new LighthouseAuditReport(webPage,webApplication, reportFolder,this.logger,auditInstanceId,cpuSlowdownMultiplier,networkSpeed);
+        if(this.externalNetworkSpeed != null){
+            this.report = new LighthouseAuditReport(webPage,webApplication, reportFolder,this.logger,auditInstanceId,cpuSlowdownMultiplier,externalNetworkSpeed);
+        }else{
+            this.report = new LighthouseAuditReport(webPage,webApplication, reportFolder,this.logger,auditInstanceId,cpuSlowdownMultiplier,networkSpeed);
+        }
+        
     }
     
     async run() {

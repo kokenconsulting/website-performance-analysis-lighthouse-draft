@@ -7,4 +7,4 @@ import {
 //get current working directory
 const configFullPath = path.join(process.cwd(), 'throttedRunConfig.json');
 const auditRunner = new WebPageThrottledAuditOrchestrator(configFullPath);
-await auditRunner.run(false);
+await auditRunner.run(true);

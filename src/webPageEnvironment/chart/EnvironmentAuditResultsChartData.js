@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import { EnvironmentAuditResultsChartDataModel } from './EnvironmentAuditResultsChartDataModel.js';
 import { EnvironmentSpecificThrottleSettingChartData } from './EnvironmentSpecificThrottleSettingChartData.js';
+import { EnvironmentThrottleSettingChartData } from './EnvironmentThrottleSettingChartData.js';
 import { WebPageThrottledAuditSummaryReport } from '../../webPageThrottledAudit/reports/WebPageThrottledAuditSummaryReport.js';
 import { WebPageEnvironmentAuditListReport } from '../report/WebPageEnvironmentAuditListReport.js';
 import { BaseReport } from '../../base/BaseReport.js';
@@ -29,6 +30,8 @@ export class EnvironmentAuditResultsChartData extends BaseReport {
         const auditSummaryReport = this.webPageThrottledAuditSummaryReport.getReport();
         const auditList = auditSummaryReport.auditResultList;
         for (const audit of auditList) {
+            this.logger.logInfo(`EnvironmentAuditResultsChartData - Processing audit ${audit}`);
+            this.logger.logInfo(`EnvironmentAuditResultsChartData - Processing audit ${audit.auditInstanceId}`);
             const reporter = new WebPageThrottledAuditSummaryReport(this.webPage, this.webApplication, this.reportFolder, this.logger, audit);
             const auditSummary = reporter.getReport();
             const auditListArray = auditSummary.auditResultList;
@@ -81,15 +84,26 @@ export class EnvironmentAuditResultsChartData extends BaseReport {
                     interactive: [],
                     speedindex: []
                 };
-                this.environmentUnsortedCompleteAuditDetails[key].labels.push(`${auditDetail.startDateTime}-${auditDetail.auditInstanceId}`);
-                this.environmentUnsortedCompleteAuditDetails[key].interactive.push(auditDetail.loadTimeInteractive);
-                this.environmentUnsortedCompleteAuditDetails[key].speedindex.push(auditDetail.loadTimeSpeedIndex);
+
             }
+            this.environmentUnsortedCompleteAuditDetails[key].labels.push(`${auditDetail.startDateTime}-${auditDetail.auditInstanceId}`);
+            this.environmentUnsortedCompleteAuditDetails[key].interactive.push(auditDetail.loadTimeInteractive);
+            this.environmentUnsortedCompleteAuditDetails[key].speedindex.push(auditDetail.loadTimeSpeedIndex);
         }
     }
-    
+
     generateSpecificThrottledSettingChartData() {
+        const cpuSlowDownMultiplierList = [];
+        const networkSpeedList = [];
         for (const [key, value] of Object.entries(this.environmentUnsortedCompleteAuditDetails)) {
+
+            if (cpuSlowDownMultiplierList.indexOf(value.cpuSlowDownMultiplier) === -1) {
+                cpuSlowDownMultiplierList.push(value.cpuSlowDownMultiplier);
+            }
+            if (networkSpeedList.indexOf(value.networkThrottle) === -1) {
+                networkSpeedList.push(value.networkThrottle);
+            }
+
             const cpuSlowDownMultiplier = value.cpuSlowDownMultiplier;
             const networkThrottle = value.networkThrottle;
             const labels = value.labels;
@@ -102,5 +116,7 @@ export class EnvironmentAuditResultsChartData extends BaseReport {
             var specificThrottleSettingChartData = new EnvironmentSpecificThrottleSettingChartData(this.webPage, this.webApplication, this.reportFolder, this.logger, cpuSlowDownMultiplier, networkThrottle, labels, dataSets);
             specificThrottleSettingChartData.generate();
         }
+        const environmentThrottleSettingChartData = new EnvironmentThrottleSettingChartData(this.webPage, this.webApplication, this.reportFolder, this.logger, cpuSlowDownMultiplierList, networkSpeedList);
+        environmentThrottleSettingChartData.generate();
     }
 }

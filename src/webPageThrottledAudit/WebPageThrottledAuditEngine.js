@@ -109,6 +109,6 @@ export class WebPageThrottledAuditEngine extends EngineBase {
       );
       await throttlingManager.stopThrottling();
     }
-
+    return this.auditInstanceId;
   }
 }

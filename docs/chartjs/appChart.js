@@ -1,11 +1,11 @@
 const webApplicationKeysListDdId = "webApplicationKeysList"
 const webApplicationChartId = "webApplicationAuditChart";
 $(document).ready(function () {
-    populateApplicationKeyListDropdownlist(applicationId);
-    $('#' + webApplicationKeysListDdId).change(function () {
-        var optionId = $(this).val();
-        setApplicationChartData(applicationId, optionId);
-    });
+    // populateApplicationKeyListDropdownlist(applicationId);
+    // $('#' + webApplicationKeysListDdId).change(function () {
+    //     var optionId = $(this).val();
+    //     setApplicationChartData(applicationId, optionId);
+    // });
 });
 
 function populateApplicationKeyListDropdownlist(applicationId) {
