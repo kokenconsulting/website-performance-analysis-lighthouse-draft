@@ -17,8 +17,13 @@ export class BaseReport {
             });
         }
     }
+    getReportFolderPath() {
+        const folderPath = this.reportFolder;
+        this.createFoldersIfNotExist(folderPath)
+        return folderPath;
+    }
     getWebApplicationReportFolderPath() {
-        const folderPath = `${this.reportFolder}/${this.webApplication.id}`;
+        const folderPath = `${this.getReportFolderPath()}/${this.webApplication.id}`;
         this.createFoldersIfNotExist(folderPath)
         return folderPath;
     }
@@ -32,6 +37,12 @@ export class BaseReport {
     getWebPageEnvironmentFolderPath() {
         //create folders if they don't exist
         const folderPath = `${this.getWebPageWebPageFolderPath()}/${this.webPage.environment}`;
+        this.createFoldersIfNotExist(folderPath)
+        return folderPath;
+    }
+    getWebPageEnvironmentChartDataFolderPath() {
+        //create folders if they don't exist
+        const folderPath = `${this.getWebPageEnvironmentFolderPath()}/${CONSTANTS.CHARTDATA}`;
         this.createFoldersIfNotExist(folderPath)
         return folderPath;
     }

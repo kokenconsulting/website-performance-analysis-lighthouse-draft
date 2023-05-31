@@ -20,11 +20,19 @@
             
             {
                 "rttMs": 100,
+                "throughputKbps": 19500
+            },
+            {
+                "rttMs": 100,
+                "throughputKbps": 25500
+            },
+            {
+                "rttMs": 100,
                 "throughputKbps": 29500
             }
         ],
         "CPUSlowDownMultipliers": [
-            0
+            0,1
         ]
     }
 }

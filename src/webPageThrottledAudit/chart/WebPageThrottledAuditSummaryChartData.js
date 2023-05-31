@@ -51,7 +51,7 @@ export class WebPageThrottledAuditSummaryChartData extends BaseReport {
             }
             webPageThrottledAuditSummaryChartDataList.interactiveResult[cpuSlowDownMultiplierStringValue].push(analysisResult.loadTimeInteractive);
             webPageThrottledAuditSummaryChartDataList.speedIndex[cpuSlowDownMultiplierStringValue].push(analysisResult.loadTimeSpeedIndex);
-            if (!networkSpeedList.includes(analysisResult.networkThrottle)) {
+            if (!networkSpeedList.includes(analysisResult.networkThrottle.throughputKbps)) {
                 networkSpeedList.push(analysisResult.networkThrottle.throughputKbps);
             }
         }

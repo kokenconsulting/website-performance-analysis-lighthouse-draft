@@ -38,8 +38,17 @@ export class CONSTANTS {
     static get WEB_PAGE_ENVIRONMENT_LIST_FILE_NAME() {
         return 'web-page-environment-list-report.json';
     }
+    static get WEB_APPLICATION_LIST_FILE_NAME() {
+        return 'web-application-list-report.json';
+    }
     static get WEB_PAGE_LIST_FILE_NAME() {
         return 'web-page-list-report.json';
+    }
+    static get WEB_PAGE_ENVIRONMENT_THROTTLED_AUDIT_THROTTLE_IMPACT_CHART_DATA_FILE_NAME() {
+        return 'web-page-environment-throttled-audit-throttle-impact-report.json';
+    }
+    static get WEB_PAGE_ENVIRONMENT_SPECIFIC_THROTTLE_SETTING_THROTTLE_IMPACT_CHART_DATA_FILE_NAME_SUFFIX() {
+        return 'web-page-environment-specific-throttle-setting-throttle-impact-report.json';
     }
 }
 

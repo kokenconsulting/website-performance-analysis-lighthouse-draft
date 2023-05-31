@@ -9,7 +9,7 @@ var constants = {
     AUDIT_INSTANCE_ID: "auditInstanceId"
 };
 var baseUrl = "localhost:8000";
-var applicationId = "SampleApplication";
+var applicationId = "Google_Support_Page";
 var colorList = ["red", "blue", "green", "orange", "purple", "yellow", "pink", "brown", "grey", "black"];
 var savedCpuSlowDownMultipliers = [];
 var savedResultTypes = [];

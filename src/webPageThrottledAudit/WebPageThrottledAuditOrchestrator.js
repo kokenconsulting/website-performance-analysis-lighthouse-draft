@@ -11,8 +11,10 @@ import { WebApplicationThrottledAuditResultsReport } from '../webApplication/Web
 import { WebPageThrottledAuditSummaryReport } from './reports/WebPageThrottledAuditSummaryReport.js'
 import { WebPageThrottledAuditSummaryChartData } from './chart/WebPageThrottledAuditSummaryChartData.js'
 import { WebPageEnvironmentAuditListReport } from '../webPageEnvironment/report/WebPageEnvironmentAuditListReport.js'
-import {WebPageEnvironmentListReport} from '../webPage/report/WebPageEnvironmentListReport.js'
-import {WebApplicationWebPageListReport} from '../webApplication/report/WebApplicationWebPageListReport.js'
+import { WebPageEnvironmentListReport } from '../webPage/report/WebPageEnvironmentListReport.js'
+import { WebApplicationWebPageListReport } from '../webApplication/report/WebApplicationWebPageListReport.js'
+import { EnvironmentAuditResultsChartData } from '../webPageEnvironment/chart/EnvironmentAuditResultsChartData.js'
+import { WebApplicationListReport } from '../reports/WebApplicationListReport.js'
 export class WebPageThrottledAuditOrchestrator {
     //constructor(webApplication, url, reportFolder, logger, auditInstanceId = null, cpuSlowdownMultiplierArray = null, networkSpeedArray = null) {
     constructor(configFileFullPath) {
@@ -55,32 +57,41 @@ export class WebPageThrottledAuditOrchestrator {
     }
 
     async run(useExternalThrottling = true) {
-        // const auditInstanceId = await this.runEngine(useExternalThrottling);
-        // await this.generateReports(auditInstanceId);
-        await this.generateReports();
+        const auditInstanceId = await this.runEngine(useExternalThrottling);
+        await this.generateReports(auditInstanceId);
+        await this.generateCharts(auditInstanceId);
     };
 
     async runEngine(useExternalThrottling) {
         return await this.webpageThrottledAuditEngine.run(useExternalThrottling);
     }
-    async generateReports(auditInstanceId) {
-        // const webPageThrottledAuditSummaryReport = new WebPageThrottledAuditSummaryReport(
-        //     this.webPage,
-        //     this.webPageAuditConfiguration.webApplication,
-        //     this.webPageAuditConfiguration.reportFolderFullPath,
-        //     this.logger,
-        //     auditInstanceId
-        // );
-        // await webPageThrottledAuditSummaryReport.generate();
+    async generateCharts(auditInstanceId) {
+        const webPageThrottledAuditSummaryChartData = new WebPageThrottledAuditSummaryChartData(
+            this.webPage,
+            this.webPageAuditConfiguration.webApplication,
+            this.webPageAuditConfiguration.reportFolderFullPath,
+            this.logger,
+            auditInstanceId
+        );
+        webPageThrottledAuditSummaryChartData.generate();
 
-        // const webPageThrottledAuditSummaryChartData = new WebPageThrottledAuditSummaryChartData(
-        //     this.webPage,
-        //     this.webPageAuditConfiguration.webApplication,
-        //     this.webPageAuditConfiguration.reportFolderFullPath,
-        //     this.logger,
-        //     auditInstanceId
-        // );
-        // webPageThrottledAuditSummaryChartData.generate();
+        const environmentAuditResultsChartData = new EnvironmentAuditResultsChartData(
+            this.webPage,
+            this.webPageAuditConfiguration.webApplication,
+            this.webPageAuditConfiguration.reportFolderFullPath,
+            this.logger
+        );
+        await environmentAuditResultsChartData.generate();
+    }
+    async generateReports(auditInstanceId) {
+        const webPageThrottledAuditSummaryReport = new WebPageThrottledAuditSummaryReport(
+            this.webPage,
+            this.webPageAuditConfiguration.webApplication,
+            this.webPageAuditConfiguration.reportFolderFullPath,
+            this.logger,
+            auditInstanceId
+        );
+        await webPageThrottledAuditSummaryReport.generate();
 
         const webPageEnvironmentAuditListReport = new WebPageEnvironmentAuditListReport(
             this.webPage,
@@ -103,9 +114,10 @@ export class WebPageThrottledAuditOrchestrator {
             this.logger
         );
         await webApplicationWebPageListReport.generate();
-        // await this.WebApplicationThrottledAuditResultsReport.generate();
-
-        // this.auditListReport.generate();
-        // this.applicationAllResultsReport.generate();
+        const webApplicationListReport = new WebApplicationListReport(
+            this.webPageAuditConfiguration.reportFolderFullPath,
+            this.logger
+        )
+        webApplicationListReport.generate();
     }
 }

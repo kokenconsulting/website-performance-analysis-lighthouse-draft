@@ -10,5 +10,3 @@ export class WebApplicationEnvironmentSummaryModel {
     return JSON.parse(JSON.stringify(this));
   }
 }
-
-
