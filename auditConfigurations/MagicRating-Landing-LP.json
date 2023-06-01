@@ -3,7 +3,7 @@
     "WebPage": {
         "Id": "MAGR_LANDING_PAGE",
         "Name": "MAGR LANDING PAGE",
-        "Url": "http://www.fedex.com/magr/app/index.html",
+        "Url": "https://www.fedex.com/magr/app/index.html",
         "Description" : "MAGR APP LANDING PAGE",
         "Environment": "LP"
     },
