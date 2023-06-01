@@ -1,8 +1,8 @@
 
 import { LighthouseAuditEngine } from '../lighthouse/LighthouseAuditEngine.js'
-import { AuditReport } from './AuditReport.js';
+import { ThrottledAuditReport } from './ThrottledAuditReport.js';
 import { EngineBase } from '../base/EngineBase.js';
-export class AuditEngine extends EngineBase {
+export class ThrottledAuditEngine extends EngineBase {
     constructor(webPage,webApplication,  reportFolder, logger, auditGroupId, isExternalThrottlingUsed, cpuSlowdownMultiplier, networkSpeed) {
         super(logger);
         this.webPage = webPage;
@@ -30,7 +30,7 @@ export class AuditEngine extends EngineBase {
         this.logger.logInfo(`Analysis Orchestration - Lighthouse Analysis completed`);
         this.logger.logInfo(`Analysis Orchestration - Saving Lighthouse Analysis Report - Session Id: ${this.auditGroupId}, Cpu Slowdown Multiplier: ${this.cpuSlowdownMultiplier}, Network Speed: ${JSON.stringify(this.networkSpeed)}`);
         
-        var auditReporter = new AuditReport(this.webPage,this.webApplication, this.reportFolder, this.logger, this.auditGroupId, this.cpuSlowdownMultiplier, this.networkSpeed);
+        var auditReporter = new ThrottledAuditReport(this.webPage,this.webApplication, this.reportFolder, this.logger, this.auditGroupId, this.cpuSlowdownMultiplier, this.networkSpeed);
         auditReporter.generate()
     }
 }

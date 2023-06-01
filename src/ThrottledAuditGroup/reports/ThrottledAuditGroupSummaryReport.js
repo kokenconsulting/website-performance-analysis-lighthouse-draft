@@ -1,6 +1,6 @@
 import { BaseReport } from "../../base/BaseReport.js";
 import { CONSTANTS } from "../../base/Constants.js";
-import { AuditReport } from "../../throttledAudit/AuditReport.js";
+import { ThrottledAuditReport } from "../../throttledAudit/ThrottledAuditReport.js";
 import { ThrottledAuditGroupSummaryReportModel } from "./ThrottledAuditGroupSummaryReportModel.js";
 import * as fs from 'fs';
 import * as path from 'path';
@@ -57,7 +57,7 @@ export class ThrottledAuditGroupSummaryReport extends BaseReport {
                 //TODO - this is stupid... just let AuditReport to parse the jsonReport
                 var cpuSlowDownMultiplier = jsonReport.cpuSlowDownMultiplier;
                 var networkSpeed = jsonReport.networkThrottle;
-                var lighthouseAnalysisReport = new AuditReport(this.webPage,this.webApplication, this.reportFolder, this.logger, this.auditGroupId, cpuSlowDownMultiplier, networkSpeed);
+                var lighthouseAnalysisReport = new ThrottledAuditReport(this.webPage,this.webApplication, this.reportFolder, this.logger, this.auditGroupId, cpuSlowDownMultiplier, networkSpeed);
                 var analysisResultReport = lighthouseAnalysisReport.getReport();
                 auditResultList.push(analysisResultReport);
             } catch (error) {

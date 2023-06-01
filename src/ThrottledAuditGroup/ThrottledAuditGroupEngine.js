@@ -1,6 +1,6 @@
 import { EngineBase } from "../base/EngineBase.js";
 import { v4 as uuidv4 } from "uuid";
-import { AuditEngine } from "../throttledAudit/AuditEngine.js";
+import { ThrottledAuditEngine } from "../throttledAudit/ThrottledAuditEngine.js";
 import { ThrottlingManager } from "../throttling/ThrottlingManager.js";
 
 export class ThrottledAuditGroupEngine extends EngineBase {
@@ -46,7 +46,7 @@ export class ThrottledAuditGroupEngine extends EngineBase {
         this.logger.logInfo(
           `cpuSlowdownMultiplier is ${cpuSlowdownMultiplier} and network speed is ${networkSpeed}`
         );
-        const auditEngine = new AuditEngine(
+        const auditEngine = new ThrottledAuditEngine(
           this.webPageThrottledAuditConfiguration.webPage,
           this.webPageThrottledAuditConfiguration.webApplication,
           this.webPageThrottledAuditConfiguration.reportFolderFullPath,
@@ -88,7 +88,7 @@ export class ThrottledAuditGroupEngine extends EngineBase {
             networkSpeedItem
           )}`
         );
-        const auditEngine = new AuditEngine(
+        const auditEngine = new ThrottledAuditEngine(
           this.webPageThrottledAuditConfiguration.webPage,
           this.webPageThrottledAuditConfiguration.webApplication,
           this.webPageThrottledAuditConfiguration.reportFolderFullPath,

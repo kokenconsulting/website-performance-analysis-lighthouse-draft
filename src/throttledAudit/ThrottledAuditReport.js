@@ -1,10 +1,10 @@
 import { BaseReport } from "../base/BaseReport.js";
-import { AuditResultModel } from "./AuditResultModel.js";
+import { ThrottledAuditResultModel } from "./ThrottledAuditResultModel.js";
 import { LighthouseAuditReport } from '../lighthouse/LighthouseAuditReport.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
-export class AuditReport extends BaseReport {
+export class ThrottledAuditReport extends BaseReport {
     constructor(webPage,webApplication, reportFolder, logger, auditGroupId, cpuSlowDownMultiplier, networkSpeed) {
         super(webPage,webApplication, reportFolder, logger);
         this.auditGroupId = auditGroupId;
@@ -22,7 +22,7 @@ export class AuditReport extends BaseReport {
 
     generate() {
         var lighthouseAnalysisResult = this.lighthouseReport.getReport();
-        var auditModel = this.getReportAsAuditResultModel(lighthouseAnalysisResult);
+        var auditModel = this.getReportAsThrottledAuditResultModel(lighthouseAnalysisResult);
         this.saveReport(auditModel)
     }
 
@@ -38,7 +38,7 @@ export class AuditReport extends BaseReport {
         return JSON.parse(data);
     }
 
-    getReportAsAuditResultModel(lighthouseAnalysisResult) {
+    getReportAsThrottledAuditResultModel(lighthouseAnalysisResult) {
         //TODO - get date from report
         const analysisEndTime = new Date();
         const extractedNumericValues = this.extractNumericValue(lighthouseAnalysisResult.audits);
@@ -47,7 +47,7 @@ export class AuditReport extends BaseReport {
         const interactiveResultInMilliseconds = extractedNumericValues["interactive"];
         const speedIndexResultinMilliseconds = extractedNumericValues["speed-index"];
         this.logger.logInfo(`Interactive result is ${interactiveResultInMilliseconds} and speed index result is ${speedIndexResultinMilliseconds}`);
-        return new AuditResultModel(this.webPage,this.webApplication, this.auditGroupId, this.webApplication.initiatedBy, this.webApplication.environment, lighthouseAnalysisResult.fetchTime, analysisEndTime, networkSpeed, cpuSlowDownMultiplier, interactiveResultInMilliseconds, speedIndexResultinMilliseconds);
+        return new ThrottledAuditResultModel(this.webPage,this.webApplication, this.auditGroupId, this.webApplication.initiatedBy, this.webApplication.environment, lighthouseAnalysisResult.fetchTime, analysisEndTime, networkSpeed, cpuSlowDownMultiplier, interactiveResultInMilliseconds, speedIndexResultinMilliseconds);
     }
     extractNumericValue(jsonObject) {
         const numericValuesObj = {};

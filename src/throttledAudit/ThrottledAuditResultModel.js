@@ -1,6 +1,6 @@
 import { BaseModel } from "../base/BaseModel.js";
 
-export class AuditResultModel extends BaseModel {
+export class ThrottledAuditResultModel extends BaseModel {
     constructor(webPage,webApplication, auditGroupId, initiatedBy, executionEnvironment, startDateTime, endDateTime, networkThrottle, cpuSlowDownMultiplier, loadTimeInteractive, loadTimeSpeedIndex) {
       super();
       this.webPage= webPage;
