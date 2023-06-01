@@ -2,8 +2,8 @@ import * as chromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
 import { EngineBase } from '../base/EngineBase.js';
 import {LighthouseAuditReport} from './LighthouseAuditReport.js';
-const maxWaitForFcp = 1000000
-const maxWaitForLoad = 2000000
+const maxWaitForFcp = 30000
+const maxWaitForLoad = 60000
 const formFactor = "desktop"
 
 export class LighthouseAuditEngine extends EngineBase {
