@@ -7,16 +7,16 @@ const maxWaitForLoad = 2000000
 const formFactor = "desktop"
 
 export class LighthouseAuditEngine extends EngineBase {
-    constructor(webPage,webApplication, reportFolder, logger,auditInstanceId, cpuSlowdownMultiplier,networkSpeed,externalNetworkSpeed=null) {
+    constructor(webPage,webApplication, reportFolder, logger,auditGroupId, cpuSlowdownMultiplier,networkSpeed,externalNetworkSpeed=null) {
         super(logger)
         this.webPage = webPage;
         this.networkSpeed =networkSpeed;
         this.cpuSlowdownMultiplier =cpuSlowdownMultiplier;
         this.externalNetworkSpeed = externalNetworkSpeed;
         if(this.externalNetworkSpeed != null){
-            this.report = new LighthouseAuditReport(webPage,webApplication, reportFolder,this.logger,auditInstanceId,cpuSlowdownMultiplier,externalNetworkSpeed);
+            this.report = new LighthouseAuditReport(webPage,webApplication, reportFolder,this.logger,auditGroupId,cpuSlowdownMultiplier,externalNetworkSpeed);
         }else{
-            this.report = new LighthouseAuditReport(webPage,webApplication, reportFolder,this.logger,auditInstanceId,cpuSlowdownMultiplier,networkSpeed);
+            this.report = new LighthouseAuditReport(webPage,webApplication, reportFolder,this.logger,auditGroupId,cpuSlowdownMultiplier,networkSpeed);
         }
         
     }

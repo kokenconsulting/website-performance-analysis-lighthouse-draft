@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { EnvironmentAuditResultsChartDataModel } from './EnvironmentAuditResultsChartDataModel.js';
 import { EnvironmentSpecificThrottleSettingChartData } from './EnvironmentSpecificThrottleSettingChartData.js';
 import { EnvironmentThrottleSettingChartData } from './EnvironmentThrottleSettingChartData.js';
-import { WebPageThrottledAuditSummaryReport } from '../../webPageThrottledAudit/reports/WebPageThrottledAuditSummaryReport.js';
+import { ThrottledAuditGroupSummaryReport } from '../../ThrottledAuditGroup/reports/ThrottledAuditGroupSummaryReport.js';
 import { WebPageEnvironmentAuditListReport } from '../report/WebPageEnvironmentAuditListReport.js';
 import { BaseReport } from '../../base/BaseReport.js';
 import { CONSTANTS } from '../../base/Constants.js';
@@ -31,8 +31,8 @@ export class EnvironmentAuditResultsChartData extends BaseReport {
         const auditList = auditSummaryReport.auditResultList;
         for (const audit of auditList) {
             this.logger.logInfo(`EnvironmentAuditResultsChartData - Processing audit ${audit}`);
-            this.logger.logInfo(`EnvironmentAuditResultsChartData - Processing audit ${audit.auditInstanceId}`);
-            const reporter = new WebPageThrottledAuditSummaryReport(this.webPage, this.webApplication, this.reportFolder, this.logger, audit);
+            this.logger.logInfo(`EnvironmentAuditResultsChartData - Processing audit ${audit.auditGroupId}`);
+            const reporter = new ThrottledAuditGroupSummaryReport(this.webPage, this.webApplication, this.reportFolder, this.logger, audit);
             const auditSummary = reporter.getReport();
             const auditListArray = auditSummary.auditResultList;
             for (const auditItem of auditListArray) {
@@ -42,12 +42,12 @@ export class EnvironmentAuditResultsChartData extends BaseReport {
     }
 
     getSessionSummaryInformation() {
-        const auditSummaryPath = this.getReportFilePath(this.auditInstanceId);
+        const auditSummaryPath = this.getReportFilePath(this.auditGroupId);
         const auditSummaryDataJson = JSON.parse(fs.readFileSync(auditSummaryPath, 'utf8'));
         return auditSummaryDataJson;
     }
     getReport() {
-        //TODO - return as WebPageThrottledAuditSummaryChartDataModel
+        //TODO - return as ThrottledAuditGroupSummaryChartDataModel
         const data = fs.readFileSync(this.chartDataFilePath, 'utf8');
         return JSON.parse(data);
     }
@@ -86,7 +86,7 @@ export class EnvironmentAuditResultsChartData extends BaseReport {
                 };
 
             }
-            this.environmentUnsortedCompleteAuditDetails[key].labels.push(`${auditDetail.startDateTime}-${auditDetail.auditInstanceId}`);
+            this.environmentUnsortedCompleteAuditDetails[key].labels.push(`${auditDetail.startDateTime}-${auditDetail.auditGroupId}`);
             this.environmentUnsortedCompleteAuditDetails[key].interactive.push(auditDetail.loadTimeInteractive);
             this.environmentUnsortedCompleteAuditDetails[key].speedindex.push(auditDetail.loadTimeSpeedIndex);
         }

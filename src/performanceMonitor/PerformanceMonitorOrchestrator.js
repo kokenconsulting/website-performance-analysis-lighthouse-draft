@@ -1,15 +1,15 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { WebPageThrottledAuditConfiguration } from '../webPageThrottledAudit/WebPageThrottledAuditConfiguration.js';
+import { ThrottledAuditGroupConfiguration } from '../ThrottledAuditGroup/ThrottledAuditGroupConfiguration.js';
 import { ThrottlingSettings } from '../throttling/ThrottlingSettings.js';
 import { WebApplication } from '../webApplication/WebApplicationModel.js';
 import { WebPageModel } from '../webPage/WebPageModel.js';
-import { WebPageThrottledAuditEngine } from '../webPageThrottledAudit/WebPageThrottledAuditEngine.js';
+import { ThrottledAuditGroupEngine } from '../ThrottledAuditGroup/ThrottledAuditGroupEngine.js';
 import { ProcessLogger } from '../log/ProcessLogger_Rename.js';
 import { AuditListReport } from '../webApplication/AuditListReport.js';
 import { WebApplicationThrottledAuditResultsReport } from '../webApplication/WebApplicationThrottledAuditResultsReport.js';
-import { WebPageThrottledAuditSummaryReport } from '../webPageThrottledAudit/reports/WebPageThrottledAuditSummaryReport.js'
-import { WebPageThrottledAuditSummaryChartData } from '../webPageThrottledAudit/chart/WebPageThrottledAuditSummaryChartData.js'
+import { ThrottledAuditGroupSummaryReport } from '../ThrottledAuditGroup/reports/ThrottledAuditGroupSummaryReport.js'
+import { ThrottledAuditGroupSummaryChartData } from '../ThrottledAuditGroup/chart/ThrottledAuditGroupSummaryChartData.js'
 import { WebPageEnvironmentAuditListReport } from '../webPageEnvironment/report/WebPageEnvironmentAuditListReport.js'
 import { WebPageEnvironmentListReport } from '../webPage/report/WebPageEnvironmentListReport.js'
 import { WebApplicationWebPageListReport } from '../webApplication/report/WebApplicationWebPageListReport.js'
@@ -17,7 +17,7 @@ import { EnvironmentAuditResultsChartData } from '../webPageEnvironment/chart/En
 import { WebApplicationListReport } from './WebApplicationListReport.js'
 
 export class PerformanceMonitorOrchestrator {
-    //constructor(webApplication, url, reportFolder, logger, auditInstanceId = null, cpuSlowdownMultiplierArray = null, networkSpeedArray = null) {
+    //constructor(webApplication, url, reportFolder, logger, auditGroupId = null, cpuSlowdownMultiplierArray = null, networkSpeedArray = null) {
     constructor(configFileFullPath) {
         this.logger = new ProcessLogger();
         this.config = JSON.parse(fs.readFileSync(configFileFullPath, 'utf8'));
@@ -40,9 +40,9 @@ export class PerformanceMonitorOrchestrator {
             this.config.ThrottlingSettings.CPUSlowDownMultipliers
         );
 
-        this.webPageAuditConfiguration = new WebPageThrottledAuditConfiguration(this.webPage, reportFolderFullPath, this.webApplication, throttlingSettings);
+        this.webPageAuditConfiguration = new ThrottledAuditGroupConfiguration(this.webPage, reportFolderFullPath, this.webApplication, throttlingSettings);
         //engine
-        this.webpageThrottledAuditEngine = new WebPageThrottledAuditEngine(this.webPageAuditConfiguration, this.logger)
+        this.webpageThrottledAuditEngine = new ThrottledAuditGroupEngine(this.webPageAuditConfiguration, this.logger)
 
         //Reporters
         this.auditListReport = new AuditListReport(this.webPage, this.webApplication, reportFolderFullPath, this.logger);
@@ -52,27 +52,27 @@ export class PerformanceMonitorOrchestrator {
         //     this.webPageAuditConfiguration.webApplication,
         //     this.webPageAuditConfiguration.reportFolderFullPath,
         //     this.logger,
-        //     this.auditInstanceId
+        //     this.auditGroupId
         // );
 
     }
 
     async run(useExternalThrottling = true) {
-        const auditInstanceId = await this.runEngine(useExternalThrottling);
-        await this.generateReports(auditInstanceId);
-        await this.generateCharts(auditInstanceId);
+        const auditGroupId = await this.runEngine(useExternalThrottling);
+        await this.generateReports(auditGroupId);
+        await this.generateCharts(auditGroupId);
     };
 
     async runEngine(useExternalThrottling) {
         return await this.webpageThrottledAuditEngine.run(useExternalThrottling);
     }
-    async generateCharts(auditInstanceId) {
-        const webPageThrottledAuditSummaryChartData = new WebPageThrottledAuditSummaryChartData(
+    async generateCharts(auditGroupId) {
+        const webPageThrottledAuditSummaryChartData = new ThrottledAuditGroupSummaryChartData(
             this.webPage,
             this.webPageAuditConfiguration.webApplication,
             this.webPageAuditConfiguration.reportFolderFullPath,
             this.logger,
-            auditInstanceId
+            auditGroupId
         );
         webPageThrottledAuditSummaryChartData.generate();
 
@@ -84,13 +84,13 @@ export class PerformanceMonitorOrchestrator {
         );
         await environmentAuditResultsChartData.generate();
     }
-    async generateReports(auditInstanceId) {
-        const webPageThrottledAuditSummaryReport = new WebPageThrottledAuditSummaryReport(
+    async generateReports(auditGroupId) {
+        const webPageThrottledAuditSummaryReport = new ThrottledAuditGroupSummaryReport(
             this.webPage,
             this.webPageAuditConfiguration.webApplication,
             this.webPageAuditConfiguration.reportFolderFullPath,
             this.logger,
-            auditInstanceId
+            auditGroupId
         );
         await webPageThrottledAuditSummaryReport.generate();
 

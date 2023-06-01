@@ -31,7 +31,7 @@ export class WebPageEnvironmentListReport extends BaseReport {
     }
 
     getReport() {
-        //TODO - return as WebPageThrottledAuditSummaryReportModel
+        //TODO - return as ThrottledAuditGroupSummaryReportModel
         const data = fs.readFileSync(this.reportFilePath, 'utf8');
         return JSON.parse(data);
     }

@@ -3,42 +3,42 @@ import { v4 as uuidv4 } from "uuid";
 import { AuditEngine } from "../audit/AuditEngine.js";
 import { ThrottlingManager } from "../throttling/ThrottlingManager.js";
 
-export class WebPageThrottledAuditEngine extends EngineBase {
-  constructor(webPageThrottledAuditConfiguration, logger, auditInstanceId = null) {
-    //TODO - Add validation for webPageThrottledAuditConfiguration, logger and auditInstanceId.
+export class ThrottledAuditGroupEngine extends EngineBase {
+  constructor(webPageThrottledAuditConfiguration, logger, auditGroupId = null) {
+    //TODO - Add validation for webPageThrottledAuditConfiguration, logger and auditGroupId.
     super(logger);
     this.webPageThrottledAuditConfiguration = webPageThrottledAuditConfiguration;
     this.reportFolderFullPath = webPageThrottledAuditConfiguration.reportFolderFullPath;
-    this.setAuditInstanceId(auditInstanceId);
+    this.setAuditInstanceId(auditGroupId);
     this.cpuSlowdownMultiplierArray =
       this.webPageThrottledAuditConfiguration.throttlingSettings.cpuSlowDownMultipliers;
     this.networkSpeedArray =
       this.webPageThrottledAuditConfiguration.throttlingSettings.networkSpeeds;
   }
 
-  setAuditInstanceId(auditInstanceId) {
-    if (auditInstanceId == null || auditInstanceId === undefined) {
-      this.auditInstanceId = uuidv4();
+  setAuditInstanceId(auditGroupId) {
+    if (auditGroupId == null || auditGroupId === undefined) {
+      this.auditGroupId = uuidv4();
     } else {
-      this.auditInstanceId = auditInstanceId;
+      this.auditGroupId = auditGroupId;
     }
-    this.logger.logInfo(`Audit instance id is ${this.auditInstanceId}`);
+    this.logger.logInfo(`Audit instance id is ${this.auditGroupId}`);
   }
   async run(useExternalThrottling = true) {
-    let auditInstanceId;
+    let auditGroupId;
     if (useExternalThrottling === true) {
       this.logger.logInfo("Running with external throttling");
-      auditInstanceId = await this.runWithExternalThrottling();
+      auditGroupId = await this.runWithExternalThrottling();
     } else {
       this.logger.logInfo("Running with built throttling");
-      auditInstanceId = await this.runWithBuiltInThrottling();
+      auditGroupId = await this.runWithBuiltInThrottling();
     }
-    // const summaryPath = await this.WebPageThrottledAuditSummaryReport.generate();
+    // const summaryPath = await this.ThrottledAuditGroupSummaryReport.generate();
     // this.logger.logInfo(`Summary report path is ${summaryPath}`);
-    // const chartReportPath = this.WebPageThrottledAuditSummaryChartData.generate();
+    // const chartReportPath = this.ThrottledAuditGroupSummaryChartData.generate();
     // this.logger.logInfo(`Chart report path is ${chartReportPath}`);
     // return { summaryPath, chartReportPath };
-    return auditInstanceId;
+    return auditGroupId;
   }
   async runWithBuiltInThrottling() {
     for (const networkSpeed of this.networkSpeedArray) {
@@ -51,7 +51,7 @@ export class WebPageThrottledAuditEngine extends EngineBase {
           this.webPageThrottledAuditConfiguration.webApplication,
           this.webPageThrottledAuditConfiguration.reportFolderFullPath,
           this.logger,
-          this.auditInstanceId,
+          this.auditGroupId,
           false,
           cpuSlowdownMultiplier,
           networkSpeed
@@ -59,7 +59,7 @@ export class WebPageThrottledAuditEngine extends EngineBase {
         await auditEngine.runAuditWithThrottling();
       }
     }
-    return this.auditInstanceId;
+    return this.auditGroupId;
   }
 
   async runWithExternalThrottling() {
@@ -93,7 +93,7 @@ export class WebPageThrottledAuditEngine extends EngineBase {
           this.webPageThrottledAuditConfiguration.webApplication,
           this.webPageThrottledAuditConfiguration.reportFolderFullPath,
           this.logger,
-          this.auditInstanceId,
+          this.auditGroupId,
           true,
           cpuSlowdownMultiplier,
           networkSpeedItem
@@ -107,6 +107,6 @@ export class WebPageThrottledAuditEngine extends EngineBase {
       );
       await throttlingManager.stopThrottling();
     }
-    return this.auditInstanceId;
+    return this.auditGroupId;
   }
 }

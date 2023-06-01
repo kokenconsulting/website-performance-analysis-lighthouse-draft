@@ -1,8 +1,8 @@
 
 // app information class that consist of projectname, gitrepourl, gitbranchname
 export class WebApplicationThrottledAuditResultReportItem {
-  constructor(auditInstanceId, networkSpeedInKbps, cpuSlowDownMultiplier, loadTimeInteractiveInMilliSeconds, loadTimeSpeedIndexInMilliseconds, startTime, endTime) {
-    this.auditInstanceId = auditInstanceId;
+  constructor(auditGroupId, networkSpeedInKbps, cpuSlowDownMultiplier, loadTimeInteractiveInMilliSeconds, loadTimeSpeedIndexInMilliseconds, startTime, endTime) {
+    this.auditGroupId = auditGroupId;
     this.networkSpeedInKbps = networkSpeedInKbps;
     this.cpuSlowDownMultiplier = cpuSlowDownMultiplier;
     this.loadTimeInteractiveInMilliSeconds = loadTimeInteractiveInMilliSeconds;

@@ -10,7 +10,7 @@ export class WebPageEnvironmentAuditListReport extends BaseReport {
         this.webApplication = webApplication;
         this.reportFilePath = this.getReportFilePath();
     }
-    getReportFilePath(auditInstanceId) {
+    getReportFilePath(auditGroupId) {
         //create folders if they don't exist
         return `${this.getWebPageEnvironmentFolderPath()}/${CONSTANTS.WEB_PAGE_ENVIRONMENT_AUDIT_LIST_FILE_NAME}`;
     }
@@ -32,7 +32,7 @@ export class WebPageEnvironmentAuditListReport extends BaseReport {
     }
 
     getReport() {
-        //TODO - return as WebPageThrottledAuditSummaryReportModel
+        //TODO - return as ThrottledAuditGroupSummaryReportModel
         const data = fs.readFileSync(this.reportFilePath, 'utf8');
         return JSON.parse(data);
     }

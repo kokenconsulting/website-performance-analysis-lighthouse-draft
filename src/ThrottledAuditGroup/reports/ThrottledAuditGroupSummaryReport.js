@@ -1,25 +1,25 @@
 import { BaseReport } from "../../base/BaseReport.js";
 import { CONSTANTS } from "../../base/Constants.js";
 import { AuditReport } from "../../audit/AuditReport.js";
-import { WebPageThrottledAuditSummaryReportModel } from "./WebPageThrottledAuditSummaryReportModel.js";
+import { ThrottledAuditGroupSummaryReportModel } from "./ThrottledAuditGroupSummaryReportModel.js";
 import * as fs from 'fs';
 import * as path from 'path';
 
-export class WebPageThrottledAuditSummaryReport extends BaseReport {
-    constructor(webPage,webApplication, reportFolder, logger, auditInstanceId) {
+export class ThrottledAuditGroupSummaryReport extends BaseReport {
+    constructor(webPage,webApplication, reportFolder, logger, auditGroupId) {
         super(webPage,webApplication, reportFolder, logger);
         this.webApplication = webApplication;
-        this.auditInstanceId = auditInstanceId;
-        this.reportFilePath = this.getReportFilePath(auditInstanceId);
+        this.auditGroupId = auditGroupId;
+        this.reportFilePath = this.getReportFilePath(auditGroupId);
     }
-    getReportFilePath(auditInstanceId) {
+    getReportFilePath(auditGroupId) {
         //create folders if they don't exist
-        return `${this.getWebPageAuditReportFolderPath(auditInstanceId)}/${auditInstanceId}_${CONSTANTS.SUMMARY}.json`;
+        return `${this.getWebPageAuditReportFolderPath(auditGroupId)}/${auditGroupId}_${CONSTANTS.SUMMARY}.json`;
     }
     async generate() {
         try {
             const auditResultList = await this.getAuditResultList();
-            var auditSummary = new WebPageThrottledAuditSummaryReportModel(this.webPage,this.webApplication, auditResultList);
+            var auditSummary = new ThrottledAuditGroupSummaryReportModel(this.webPage,this.webApplication, auditResultList);
             //before saving the report, remove duplicate web application object from each object in auditResultList
             //TODO - remove duplicate web application object from each object in auditResultList
             for (const analysisResult of auditSummary.auditResultList) {
@@ -33,15 +33,15 @@ export class WebPageThrottledAuditSummaryReport extends BaseReport {
         return null;
     }
 
-    saveReport(WebPageThrottledAuditSummaryReportObject) {
+    saveReport(ThrottledAuditGroupSummaryReportObject) {
 
-        fs.writeFileSync(this.reportFilePath, JSON.stringify(WebPageThrottledAuditSummaryReportObject), 'utf8');
+        fs.writeFileSync(this.reportFilePath, JSON.stringify(ThrottledAuditGroupSummaryReportObject), 'utf8');
         this.logger.logInfo(`Analysis report written to ${this.reportFilePath}`);
         return this.reportFilePath;
     }
 
     getReport() {
-        //TODO - return as WebPageThrottledAuditSummaryReportModel
+        //TODO - return as ThrottledAuditGroupSummaryReportModel
         const data = fs.readFileSync(this.reportFilePath, 'utf8');
         return JSON.parse(data);
     }
@@ -57,7 +57,7 @@ export class WebPageThrottledAuditSummaryReport extends BaseReport {
                 //TODO - this is stupid... just let AuditReport to parse the jsonReport
                 var cpuSlowDownMultiplier = jsonReport.cpuSlowDownMultiplier;
                 var networkSpeed = jsonReport.networkThrottle;
-                var lighthouseAnalysisReport = new AuditReport(this.webPage,this.webApplication, this.reportFolder, this.logger, this.auditInstanceId, cpuSlowDownMultiplier, networkSpeed);
+                var lighthouseAnalysisReport = new AuditReport(this.webPage,this.webApplication, this.reportFolder, this.logger, this.auditGroupId, cpuSlowDownMultiplier, networkSpeed);
                 var analysisResultReport = lighthouseAnalysisReport.getReport();
                 auditResultList.push(analysisResultReport);
             } catch (error) {
@@ -69,11 +69,11 @@ export class WebPageThrottledAuditSummaryReport extends BaseReport {
 
     async getAuditFilePathList() {
         var fileList = [];
-        const sessionRunFolderPath = await this.getWebPageAuditReportFolderPath(this.auditInstanceId);
+        const sessionRunFolderPath = await this.getWebPageAuditReportFolderPath(this.auditGroupId);
         this.logger.logInfo(`Session run folder path is ${sessionRunFolderPath}`);
         const files = await fs.promises.readdir(sessionRunFolderPath);
         for (const file of files) {
-            if (file.startsWith(this.auditInstanceId)) {
+            if (file.startsWith(this.auditGroupId)) {
                 const filePath = path.join(sessionRunFolderPath, file);
                 this.logger.logInfo(`File path is ${filePath}`);
                 fileList.push(filePath);

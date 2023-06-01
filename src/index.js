@@ -1,15 +1,15 @@
 import { WebApplication } from './webApplication/WebApplicationModel.js';
-import { WebPageThrottledAuditEngine } from './webPageThrottledAudit/WebPageThrottledAuditEngine.js';
+import { ThrottledAuditGroupEngine } from './ThrottledAuditGroup/ThrottledAuditGroupEngine.js';
 import { AuditListReport } from './webApplication/AuditListReport.js';
-import { WebPageThrottledAuditConfiguration } from './webPageThrottledAudit/WebPageThrottledAuditConfiguration.js';
+import { ThrottledAuditGroupConfiguration } from './ThrottledAuditGroup/ThrottledAuditGroupConfiguration.js';
 import { ThrottlingSettings } from './throttling/ThrottlingSettings.js';
 import { PerformanceMonitorOrchestrator } from './performanceMonitor/PerformanceMonitorOrchestrator.js';
 
 export {
   WebApplication,
   PerformanceMonitorOrchestrator,
-  WebPageThrottledAuditEngine,
+  ThrottledAuditGroupEngine,
   AuditListReport,
-  WebPageThrottledAuditConfiguration,
+  ThrottledAuditGroupConfiguration,
   ThrottlingSettings
 }

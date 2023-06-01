@@ -2,7 +2,7 @@
 // app information class that consist of projectname, gitrepourl, gitbranchname
 
 import { BaseModel } from '../../base/BaseModel.js';
-export class WebPageThrottledAuditSummaryReportModel extends  BaseModel {
+export class ThrottledAuditGroupSummaryReportModel extends  BaseModel {
   constructor(webPage,webApplication, auditResultList) {
     super();
     this.webPage = webPage;

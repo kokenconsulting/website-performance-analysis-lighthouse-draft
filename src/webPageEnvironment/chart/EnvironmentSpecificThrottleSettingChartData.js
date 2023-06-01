@@ -31,7 +31,7 @@ export class EnvironmentSpecificThrottleSettingChartData extends BaseReport {
     }
     
     getReport() {
-        //TODO - return as WebPageThrottledAuditSummaryChartDataModel
+        //TODO - return as ThrottledAuditGroupSummaryChartDataModel
         const data = fs.readFileSync(this.chartDataFilePath, 'utf8');
         return JSON.parse(data);
     }
