@@ -1,1 +1,86 @@
-{"webPage":{"url":"https://support.google.com/","id":"Google_Support_Page","environment":"dev","displayName":"Google Support Home Page ","description":"Sample Description"},"webApplication":{"id":"google.com","name":"google.com","version":"1.0.0","gitRepoUrl":"","gitBranchName":"master"},"auditInstanceId":"6a54d1fd-4ca3-44b6-b4a5-477c67fba72a","networkSpeedList":[9000,5500,29500,25500,19500,15500,12500],"cpuSlowDownMultiplierResultsList":{"interactiveResult":{"0":[1046.053,1371.492,994.525,1009.391,1051.426,1087.932,1079.017],"1":[1007.286,1160.122,1053.185,1049.565,1132.294,1266.874,1109.83],"2":[1544.917,1658.822,1684.362,1538.201,1555.281,1518.411,1589.479]},"speedIndex":{"0":[1048,1445,1012,921,942,1010,972],"1":[1010,1282,995,949,977,1119,1013],"2":[1036,1299,1251,1085,1048,1072,1083]}}}
+{
+    "webPage": {
+        "url": "https://support.google.com/",
+        "id": "Google_Support_Page",
+        "environment": "dev",
+        "displayName": "Google Support Home Page ",
+        "description": "Sample Description"
+    },
+    "webApplication": {
+        "id": "google.com",
+        "name": "google.com",
+        "version": "1.0.0",
+        "gitRepoUrl": "",
+        "gitBranchName": "master"
+    },
+    "auditInstanceId": "6a54d1fd-4ca3-44b6-b4a5-477c67fba72a",
+    "networkSpeedList": [
+        9000,
+        5500,
+        29500,
+        25500,
+        19500,
+        15500,
+        12500
+    ],
+    "cpuSlowDownMultiplierResultsList": {
+        "interactiveResult": {
+            "0": [
+                1046.053,
+                1371.492,
+                994.525,
+                1009.391,
+                1051.426,
+                1087.932,
+                1079.017
+            ],
+            "1": [
+                1007.286,
+                1160.122,
+                1053.185,
+                1049.565,
+                1132.294,
+                1266.874,
+                1109.83
+            ],
+            "2": [
+                1544.917,
+                1658.822,
+                1684.362,
+                1538.201,
+                1555.281,
+                1518.411,
+                1589.479
+            ]
+        },
+        "speedIndex": {
+            "0": [
+                1048,
+                1445,
+                1012,
+                921,
+                942,
+                1010,
+                972
+            ],
+            "1": [
+                1010,
+                1282,
+                995,
+                949,
+                977,
+                1119,
+                1013
+            ],
+            "2": [
+                1036,
+                1299,
+                1251,
+                1085,
+                1048,
+                1072,
+                1083
+            ]
+        }
+    }
+}

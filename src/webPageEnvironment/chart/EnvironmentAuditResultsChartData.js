@@ -116,6 +116,14 @@ export class EnvironmentAuditResultsChartData extends BaseReport {
             var specificThrottleSettingChartData = new EnvironmentSpecificThrottleSettingChartData(this.webPage, this.webApplication, this.reportFolder, this.logger, cpuSlowDownMultiplier, networkThrottle, labels, dataSets);
             specificThrottleSettingChartData.generate();
         }
+        //sort cpuSlowDownMultiplierList
+        cpuSlowDownMultiplierList.sort((a, b) => {
+            return a - b;
+        });
+        //sort networkSpeedList
+        networkSpeedList.sort((a, b) => {
+            return a - b;
+        });
         const environmentThrottleSettingChartData = new EnvironmentThrottleSettingChartData(this.webPage, this.webApplication, this.reportFolder, this.logger, cpuSlowDownMultiplierList, networkSpeedList);
         environmentThrottleSettingChartData.generate();
     }

@@ -40,7 +40,7 @@ export class WebPageThrottledAuditSummaryChartData extends BaseReport {
     processThrottlingData(auditResultList) {
         const webPageThrottledAuditSummaryChartDataList = { interactiveResult: {}, speedIndex: {} };
         const networkSpeedList = [];
-        auditResultList.sort((a, b) => (a.networkThrottle > b.networkThrottle) ? 1 : -1);
+        auditResultList.sort((a, b) => (a.networkThrottle.throughputKbps > b.networkThrottle.throughputKbps) ? 1 : -1);
         for (const analysisResult of auditResultList) {
             const cpuSlowDownMultiplierStringValue = analysisResult.cpuSlowDownMultiplier + "";
             if (!webPageThrottledAuditSummaryChartDataList.interactiveResult.hasOwnProperty(cpuSlowDownMultiplierStringValue)) {
