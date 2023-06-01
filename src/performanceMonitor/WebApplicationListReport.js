@@ -1,5 +1,5 @@
-import { BaseReport } from "..//base/BaseReport.js";
-import { CONSTANTS } from "..//base/Constants.js";
+import { BaseReport } from "../base/BaseReport.js";
+import { CONSTANTS } from "../base/Constants.js";
 import { WebApplicationListReportModel } from "./WebApplicationListReportModel.js";
 import * as fs from 'fs';
 

@@ -30,8 +30,8 @@ async function MagicRatingLandingLP() {
   await auditRunner.run(true);
 }
 
-//await TestConfig();
+await TestConfig();
 
 //await GoogleSupportLP();
-await MagicRatingLandingL6();
-await MagicRatingLandingLP();
+//await MagicRatingLandingL6();
+//await MagicRatingLandingLP();

@@ -1,8 +1,6 @@
 import { EngineBase } from "../base/EngineBase.js";
 import { v4 as uuidv4 } from "uuid";
 import { AuditEngine } from "../audit/AuditEngine.js";
-// import { WebPageThrottledAuditSummaryReport } from "./reports/WebPageThrottledAuditSummaryReport.js";
-// import { WebPageThrottledAuditSummaryChartData } from "./chart/WebPageThrottledAuditSummaryChartData.js";
 import { ThrottlingManager } from "../throttling/ThrottlingManager.js";
 
 export class WebPageThrottledAuditEngine extends EngineBase {

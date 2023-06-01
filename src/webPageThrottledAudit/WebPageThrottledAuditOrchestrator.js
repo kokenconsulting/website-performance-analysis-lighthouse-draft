@@ -14,7 +14,7 @@ import { WebPageEnvironmentAuditListReport } from '../webPageEnvironment/report/
 import { WebPageEnvironmentListReport } from '../webPage/report/WebPageEnvironmentListReport.js'
 import { WebApplicationWebPageListReport } from '../webApplication/report/WebApplicationWebPageListReport.js'
 import { EnvironmentAuditResultsChartData } from '../webPageEnvironment/chart/EnvironmentAuditResultsChartData.js'
-import { WebApplicationListReport } from '../reports/WebApplicationListReport.js'
+import { WebApplicationListReport } from '../performanceMonitor/WebApplicationListReport.js'
 export class WebPageThrottledAuditOrchestrator {
     //constructor(webApplication, url, reportFolder, logger, auditInstanceId = null, cpuSlowdownMultiplierArray = null, networkSpeedArray = null) {
     constructor(configFileFullPath) {
