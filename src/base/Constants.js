@@ -1,12 +1,12 @@
 export class CONSTANTS {
     static get AUDIT() {
-        return 'audits';
+        return 'throttledAudits';
     }
     static get ALL_KEYS() {
         return 'allkeys.json';
     }
     static get AUDITLIST() {
-        return 'auditlist';
+        return 'throttledAuditList';
     }
     static get ANALYSIS() {
         return 'analysis';
