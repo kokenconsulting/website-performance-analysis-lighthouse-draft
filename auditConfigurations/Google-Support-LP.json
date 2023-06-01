@@ -5,7 +5,7 @@
         "Name": "Google Support Home Page ",
         "Url": "https://support.google.com/",
         "Description" : "Sample Description",
-        "Environment": "dev"
+        "Environment": "LP"
     },
     "Application": {
         "Id": "google.com",

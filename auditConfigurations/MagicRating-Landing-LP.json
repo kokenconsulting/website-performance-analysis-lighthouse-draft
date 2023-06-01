@@ -1,29 +1,34 @@
 {
     "ReportFolderRelativePath": "./docs/reports",
     "WebPage": {
-        "Id": "Google_Support_Page",
-        "Name": "Google Support Home Page ",
-        "Url": "https://support.google.com/",
-        "Description" : "Sample Description",
-        "Environment": "dev"
+        "Id": "MAGR_LANDING_PAGE",
+        "Name": "MAGR LANDING PAGE",
+        "Url": "http://www.fedex.com/magr/app/index.html",
+        "Description" : "MAGR APP LANDING PAGE",
+        "Environment": "LP"
     },
     "Application": {
-        "Id": "google.com",
-        "Name": "SampleApplication",
-        "Version": "1.0.0",
-        "Description": "Sample Application",
+        "Id": "MAGR",
+        "Name": "Magic-Rating",
+        "Version": "2.5.4",
+        "Description": "Magic Rating Application",
         "GitUrl": "",
         "GitBranch": "master"
     },
     "ThrottlingSettings": {
         "NetworkSpeeds": [
+            
             {
                 "rttMs": 100,
-                "throughputKbps": 3500
+                "throughputKbps": 5500
             },
             {
                 "rttMs": 100,
-                "throughputKbps": 7500
+                "throughputKbps": 9000
+            },
+            {
+                "rttMs": 100,
+                "throughputKbps": 12500
             },
             {
                 "rttMs": 100,
@@ -31,15 +36,7 @@
             },
             {
                 "rttMs": 100,
-                "throughputKbps": 17500
-            },
-            {
-                "rttMs": 100,
-                "throughputKbps": 20500
-            },
-            {
-                "rttMs": 100,
-                "throughputKbps": 23500
+                "throughputKbps": 19500
             },
             {
                 "rttMs": 100,
@@ -51,7 +48,7 @@
             }
         ],
         "CPUSlowDownMultipliers": [
-            0,2,4
+            0,1,2
         ]
     }
 }
