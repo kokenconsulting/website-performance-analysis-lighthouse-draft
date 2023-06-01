@@ -11,7 +11,7 @@ export class AuditListReport extends BaseReport {
         this.auditListFilePath = this.getAppAuditListReportFilePath();
     }
     generate() {
-        this.logger.logInfo(`Preparing session list for app ${this.webApplication.name}`);
+        this.logger.logInfo(`Preparing throttledAuditGroup list for app ${this.webApplication.name}`);
         this.prepareAuditDataForApplication();
     }
 

@@ -30,7 +30,7 @@ function populateApplicationKeyListDropdownlist(applicationId) {
         },
         error: function (data) {
             console.log("error: " + data)
-            alert("Error getting session list data");
+            alert("Error getting list data");
         }
     });
 }
@@ -85,7 +85,7 @@ function processApplicationSpeedIndex(currentColorIndex,dataSetValues,data){
     return currentColorIndex;
 }
 
-function generateApplicationChartOnPage(currentColorIndex, labels, dataSetValues, sessionId) {
+function generateApplicationChartOnPage(currentColorIndex, labels, dataSetValues, throttledAuditGroupId) {
     const chartData = {
         labels: labels,
         datasets: dataSetValues,
@@ -96,7 +96,7 @@ function generateApplicationChartOnPage(currentColorIndex, labels, dataSetValues
         plugins: {
             title: {
                 display: true,
-                text: "Performance Results - " + sessionId
+                text: "Performance Results - " + throttledAuditGroupId
             }
         },
         scales: {

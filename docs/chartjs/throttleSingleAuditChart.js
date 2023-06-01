@@ -51,10 +51,10 @@ function generateDataForChartOptions(data, cpuSlowDownMultipliers, resultTypes) 
 
 }
 
-function generateOptionsForChart(cpuSlowDownMultipliers, resultTypes, applicationId, sessionId) {
+function generateOptionsForChart(cpuSlowDownMultipliers, resultTypes, applicationId, throttledAuditGroup) {
     //run this function only if cpuSlowDownMultipliersCheckboxList innerHtml is empty
-    parseCPUSlowDownMultipliersCheckList(cpuSlowDownMultipliers, applicationId, sessionId);
-    parseResultTypeCheckList(resultTypes, applicationId, sessionId);
+    parseCPUSlowDownMultipliersCheckList(cpuSlowDownMultipliers, applicationId, throttledAuditGroup);
+    parseResultTypeCheckList(resultTypes, applicationId, throttledAuditGroup);
 }
 
 
@@ -96,7 +96,7 @@ function processResultTypeSpeedIndex(data, currentColorIndex, dataSetValues) {
 }
 
 
-function generateChartOnPage(currentColorIndex, data, dataSetValues, sessionId) {
+function generateChartOnPage(currentColorIndex, data, dataSetValues, throttledAuditGroupId) {
     //currentColorIndex = processResultTypeSpeedIndex(data, currentColorIndex, dataSetValues);
 
     const chartData = {
@@ -109,7 +109,7 @@ function generateChartOnPage(currentColorIndex, data, dataSetValues, sessionId) 
         plugins: {
             title: {
                 display: true,
-                text: "Performance Results - " + sessionId
+                text: "Performance Results - " + throttledAuditGroupId
             }
         },
         scales: {

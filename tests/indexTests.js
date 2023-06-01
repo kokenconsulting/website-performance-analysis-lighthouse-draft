@@ -17,7 +17,7 @@ describe('index.js', () => {
   });
 
   describe('createSummaryForSession', () => {
-    it('should generate data for a session with the correct properties', () => {
+    it('should generate data for a throttledAuditGroup with the correct properties', () => {
       const webApplication = new WebApplication('My App', '1.0.0', 'https://myapp.com');
       const data = createSummaryForSession(webApplication);
       expect(data.appName).toBe('My App');

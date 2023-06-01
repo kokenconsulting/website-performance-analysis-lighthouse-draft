@@ -12,7 +12,7 @@ export class WebApplicationThrottledAuditResultsReport extends BaseReport {
         this.allKeys = [];
     }
     generate() {
-        this.logger.logInfo(`Preparing session list for app ${this.webApplication.name}`);
+        this.logger.logInfo(`Preparing throttledAuditGroup list for app ${this.webApplication.name}`);
         this.prepareAuditDataForApplication();
         this.createChartData();
         this.createSpecificReportFiles();

@@ -69,12 +69,12 @@ export class ThrottledAuditGroupSummaryReport extends BaseReport {
 
     async getAuditFilePathList() {
         var fileList = [];
-        const sessionRunFolderPath = await this.getWebPageAuditReportFolderPath(this.throttledAuditGroupId);
-        this.logger.logInfo(`Session run folder path is ${sessionRunFolderPath}`);
-        const files = await fs.promises.readdir(sessionRunFolderPath);
+        const throttledAuditGroupFolderPath = await this.getWebPageAuditReportFolderPath(this.throttledAuditGroupId);
+        this.logger.logInfo(`Session run folder path is ${throttledAuditGroupFolderPath}`);
+        const files = await fs.promises.readdir(throttledAuditGroupFolderPath);
         for (const file of files) {
             if (file.startsWith(this.throttledAuditGroupId)) {
-                const filePath = path.join(sessionRunFolderPath, file);
+                const filePath = path.join(throttledAuditGroupFolderPath, file);
                 this.logger.logInfo(`File path is ${filePath}`);
                 fileList.push(filePath);
             }

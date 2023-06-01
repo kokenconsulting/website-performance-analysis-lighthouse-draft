@@ -10,7 +10,7 @@ export class ThrottledAuditReport extends BaseReport {
         this.throttledAuditGroupId = throttledAuditGroupId;
         this.cpuSlowDownMultiplier = cpuSlowDownMultiplier;
         this.networkSpeed = networkSpeed;
-        this.logger.logInfo(`Creating analysis report for session ${this.throttledAuditGroupId} with cpu slowdown multiplier ${cpuSlowDownMultiplier} and network speed ${networkSpeed}`);
+        this.logger.logInfo(`Creating analysis report for throttledAuditGroup ${this.throttledAuditGroupId} with cpu slowdown multiplier ${cpuSlowDownMultiplier} and network speed ${networkSpeed}`);
         this.lighthouseReport = new LighthouseAuditReport(this.webPage,this.webApplication, this.reportFolder, this.logger, this.throttledAuditGroupId, this.cpuSlowDownMultiplier, this.networkSpeed);
         this.reportFilePath = this.getReportFilePath();
     }
