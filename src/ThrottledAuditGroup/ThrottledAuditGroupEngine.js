@@ -1,6 +1,6 @@
 import { EngineBase } from "../base/EngineBase.js";
 import { v4 as uuidv4 } from "uuid";
-import { AuditEngine } from "../audit/AuditEngine.js";
+import { AuditEngine } from "../throttledAudit/AuditEngine.js";
 import { ThrottlingManager } from "../throttling/ThrottlingManager.js";
 
 export class ThrottledAuditGroupEngine extends EngineBase {
