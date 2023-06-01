@@ -5,26 +5,26 @@ import { BaseReport } from '../../base/BaseReport.js';
 import { CONSTANTS } from '../../base/Constants.js';
 
 export class ThrottledAuditGroupSummaryChartData extends BaseReport {
-    constructor(webPage, webApplication, reportFolder, logger, auditGroupId) {
+    constructor(webPage, webApplication, reportFolder, logger, throttledAuditGroupId) {
         super(webPage, webApplication, reportFolder, logger)
-        this.auditGroupId = auditGroupId;
-        this.ThrottledAuditGroupSummaryReport = new ThrottledAuditGroupSummaryReport(webPage, webApplication, reportFolder, logger, auditGroupId);
-        this.webPageThrottledAuditSummaryChartDataFilePath = this.getThrottledAuditGroupSummaryChartDataFilePath(auditGroupId);
+        this.throttledAuditGroupId = throttledAuditGroupId;
+        this.ThrottledAuditGroupSummaryReport = new ThrottledAuditGroupSummaryReport(webPage, webApplication, reportFolder, logger, throttledAuditGroupId);
+        this.webPageThrottledAuditSummaryChartDataFilePath = this.getThrottledAuditGroupSummaryChartDataFilePath(throttledAuditGroupId);
     }
-    getThrottledAuditGroupSummaryChartDataFilePath(auditGroupId) {
+    getThrottledAuditGroupSummaryChartDataFilePath(throttledAuditGroupId) {
         //create folders if they don't exist
-        return `${this.getWebPageAuditChartDataFolderPath(auditGroupId)}/${CONSTANTS.WEB_PAGE_THROTTLED_AUDIT_THROTTLE_IMPACT_CHART_DATA_FILE_NAME}`;
+        return `${this.getWebPageAuditChartDataFolderPath(throttledAuditGroupId)}/${CONSTANTS.WEB_PAGE_THROTTLED_AUDIT_THROTTLE_IMPACT_CHART_DATA_FILE_NAME}`;
     }
 
     generate() {
         const auditSummaryDataJson = this.ThrottledAuditGroupSummaryReport.getReport();
-        //const auditSummaryDataJson = this.getThrottledAuditGroupSummaryChartDataFilePath(this.auditGroupId);
+        //const auditSummaryDataJson = this.getThrottledAuditGroupSummaryChartDataFilePath(this.throttledAuditGroupId);
         const chartData = this.processThrottlingData(auditSummaryDataJson.auditResultList);
         return this.saveReport(chartData);
     }
 
     getSessionSummaryInformation() {
-        const auditSummaryPath = this.getThrottledAuditGroupSummaryChartDataFilePath(this.auditGroupId);
+        const auditSummaryPath = this.getThrottledAuditGroupSummaryChartDataFilePath(this.throttledAuditGroupId);
         const auditSummaryDataJson = JSON.parse(fs.readFileSync(auditSummaryPath, 'utf8'));
         return auditSummaryDataJson;
     }
@@ -55,6 +55,6 @@ export class ThrottledAuditGroupSummaryChartData extends BaseReport {
                 networkSpeedList.push(analysisResult.networkThrottle.throughputKbps);
             }
         }
-        return new ThrottledAuditGroupSummaryChartDataModel(this.webPage,this.webApplication, this.auditGroupId, networkSpeedList, webPageThrottledAuditSummaryChartDataList);
+        return new ThrottledAuditGroupSummaryChartDataModel(this.webPage,this.webApplication, this.throttledAuditGroupId, networkSpeedList, webPageThrottledAuditSummaryChartDataList);
     }
 }

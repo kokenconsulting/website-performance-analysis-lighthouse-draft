@@ -1,16 +1,16 @@
 // Upon selection of drowdownlist value, call setSessionChart value
-function setAuditChartData(webAppId, webPageId, env, auditGroupId) {
-    const url = DATA_SOURCES.THROTTLED_AUDIT_SUMMARY_CHART_DATA(webAppId, webPageId, env,auditGroupId)
+function setAuditChartData(webAppId, webPageId, env, throttledAuditGroupId) {
+    const url = DATA_SOURCES.THROTTLED_AUDIT_SUMMARY_CHART_DATA(webAppId, webPageId, env,throttledAuditGroupId)
     fetch(url)
         .then(response => response.json())
-        .then(data => processCPUSlowDownMultiplierResultsUponRequestSuccess(data, applicationId, auditGroupId));
+        .then(data => processCPUSlowDownMultiplierResultsUponRequestSuccess(data, applicationId, throttledAuditGroupId));
 }
 
-function processCPUSlowDownMultiplierResultsUponRequestSuccess(data, applicationId, auditGroupId) {
+function processCPUSlowDownMultiplierResultsUponRequestSuccess(data, applicationId, throttledAuditGroupId) {
 
     var cpuSlowDownMultipliers = [];
     var resultTypes = [];
-    generateOptionsForChart(cpuSlowDownMultipliers, resultTypes, applicationId, auditGroupId);
+    generateOptionsForChart(cpuSlowDownMultipliers, resultTypes, applicationId, throttledAuditGroupId);
     generateDataForChartOptions(data, cpuSlowDownMultipliers, resultTypes);
 
     var dataSetValues = [];
@@ -22,7 +22,7 @@ function processCPUSlowDownMultiplierResultsUponRequestSuccess(data, application
     //given data: data.cpuSlowDownMultiplierResultsList.speedIndex, loop
     //through each key and create a dataset object
     //keep same color counters
-    generateChartOnPage(currentColorIndex, data, dataSetValues, auditGroupId);
+    generateChartOnPage(currentColorIndex, data, dataSetValues, throttledAuditGroupId);
 }
 function generateDataForChartOptions(data, cpuSlowDownMultipliers, resultTypes) {
     for (const [key, value] of Object.entries(data.cpuSlowDownMultiplierResultsList.interactiveResult)) {

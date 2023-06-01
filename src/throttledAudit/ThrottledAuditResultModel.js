@@ -1,11 +1,11 @@
 import { BaseModel } from "../base/BaseModel.js";
 
 export class ThrottledAuditResultModel extends BaseModel {
-    constructor(webPage,webApplication, auditGroupId, initiatedBy, executionEnvironment, startDateTime, endDateTime, networkThrottle, cpuSlowDownMultiplier, loadTimeInteractive, loadTimeSpeedIndex) {
+    constructor(webPage,webApplication, throttledAuditGroupId, initiatedBy, executionEnvironment, startDateTime, endDateTime, networkThrottle, cpuSlowDownMultiplier, loadTimeInteractive, loadTimeSpeedIndex) {
       super();
       this.webPage= webPage;
       this.webApplication = webApplication;
-      this.auditGroupId = auditGroupId;
+      this.throttledAuditGroupId = throttledAuditGroupId;
       this.initiatedBy = initiatedBy;
       this.executionEnvironment = executionEnvironment;
       this.startDateTime = startDateTime;

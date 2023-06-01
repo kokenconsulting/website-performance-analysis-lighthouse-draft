@@ -19,10 +19,10 @@ export class WebApplicationThrottledAuditResultsReport extends BaseReport {
         this.saveAllKeysReport();
     }
 
-    addToReportItemList(auditGroupId, auditSummaryObject) {
+    addToReportItemList(throttledAuditGroupId, auditSummaryObject) {
         for (const auditResult of auditSummaryObject.auditResultList) {
             var item = new WebApplicationThrottledAuditResultReportItem(
-                auditGroupId,
+                throttledAuditGroupId,
                 auditResult.networkThrottle,
                 auditResult.cpuSlowDownMultiplier,
                 auditResult.loadTimeInteractive,
@@ -63,13 +63,13 @@ export class WebApplicationThrottledAuditResultsReport extends BaseReport {
                 {
                     interactive: [],
                     speedIndex: [],
-                    auditGroupId: []
+                    throttledAuditGroupId: []
                 };
             }
             this.reportObject[formattedKey].interactive.push(auditResult.loadTimeInteractiveInMilliSeconds);
             this.reportObject[formattedKey].speedIndex.push(auditResult.loadTimeSpeedIndexInMilliseconds);
-            this.reportObject[formattedKey].auditGroupId.push({
-                auditGroupId: auditResult.auditGroupId,
+            this.reportObject[formattedKey].throttledAuditGroupId.push({
+                throttledAuditGroupId: auditResult.throttledAuditGroupId,
                 startDateTime: auditResult.startDateTime,
                 endDateTime: auditResult.endDateTime
             });
@@ -90,16 +90,16 @@ export class WebApplicationThrottledAuditResultsReport extends BaseReport {
             if (!auditFolder.match(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/)) {
                 continue;
             }
-            const auditGroupId = auditFolder;
-            this.logger.logInfo(`auditGroupId: ${auditGroupId}`);
+            const throttledAuditGroupId = auditFolder;
+            this.logger.logInfo(`throttledAuditGroupId: ${throttledAuditGroupId}`);
             //if folder is empty, then delete folder and continue
             if (fs.readdirSync(`${auditListFolderPath}/${auditFolder}`).length === 0) {
                 fs.rmdirSync(`${auditListFolderPath}/${auditFolder}`);
                 continue;
             }
-            const auditSummaryFilePath = this.getThrottledAuditGroupSummaryReportFilePath(auditGroupId);
+            const auditSummaryFilePath = this.getThrottledAuditGroupSummaryReportFilePath(throttledAuditGroupId);
             const auditSummaryObject = JSON.parse(fs.readFileSync(auditSummaryFilePath, 'utf8'));
-            this.addToReportItemList(auditGroupId, auditSummaryObject);
+            this.addToReportItemList(throttledAuditGroupId, auditSummaryObject);
         }
     }
 

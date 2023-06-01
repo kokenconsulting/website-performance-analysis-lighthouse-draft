@@ -6,15 +6,15 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 export class ThrottledAuditGroupSummaryReport extends BaseReport {
-    constructor(webPage,webApplication, reportFolder, logger, auditGroupId) {
+    constructor(webPage,webApplication, reportFolder, logger, throttledAuditGroupId) {
         super(webPage,webApplication, reportFolder, logger);
         this.webApplication = webApplication;
-        this.auditGroupId = auditGroupId;
-        this.reportFilePath = this.getReportFilePath(auditGroupId);
+        this.throttledAuditGroupId = throttledAuditGroupId;
+        this.reportFilePath = this.getReportFilePath(throttledAuditGroupId);
     }
-    getReportFilePath(auditGroupId) {
+    getReportFilePath(throttledAuditGroupId) {
         //create folders if they don't exist
-        return `${this.getWebPageAuditReportFolderPath(auditGroupId)}/${auditGroupId}_${CONSTANTS.SUMMARY}.json`;
+        return `${this.getWebPageAuditReportFolderPath(throttledAuditGroupId)}/${throttledAuditGroupId}_${CONSTANTS.SUMMARY}.json`;
     }
     async generate() {
         try {
@@ -57,7 +57,7 @@ export class ThrottledAuditGroupSummaryReport extends BaseReport {
                 //TODO - this is stupid... just let AuditReport to parse the jsonReport
                 var cpuSlowDownMultiplier = jsonReport.cpuSlowDownMultiplier;
                 var networkSpeed = jsonReport.networkThrottle;
-                var lighthouseAnalysisReport = new ThrottledAuditReport(this.webPage,this.webApplication, this.reportFolder, this.logger, this.auditGroupId, cpuSlowDownMultiplier, networkSpeed);
+                var lighthouseAnalysisReport = new ThrottledAuditReport(this.webPage,this.webApplication, this.reportFolder, this.logger, this.throttledAuditGroupId, cpuSlowDownMultiplier, networkSpeed);
                 var analysisResultReport = lighthouseAnalysisReport.getReport();
                 auditResultList.push(analysisResultReport);
             } catch (error) {
@@ -69,11 +69,11 @@ export class ThrottledAuditGroupSummaryReport extends BaseReport {
 
     async getAuditFilePathList() {
         var fileList = [];
-        const sessionRunFolderPath = await this.getWebPageAuditReportFolderPath(this.auditGroupId);
+        const sessionRunFolderPath = await this.getWebPageAuditReportFolderPath(this.throttledAuditGroupId);
         this.logger.logInfo(`Session run folder path is ${sessionRunFolderPath}`);
         const files = await fs.promises.readdir(sessionRunFolderPath);
         for (const file of files) {
-            if (file.startsWith(this.auditGroupId)) {
+            if (file.startsWith(this.throttledAuditGroupId)) {
                 const filePath = path.join(sessionRunFolderPath, file);
                 this.logger.logInfo(`File path is ${filePath}`);
                 fileList.push(filePath);

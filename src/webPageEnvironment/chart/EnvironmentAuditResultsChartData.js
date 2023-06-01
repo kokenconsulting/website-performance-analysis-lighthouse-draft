@@ -31,7 +31,7 @@ export class EnvironmentAuditResultsChartData extends BaseReport {
         const auditList = auditSummaryReport.auditResultList;
         for (const audit of auditList) {
             this.logger.logInfo(`EnvironmentAuditResultsChartData - Processing audit ${audit}`);
-            this.logger.logInfo(`EnvironmentAuditResultsChartData - Processing audit ${audit.auditGroupId}`);
+            this.logger.logInfo(`EnvironmentAuditResultsChartData - Processing audit ${audit.throttledAuditGroupId}`);
             const reporter = new ThrottledAuditGroupSummaryReport(this.webPage, this.webApplication, this.reportFolder, this.logger, audit);
             const auditSummary = reporter.getReport();
             const auditListArray = auditSummary.auditResultList;
@@ -42,7 +42,7 @@ export class EnvironmentAuditResultsChartData extends BaseReport {
     }
 
     getSessionSummaryInformation() {
-        const auditSummaryPath = this.getReportFilePath(this.auditGroupId);
+        const auditSummaryPath = this.getReportFilePath(this.throttledAuditGroupId);
         const auditSummaryDataJson = JSON.parse(fs.readFileSync(auditSummaryPath, 'utf8'));
         return auditSummaryDataJson;
     }
@@ -86,7 +86,7 @@ export class EnvironmentAuditResultsChartData extends BaseReport {
                 };
 
             }
-            this.environmentUnsortedCompleteAuditDetails[key].labels.push(`${auditDetail.startDateTime}-${auditDetail.auditGroupId}`);
+            this.environmentUnsortedCompleteAuditDetails[key].labels.push(`${auditDetail.startDateTime}-${auditDetail.throttledAuditGroupId}`);
             this.environmentUnsortedCompleteAuditDetails[key].interactive.push(auditDetail.loadTimeInteractive);
             this.environmentUnsortedCompleteAuditDetails[key].speedindex.push(auditDetail.loadTimeSpeedIndex);
         }

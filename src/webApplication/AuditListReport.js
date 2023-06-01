@@ -16,13 +16,13 @@ export class AuditListReport extends BaseReport {
     }
 
     addToAuditList(auditSummaryObject) {
-        const auditGroupId = auditSummaryObject.auditResultList[0].auditGroupId;
+        const throttledAuditGroupId = auditSummaryObject.auditResultList[0].throttledAuditGroupId;
         const startDateTime = auditSummaryObject.auditResultList[0].startDateTime;
         const endDateTime = auditSummaryObject.auditResultList[0].endDateTime;
-        const auditExists = this.auditList.audits.find(audit => audit.auditGroupId === auditGroupId);
+        const auditExists = this.auditList.audits.find(audit => audit.throttledAuditGroupId === throttledAuditGroupId);
         if (!auditExists) {
             this.auditList.audits.push({
-                auditGroupId: auditGroupId,
+                throttledAuditGroupId: throttledAuditGroupId,
                 startDateTime: startDateTime,
                 endDateTime: endDateTime,
                 appVersion: this.webApplication.version
@@ -43,10 +43,10 @@ export class AuditListReport extends BaseReport {
             if (!auditFolder.match(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/)) {
                 continue;
             }
-            const auditGroupId = auditFolder;
-            this.logger.logInfo(`auditGroupId: ${auditGroupId}`);
+            const throttledAuditGroupId = auditFolder;
+            this.logger.logInfo(`throttledAuditGroupId: ${throttledAuditGroupId}`);
 
-            const auditSummaryFilePath = this.getThrottledAuditGroupSummaryReportFilePath(auditGroupId);
+            const auditSummaryFilePath = this.getThrottledAuditGroupSummaryReportFilePath(throttledAuditGroupId);
             const auditSummaryObject = JSON.parse(fs.readFileSync(auditSummaryFilePath, 'utf8'));
             this.addToAuditList(auditSummaryObject);
         }

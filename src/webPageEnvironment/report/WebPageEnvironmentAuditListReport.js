@@ -10,7 +10,7 @@ export class WebPageEnvironmentAuditListReport extends BaseReport {
         this.webApplication = webApplication;
         this.reportFilePath = this.getReportFilePath();
     }
-    getReportFilePath(auditGroupId) {
+    getReportFilePath(throttledAuditGroupId) {
         //create folders if they don't exist
         return `${this.getWebPageEnvironmentFolderPath()}/${CONSTANTS.WEB_PAGE_ENVIRONMENT_AUDIT_LIST_FILE_NAME}`;
     }

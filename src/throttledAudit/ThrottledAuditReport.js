@@ -5,19 +5,19 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 export class ThrottledAuditReport extends BaseReport {
-    constructor(webPage,webApplication, reportFolder, logger, auditGroupId, cpuSlowDownMultiplier, networkSpeed) {
+    constructor(webPage,webApplication, reportFolder, logger, throttledAuditGroupId, cpuSlowDownMultiplier, networkSpeed) {
         super(webPage,webApplication, reportFolder, logger);
-        this.auditGroupId = auditGroupId;
+        this.throttledAuditGroupId = throttledAuditGroupId;
         this.cpuSlowDownMultiplier = cpuSlowDownMultiplier;
         this.networkSpeed = networkSpeed;
-        this.logger.logInfo(`Creating analysis report for session ${this.auditGroupId} with cpu slowdown multiplier ${cpuSlowDownMultiplier} and network speed ${networkSpeed}`);
-        this.lighthouseReport = new LighthouseAuditReport(this.webPage,this.webApplication, this.reportFolder, this.logger, this.auditGroupId, this.cpuSlowDownMultiplier, this.networkSpeed);
+        this.logger.logInfo(`Creating analysis report for session ${this.throttledAuditGroupId} with cpu slowdown multiplier ${cpuSlowDownMultiplier} and network speed ${networkSpeed}`);
+        this.lighthouseReport = new LighthouseAuditReport(this.webPage,this.webApplication, this.reportFolder, this.logger, this.throttledAuditGroupId, this.cpuSlowDownMultiplier, this.networkSpeed);
         this.reportFilePath = this.getReportFilePath();
     }
 
     getReportFilePath() {
-        const fileName = `${this.auditGroupId}_cpu_${this.cpuSlowDownMultiplier}_network_${this.networkSpeed.throughputKbps}.json`;
-        return path.join(this.getWebPageAuditReportFolderPath(this.auditGroupId),fileName);
+        const fileName = `${this.throttledAuditGroupId}_cpu_${this.cpuSlowDownMultiplier}_network_${this.networkSpeed.throughputKbps}.json`;
+        return path.join(this.getWebPageAuditReportFolderPath(this.throttledAuditGroupId),fileName);
     }
 
     generate() {
@@ -47,7 +47,7 @@ export class ThrottledAuditReport extends BaseReport {
         const interactiveResultInMilliseconds = extractedNumericValues["interactive"];
         const speedIndexResultinMilliseconds = extractedNumericValues["speed-index"];
         this.logger.logInfo(`Interactive result is ${interactiveResultInMilliseconds} and speed index result is ${speedIndexResultinMilliseconds}`);
-        return new ThrottledAuditResultModel(this.webPage,this.webApplication, this.auditGroupId, this.webApplication.initiatedBy, this.webApplication.environment, lighthouseAnalysisResult.fetchTime, analysisEndTime, networkSpeed, cpuSlowDownMultiplier, interactiveResultInMilliseconds, speedIndexResultinMilliseconds);
+        return new ThrottledAuditResultModel(this.webPage,this.webApplication, this.throttledAuditGroupId, this.webApplication.initiatedBy, this.webApplication.environment, lighthouseAnalysisResult.fetchTime, analysisEndTime, networkSpeed, cpuSlowDownMultiplier, interactiveResultInMilliseconds, speedIndexResultinMilliseconds);
     }
     extractNumericValue(jsonObject) {
         const numericValuesObj = {};

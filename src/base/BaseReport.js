@@ -53,16 +53,16 @@ export class BaseReport {
         return folderPath;
     }
    
-    getWebPageAuditReportFolderPath(auditGroupId) {
+    getWebPageAuditReportFolderPath(throttledAuditGroupId) {
         //create folders if they don't exist
-        const folderPath = `${this.getWebPageAuditFolderPath()}/${auditGroupId}`;
+        const folderPath = `${this.getWebPageAuditFolderPath()}/${throttledAuditGroupId}`;
         this.createFoldersIfNotExist(folderPath)
         return folderPath;
     }
 
 
-    getWebPageAuditChartDataFolderPath(auditGroupId) {
-        const folderPath = `${this.getWebPageAuditReportFolderPath(auditGroupId)}/${CONSTANTS.CHARTDATA}`;
+    getWebPageAuditChartDataFolderPath(throttledAuditGroupId) {
+        const folderPath = `${this.getWebPageAuditReportFolderPath(throttledAuditGroupId)}/${CONSTANTS.CHARTDATA}`;
         this.createFoldersIfNotExist(folderPath)
         return folderPath;
     }
@@ -89,20 +89,20 @@ export class BaseReport {
         return `${this.getWebApplicationReportFolderPath()}/${this.webApplication.name}_${CONSTANTS.SUMMARY}.json`;
     }
 
-    getAnalysisReportFilePath(auditGroupId, cpuSlowDownMultiplier, networkSpeed) {
+    getAnalysisReportFilePath(throttledAuditGroupId, cpuSlowDownMultiplier, networkSpeed) {
         //create folders if they don't exist
-        return `${this.getAnalysisListReportFolderPath(auditGroupId)}/${auditGroupId}_${CONSTANTS.CPU}_${cpuSlowDownMultiplier}_${CONSTANTS.NETWORK}_${networkSpeed.throughputKbps}.json`;
+        return `${this.getAnalysisListReportFolderPath(throttledAuditGroupId)}/${throttledAuditGroupId}_${CONSTANTS.CPU}_${cpuSlowDownMultiplier}_${CONSTANTS.NETWORK}_${networkSpeed.throughputKbps}.json`;
     }
 
-    getChartDataReportFolderPath(auditGroupId) {
+    getChartDataReportFolderPath(throttledAuditGroupId) {
         //create folders if they don't exist
-        var folderPath = `${this.getWebPageAuditReportFolderPath(auditGroupId)}/${CONSTANTS.CHARTDATA}`
+        var folderPath = `${this.getWebPageAuditReportFolderPath(throttledAuditGroupId)}/${CONSTANTS.CHARTDATA}`
         this.createFoldersIfNotExist(folderPath)
         return folderPath;
     }
-    getThrottledAuditGroupThrottleImpactReportFilePath(auditGroupId) {
+    getThrottledAuditGroupThrottleImpactReportFilePath(throttledAuditGroupId) {
         //create folders if they don't exist
-        var filePath = `${this.getChartDataReportFolderPath(auditGroupId)}/${CONSTANTS.WEB_PAGE_THROTTLED_AUDIT_THROTTLE_IMPACT_REPORT_FILE_NAME}`
+        var filePath = `${this.getChartDataReportFolderPath(throttledAuditGroupId)}/${CONSTANTS.WEB_PAGE_THROTTLED_AUDIT_THROTTLE_IMPACT_REPORT_FILE_NAME}`
         return filePath;
     }
 

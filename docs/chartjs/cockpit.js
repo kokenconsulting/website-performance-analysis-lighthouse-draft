@@ -25,8 +25,8 @@ class DATA_SOURCES {
     static ENVIRONMENT_THROTTLED_AUDIT_CHART_DATA(webappId, webPageId, env, cpu, network) {
         return `${DATA_SOURCES.REPORTS_FOLDER_NAME()}/${webappId}/${webPageId}/${env}/${DATA_SOURCES.CHART_DATA_FOLDER_NAME()}/cpu_${cpu}_${network}_web-page-environment-specific-throttle-setting-throttle-impact-report.json`
     }
-    static THROTTLED_AUDIT_SUMMARY_CHART_DATA(webappId, webPageId, env, auditGroupId) {
-        return `${DATA_SOURCES.REPORTS_FOLDER_NAME()}/${webappId}/${webPageId}/${env}/${DATA_SOURCES.AUDITS_FOLDER_NAME()}/${auditGroupId}/${DATA_SOURCES.CHART_DATA_FOLDER_NAME()}/web-page-throttled-audit-throttle-impact-report.json`
+    static THROTTLED_AUDIT_SUMMARY_CHART_DATA(webappId, webPageId, env, throttledAuditGroupId) {
+        return `${DATA_SOURCES.REPORTS_FOLDER_NAME()}/${webappId}/${webPageId}/${env}/${DATA_SOURCES.AUDITS_FOLDER_NAME()}/${throttledAuditGroupId}/${DATA_SOURCES.CHART_DATA_FOLDER_NAME()}/web-page-throttled-audit-throttle-impact-report.json`
     }
 }
 
@@ -239,11 +239,11 @@ function generateApplicationChartOnPage(labels, dataSetValues, webAppId, webPage
                 const value = mainChartObject.data.datasets[firstPoint.datasetIndex].data[firstPoint.index];
                 console.log(label);
                 //audit instance id is second part of label split with -
-                const auditGroupId = label.split("Z-")[1];
+                const throttledAuditGroupId = label.split("Z-")[1];
                 console.log(value);
                 console.log(datasetIndex);
-                console.log("audit instance id"+auditGroupId);
-                setAuditChartData(webAppId, webPageId, env, auditGroupId)
+                console.log("audit instance id"+throttledAuditGroupId);
+                setAuditChartData(webAppId, webPageId, env, throttledAuditGroupId)
             }
         },
         interaction: {

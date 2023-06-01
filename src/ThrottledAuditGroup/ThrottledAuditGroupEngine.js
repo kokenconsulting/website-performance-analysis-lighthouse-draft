@@ -4,41 +4,41 @@ import { ThrottledAuditEngine } from "../throttledAudit/ThrottledAuditEngine.js"
 import { ThrottlingManager } from "../throttling/ThrottlingManager.js";
 
 export class ThrottledAuditGroupEngine extends EngineBase {
-  constructor(webPageThrottledAuditConfiguration, logger, auditGroupId = null) {
-    //TODO - Add validation for webPageThrottledAuditConfiguration, logger and auditGroupId.
+  constructor(webPageThrottledAuditConfiguration, logger, throttledAuditGroupId = null) {
+    //TODO - Add validation for webPageThrottledAuditConfiguration, logger and throttledAuditGroupId.
     super(logger);
     this.webPageThrottledAuditConfiguration = webPageThrottledAuditConfiguration;
     this.reportFolderFullPath = webPageThrottledAuditConfiguration.reportFolderFullPath;
-    this.setAuditInstanceId(auditGroupId);
+    this.setAuditGroupId(throttledAuditGroupId);
     this.cpuSlowdownMultiplierArray =
       this.webPageThrottledAuditConfiguration.throttlingSettings.cpuSlowDownMultipliers;
     this.networkSpeedArray =
       this.webPageThrottledAuditConfiguration.throttlingSettings.networkSpeeds;
   }
 
-  setAuditInstanceId(auditGroupId) {
-    if (auditGroupId == null || auditGroupId === undefined) {
-      this.auditGroupId = uuidv4();
+  setAuditGroupId(throttledAuditGroupId) {
+    if (throttledAuditGroupId == null || throttledAuditGroupId === undefined) {
+      this.throttledAuditGroupId = uuidv4();
     } else {
-      this.auditGroupId = auditGroupId;
+      this.throttledAuditGroupId = throttledAuditGroupId;
     }
-    this.logger.logInfo(`Audit instance id is ${this.auditGroupId}`);
+    this.logger.logInfo(`Audit instance id is ${this.throttledAuditGroupId}`);
   }
   async run(useExternalThrottling = true) {
-    let auditGroupId;
+    let throttledAuditGroupId;
     if (useExternalThrottling === true) {
       this.logger.logInfo("Running with external throttling");
-      auditGroupId = await this.runWithExternalThrottling();
+      throttledAuditGroupId = await this.runWithExternalThrottling();
     } else {
       this.logger.logInfo("Running with built throttling");
-      auditGroupId = await this.runWithBuiltInThrottling();
+      throttledAuditGroupId = await this.runWithBuiltInThrottling();
     }
     // const summaryPath = await this.ThrottledAuditGroupSummaryReport.generate();
     // this.logger.logInfo(`Summary report path is ${summaryPath}`);
     // const chartReportPath = this.ThrottledAuditGroupSummaryChartData.generate();
     // this.logger.logInfo(`Chart report path is ${chartReportPath}`);
     // return { summaryPath, chartReportPath };
-    return auditGroupId;
+    return throttledAuditGroupId;
   }
   async runWithBuiltInThrottling() {
     for (const networkSpeed of this.networkSpeedArray) {
@@ -51,7 +51,7 @@ export class ThrottledAuditGroupEngine extends EngineBase {
           this.webPageThrottledAuditConfiguration.webApplication,
           this.webPageThrottledAuditConfiguration.reportFolderFullPath,
           this.logger,
-          this.auditGroupId,
+          this.throttledAuditGroupId,
           false,
           cpuSlowdownMultiplier,
           networkSpeed
@@ -59,7 +59,7 @@ export class ThrottledAuditGroupEngine extends EngineBase {
         await auditEngine.runAuditWithThrottling();
       }
     }
-    return this.auditGroupId;
+    return this.throttledAuditGroupId;
   }
 
   async runWithExternalThrottling() {
@@ -93,7 +93,7 @@ export class ThrottledAuditGroupEngine extends EngineBase {
           this.webPageThrottledAuditConfiguration.webApplication,
           this.webPageThrottledAuditConfiguration.reportFolderFullPath,
           this.logger,
-          this.auditGroupId,
+          this.throttledAuditGroupId,
           true,
           cpuSlowdownMultiplier,
           networkSpeedItem
@@ -107,6 +107,6 @@ export class ThrottledAuditGroupEngine extends EngineBase {
       );
       await throttlingManager.stopThrottling();
     }
-    return this.auditGroupId;
+    return this.throttledAuditGroupId;
   }
 }

@@ -41,7 +41,7 @@ function setApplicationChartData(applicationId, optionId) {
         .then(response => response.json())
         .then(data => processChartData(data, applicationId, optionId));
 }
-function processChartData(data, applicationId, auditGroupId) {
+function processChartData(data, applicationId, throttledAuditGroupId) {
     //TODOs
     let currentColorIndex = 0;
     let labels = processApplicationLabels(data);
@@ -49,14 +49,14 @@ function processChartData(data, applicationId, auditGroupId) {
     let dataSetValues = [];
     currentColorIndex =  processApplicationInteractive(currentColorIndex,dataSetValues,data);
     currentColorIndex = processApplicationSpeedIndex(currentColorIndex,dataSetValues,data);
-    generateApplicationChartOnPage(currentColorIndex, labels, dataSetValues, auditGroupId)
+    generateApplicationChartOnPage(currentColorIndex, labels, dataSetValues, throttledAuditGroupId)
 }
 
 function processApplicationLabels(data) {
     let labels = [];
-    //loop over array in data.auditGroupId
-    for (const key in data.auditGroupId) {
-        const label = data.auditGroupId[key].startDateTime;
+    //loop over array in data.throttledAuditGroupId
+    for (const key in data.throttledAuditGroupId) {
+        const label = data.throttledAuditGroupId[key].startDateTime;
         labels.push(label);
     }
     return labels;
