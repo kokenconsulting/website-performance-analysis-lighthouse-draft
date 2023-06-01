@@ -15,7 +15,8 @@ import { WebPageEnvironmentListReport } from '../webPage/report/WebPageEnvironme
 import { WebApplicationWebPageListReport } from '../webApplication/report/WebApplicationWebPageListReport.js'
 import { EnvironmentAuditResultsChartData } from '../webPageEnvironment/chart/EnvironmentAuditResultsChartData.js'
 import { WebApplicationListReport } from './WebApplicationListReport.js'
-export class WebPageThrottledAuditOrchestrator {
+
+export class PerformanceMonitorOrchestrator {
     //constructor(webApplication, url, reportFolder, logger, auditInstanceId = null, cpuSlowdownMultiplierArray = null, networkSpeedArray = null) {
     constructor(configFileFullPath) {
         this.logger = new ProcessLogger();

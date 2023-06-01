@@ -3,11 +3,11 @@ import { WebPageThrottledAuditEngine } from './webPageThrottledAudit/WebPageThro
 import { AuditListReport } from './webApplication/AuditListReport.js';
 import { WebPageThrottledAuditConfiguration } from './webPageThrottledAudit/WebPageThrottledAuditConfiguration.js';
 import { ThrottlingSettings } from './throttling/ThrottlingSettings.js';
-import { WebPageThrottledAuditOrchestrator } from './performanceMonitor/WebPageThrottledAuditOrchestrator.js';
+import { PerformanceMonitorOrchestrator } from './performanceMonitor/PerformanceMonitorOrchestrator.js';
 
 export {
   WebApplication,
-  WebPageThrottledAuditOrchestrator,
+  PerformanceMonitorOrchestrator,
   WebPageThrottledAuditEngine,
   AuditListReport,
   WebPageThrottledAuditConfiguration,
