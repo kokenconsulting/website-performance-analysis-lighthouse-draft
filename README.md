@@ -1,70 +1,27 @@
 # Website Performance Analysis via Lighthouse 
 
-## Installation of NPM Package
-- Install the package globally
-```` shell
-npm i -g website-performance-analysis-lighthouse-draft 
-````
-
 ## Usage 
-Sample Config File
-```json
-{
-    "ReportFolderRelativePath": "./docs/reports",
-    "WebPage": {
-        "Id": "Test-Configuration",
-        "Name": "Test-Configuration",
-        "Url": "https://www.google.com/",
-        "Description": "Sample Description",
-        "Environment": "LP"
-    },
-    "Application": {
-        "Id": "test-website",
-        "Name": "test-website",
-        "Version": "1.0.0",
-        "Description": "Sample Application",
-        "GitUrl": "",
-        "GitBranch": "master"
-    },
-    "ThrottlingSettings": {
-        "NetworkSpeeds": [
-            {
-                "rttMs": 100,
-                "throughputKbps": 29500
-            },
-            {
-                "rttMs": 100,
-                "throughputKbps": 35500
-            }
-        ],
-        "CPUSlowDownMultipliers": [
-            0
-        ]
-    }
-}
-```
 
-Run Script
+See [Sample Client Repo Readme](https://github.com/kokenconsulting/client-for-website-performance-analysis-lighthouse/tree/docs)
 
-```javascript
-import * as path from 'path';
-import {
-  PerformanceMonitorOrchestrator,
-}
-  from 'website-performance-analysis-lighthouse-draft';
+## Why do we have this library?
 
-async function TestConfig() {
-  //get current working directory
-  const configFullPath = path.join(process.cwd(), 'auditConfigurations/test-config.json');
-  const auditRunner = new PerformanceMonitorOrchestrator(configFullPath);
-  await auditRunner.run(false);
-}
-await TestConfig()
-```        
+[Google Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/) is an automated tool for improving the quality of web pages.
+This tool can be run against any web page, public or requiring authentication. 
+It has audits for performance, accessibility, progressive web apps, SEO, and more.
 
+We are currently using performance audit capability from [Google Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)
 ## Concepts
 
+### Performance Monitor
 
+Performance Monitor is the main process that triggers Throttled Audit for a specific WebPage (in a specific environment). 
+[The orchestrator]() is the easiest way to start the audit process and will make sure that the Report UI contains
+
+### Web Page
+
+Web Page is the entity whose performance is measured. 
+Web Page contains two key properties : url and environment. An throttled audit session will be started for 
 ### Lighthouse Audit
 
 ### Throttled Audit
