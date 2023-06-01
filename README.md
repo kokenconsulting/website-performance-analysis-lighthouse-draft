@@ -1,37 +1,73 @@
 # Website Performance Analysis via Lighthouse 
 
+## Installation of NPM Package
+- Install the package globally
+```` shell
+npm i -g website-performance-analysis-lighthouse-draft 
+````
+
 ## Usage 
+Sample Config File
+```json
+{
+    "ReportFolderRelativePath": "./docs/reports",
+    "WebPage": {
+        "Id": "Test-Configuration",
+        "Name": "Test-Configuration",
+        "Url": "https://www.google.com/",
+        "Description": "Sample Description",
+        "Environment": "LP"
+    },
+    "Application": {
+        "Id": "test-website",
+        "Name": "test-website",
+        "Version": "1.0.0",
+        "Description": "Sample Application",
+        "GitUrl": "",
+        "GitBranch": "master"
+    },
+    "ThrottlingSettings": {
+        "NetworkSpeeds": [
+            {
+                "rttMs": 100,
+                "throughputKbps": 29500
+            },
+            {
+                "rttMs": 100,
+                "throughputKbps": 35500
+            }
+        ],
+        "CPUSlowDownMultipliers": [
+            0
+        ]
+    }
+}
+```
 
-## Folder Structure
+Run Script
 
-- reports
-    - application_list.json
-    - <AppName>
-        - <AppName>_webpage_list.json
-        - WebPageId
-            - <WebPageId>_environment_list_report.json
-            - <Environment>
-                - ChartJsData
-                    - <WebPageId>_<Environment>_throttledAudit_cpu_<cpu>_network_<network>chartdata.json
-                - ThrottledAudits
-                    - <WebPageId>_<Environment>_audit_list.json
-                    - <auditInstanceId>
-                        - <auditInstanceId>>_overview_report.json
-                        - ChartJsData
-                            - <auditInstance>_throttledAudit_chartdata.json
-                        - LighthouseFullReports
-                            - <auditInstanceId>_cpu_<cpu>_network_<network>_lighthouse_full_report.json 
-                        - AuditReports 
-                            - <auditInstanceId>_cpu_<cpu>_network_<network>_audit_report.json
-                        
-                
-            
+```javascript
+import * as path from 'path';
+import {
+  PerformanceMonitorOrchestrator,
+}
+  from 'website-performance-analysis-lighthouse-draft';
+
+async function TestConfig() {
+  //get current working directory
+  const configFullPath = path.join(process.cwd(), 'auditConfigurations/test-config.json');
+  const auditRunner = new PerformanceMonitorOrchestrator(configFullPath);
+  await auditRunner.run(false);
+}
+await TestConfig()
+```        
 
 ## Concepts
 
+
 ### Lighthouse Audit
 
-### Lighthouse Audit Summary
+### Throttled Audit
 
 ### Web Page Throttled Audit Run
 
