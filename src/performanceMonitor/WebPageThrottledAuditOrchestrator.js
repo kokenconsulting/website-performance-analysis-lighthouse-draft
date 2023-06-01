@@ -1,20 +1,20 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { WebPageThrottledAuditConfiguration } from './WebPageThrottledAuditConfiguration.js';
+import { WebPageThrottledAuditConfiguration } from '../webPageThrottledAudit/WebPageThrottledAuditConfiguration.js';
 import { ThrottlingSettings } from '../throttling/ThrottlingSettings.js';
 import { WebApplication } from '../webApplication/WebApplicationModel.js';
 import { WebPageModel } from '../webPage/WebPageModel.js';
-import { WebPageThrottledAuditEngine } from './WebPageThrottledAuditEngine.js';
+import { WebPageThrottledAuditEngine } from '../webPageThrottledAudit/WebPageThrottledAuditEngine.js';
 import { ProcessLogger } from '../log/ProcessLogger_Rename.js';
 import { AuditListReport } from '../webApplication/AuditListReport.js';
 import { WebApplicationThrottledAuditResultsReport } from '../webApplication/WebApplicationThrottledAuditResultsReport.js';
-import { WebPageThrottledAuditSummaryReport } from './reports/WebPageThrottledAuditSummaryReport.js'
-import { WebPageThrottledAuditSummaryChartData } from './chart/WebPageThrottledAuditSummaryChartData.js'
+import { WebPageThrottledAuditSummaryReport } from '../webPageThrottledAudit/reports/WebPageThrottledAuditSummaryReport.js'
+import { WebPageThrottledAuditSummaryChartData } from '../webPageThrottledAudit/chart/WebPageThrottledAuditSummaryChartData.js'
 import { WebPageEnvironmentAuditListReport } from '../webPageEnvironment/report/WebPageEnvironmentAuditListReport.js'
 import { WebPageEnvironmentListReport } from '../webPage/report/WebPageEnvironmentListReport.js'
 import { WebApplicationWebPageListReport } from '../webApplication/report/WebApplicationWebPageListReport.js'
 import { EnvironmentAuditResultsChartData } from '../webPageEnvironment/chart/EnvironmentAuditResultsChartData.js'
-import { WebApplicationListReport } from '../performanceMonitor/WebApplicationListReport.js'
+import { WebApplicationListReport } from './WebApplicationListReport.js'
 export class WebPageThrottledAuditOrchestrator {
     //constructor(webApplication, url, reportFolder, logger, auditInstanceId = null, cpuSlowdownMultiplierArray = null, networkSpeedArray = null) {
     constructor(configFileFullPath) {
