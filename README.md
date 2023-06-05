@@ -21,12 +21,21 @@ Performance Monitor is the main process that triggers Throttled Audit for a spec
 ### Web Page
 
 Web Page is the entity whose performance is measured. 
-Web Page contains two key properties : url and environment. An throttled audit session will be started for 
+
+Web Page contains two key properties : url and environment. 
+Performance Monitor will start throttled audit session for a specific web page on a specific environment. 
 ### Lighthouse Audit
+Lighthouse Audit is the atomic concept for Web Application Performance Analysis Library. 
+
+It is only responsible for running a lighthouse audit with a given set of configuration. 
+In the case of Web Application Performance Analysis Library, the confuguration comes with throttling settings
 
 ### Throttled Audit
+Throttled Audit is a wrapper for Lighthouse Audit. 
+It will contain relevant configuration and results for the lighthouse audit. 
 
-### Web Page Throttled Audit Run
+### Throttled Audit Run
+Thorttle Audit Run will run 
 
 ### Web Application List
 
