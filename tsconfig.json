@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "outDir": "./built",
+        "allowJs": true,
+        "target": "ES6",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true // added flag
+    },
+    "include": ["./src/**/*"]
+}
