@@ -1,5 +1,5 @@
 export class EngineBase {
-    protected logger: any;
+    public logger: any;
 
     constructor(logger: any) {
         this.logger = logger;
