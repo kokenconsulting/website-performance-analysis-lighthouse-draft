@@ -1,10 +1,20 @@
 {
     "compilerOptions": {
-        "outDir": "./built",
+        "outDir": "./dist",
         "allowJs": true,
-        "target": "ES6",
+        "sourceMap": true, // 
+        "module": "es2020",
+        "target": "es2020",
         "moduleResolution": "node",
+        "declaration": true,
         "allowSyntheticDefaultImports": true // added flag
     },
-    "include": ["./src/**/*"]
+    //"include": ["./src/**/*","./node_modules/lighthouse/types/**/*.d.ts"]
+    "include": [
+        "./src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
 }
