@@ -1,5 +1,5 @@
 import * as chromeLauncher from 'chrome-launcher';
-import lighthouse, { Config,Flags} from 'lighthouse';
+import lighthouse, { Config, Flags, SharedFlagsSettings } from 'lighthouse';
 import { EngineBase } from '../base/EngineBase.js';
 import { LighthouseAuditReport } from './LighthouseAuditReport.js';
 import { ProcessLogger } from '../log/ProcessLogger_Rename.js';
@@ -11,7 +11,9 @@ interface NetworkSpeed {
 const maxWaitForFcp = 30000;
 const maxWaitForLoad = 60000;
 const formFactor = 'desktop';
-
+interface CustomFlagsSettings extends SharedFlagsSettings {
+  customSettings?: Record<string, unknown>;
+}
 export class LighthouseAuditEngine extends EngineBase {
   private webPage: any;
   private networkSpeed: NetworkSpeed;
@@ -65,6 +67,10 @@ export class LighthouseAuditEngine extends EngineBase {
     const lighthouseConfig: Config = {
       extends: 'lighthouse:default',
       settings: {
+        customSettings: {
+          providedNetworkThrottling: this.externalNetworkSpeed,
+          externalNetworkSpeed: this.externalNetworkSpeed
+        },
         formFactor: formFactor,
         maxWaitForFcp: maxWaitForFcp,
         maxWaitForLoad: maxWaitForLoad,
@@ -76,16 +82,14 @@ export class LighthouseAuditEngine extends EngineBase {
           downloadThroughputKbps: this.networkSpeed.throughputKbps,
           uploadThroughputKbps: this.networkSpeed.throughputKbps,
         },
-      },
+      } as CustomFlagsSettings,
     };
     //lighthouseConfig.settings.customSettings = {};
-    if (this.externalNetworkSpeed !== null) {
-      //lighthouseConfig.settings.externalNetworkSpeed = this.externalNetworkSpeed;
-      //lighthouseConfig.settings.customSettings.providedNetworkThrottling = this.externalNetworkSpeed;
-    } else {
-      //lighthouseConfig.settings.customSettings.providedNetworkThrottling = this.networkSpeed;
+    if (!this.externalNetworkSpeed && lighthouseConfig.settings) {
+      (lighthouseConfig.settings as CustomFlagsSettings).customSettings = {
+        providedNetworkThrottling: this.networkSpeed,
+      };
     }
-    //lighthouseConfig.settings.customSettings.providedCPUSlowDownMultiplier = this.cpuSlowdownMultiplier;
 
     const options: Flags = {
       port: chrome.port,
@@ -100,8 +104,8 @@ export class LighthouseAuditEngine extends EngineBase {
         disabled: true,
       },
     };
-    
-   
+
+
 
     const lighthouseResults = await lighthouse(this.webPage.url, options, lighthouseConfig);
     await chrome.kill();
