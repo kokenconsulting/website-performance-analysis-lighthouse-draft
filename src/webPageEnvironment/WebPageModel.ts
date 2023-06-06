@@ -1,4 +1,4 @@
-import { BaseModel } from '../base/BaseModel';
+import { BaseModel } from '../base/BaseModel.js';
 
 export class WebPageModel extends BaseModel {
   constructor(

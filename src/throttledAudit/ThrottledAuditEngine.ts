@@ -1,6 +1,6 @@
-import { LighthouseAuditEngine } from '../lighthouse/LighthouseAuditEngine';
-import { ThrottledAuditReport } from './ThrottledAuditReport';
-import { EngineBase } from '../base/EngineBase';
+import { LighthouseAuditEngine } from '../lighthouse/LighthouseAuditEngine_2.js';
+import { ThrottledAuditReport } from './ThrottledAuditReport.js';
+import { EngineBase } from '../base/EngineBase.js';
 
 export class ThrottledAuditEngine extends EngineBase {
     private webPage: any;

@@ -1,17 +1,15 @@
 {
   "name": "website-performance-analysis-lighthouse-draft",
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Website Performance Analysis tool using Google Lighthouse",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  
   "scripts": {
     "clean": "rimraf dist",
-    "prebuild": "npm run clean",
-    "build": "tsc --module commonjs",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "tsc"
+    "prebuild": "npm run clean;npm install",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "M. Ali Koeken",
   "license": "ISC",
@@ -19,15 +17,13 @@
     "@sitespeed.io/throttle": "^5.0.0",
     "chrome-launcher": "^0.15.2",
     "lighthouse": "^10.2.0",
-    "npm": "^9.6.7",
-    "source-map-loader": "^4.0.1",
-    "ts-loader": "^9.4.3",
-    "uuid": "^8.1.0"
+    "uuid": "^8.3.2"
   },
   "directories": {
     "test": "tests"
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.1",
     "rimraf": "^3.0.2",
     "typescript": "^5.1.3"
   },
