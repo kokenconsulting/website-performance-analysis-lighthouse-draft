@@ -1,6 +1,6 @@
 import { BaseModel } from '../base/BaseModel.js';
 
-export class WebApplication extends BaseModel {
+export class WebApplicationModel extends BaseModel {
   constructor(
     public id: string,
     public name: string,

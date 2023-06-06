@@ -1,8 +1,9 @@
 import * as fs from 'fs';
 import { CONSTANTS } from './Constants.js';
+import { WebPageModel } from '../webPage/WebPageModel.js';
 
 export class BaseReport {
-    protected webPage: any;
+    protected webPage: WebPageModel;
     protected webApplication: any;
     protected reportFolder: string;
     protected logger: any;
