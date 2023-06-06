@@ -1,39 +1,15 @@
-import * as fs from 'fs';
 import { CONSTANTS } from './Constants.js';
+import { ProcessLogger } from '../log/ProcessLogger_Rename.js';
 import { WebPageModel } from '../webPage/WebPageModel.js';
+import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
+import { WebApplicationBaseReport } from './WebApplicationBaseReport.js';
 
-export class BaseReport {
+export class WebPageBaseReport extends WebApplicationBaseReport{
     protected webPage: WebPageModel;
-    protected webApplication: any;
-    protected reportFolder: string;
-    protected logger: any;
 
-    constructor(webPage: any, webApplication: any, reportFolder: string, logger: any) {
+    constructor(webPage: WebPageModel, webApplication: WebApplicationModel, reportFolder: string, logger: ProcessLogger) {
+        super(webApplication, reportFolder, logger)
         this.webPage = webPage;
-        this.webApplication = webApplication;
-        this.reportFolder = reportFolder;
-        this.logger = logger;
-    }
-
-    public createFoldersIfNotExist(folderPath: string): void {
-        if (!fs.existsSync(folderPath)) {
-            fs.mkdir(folderPath, { recursive: true }, (err) => {
-                if (err) throw err;
-                this.logger.logInfo(`${folderPath} -- Folder created!`);
-            });
-        }
-    }
-
-    public getReportFolderPath(): string {
-        const folderPath = this.reportFolder;
-        this.createFoldersIfNotExist(folderPath);
-        return folderPath;
-    }
-
-    public getWebApplicationReportFolderPath(): string {
-        const folderPath = `${this.getReportFolderPath()}/${this.webApplication.id}`;
-        this.createFoldersIfNotExist(folderPath);
-        return folderPath;
     }
 
     public getWebPageWebPageFolderPath(): string {
@@ -82,10 +58,6 @@ export class BaseReport {
         return filePath;
     }
 
-    // public getApplicationChartDataSpecificFilePath(key: string): string {
-    //     const filePath = `${this.getApplicationChartDataFolder()}/${key}.json`;
-    //     return filePath;
-    // }
 
     public getApplicationChartDataAllKeysFilePath(): string {
         const filePath = `${this.getWebApplicationReportFolderPath()}/${CONSTANTS.ALL_KEYS}`;
@@ -101,11 +73,7 @@ export class BaseReport {
         return `${this.getWebApplicationReportFolderPath()}/${this.webApplication.name}_${CONSTANTS.SUMMARY}.json`;
     }
 
-    // public getAnalysisReportFilePath(throttledAuditGroupId: string, cpuSlowDownMultiplier: number, networkSpeed: any): string {
-    //     //create folders if they don't exist
-    //     return `${this.getAnalysisListReportFolderPath(throttledAuditGroupId)}/${throttledAuditGroupId}_${CONSTANTS.CPU}_${cpuSlowDownMultiplier}_${CONSTANTS.NETWORK}_${networkSpeed.throughputKbps}.json`;
-    // }
-
+  
     public getChartDataReportFolderPath(throttledAuditGroupId: string): string {
         //create folders if they don't exist
         var folderPath = `${this.getWebPageAuditReportFolderPath(throttledAuditGroupId)}/${CONSTANTS.CHARTDATA}`
@@ -113,9 +81,4 @@ export class BaseReport {
         return folderPath;
     }
 
-    // public getThrottledAuditGroupThrottleImpactReportFilePath(throttledAuditGroupId: string): string {
-    //     //create folders if they don't exist
-    //     var filePath = `${this.getChartDataReportFolderPath(throttledAuditGroupId)}/${CONSTANTS.WEB_PAGE_THROTTLED_AUDIT_THROTTLE_IMPACT_REPORT_FILE_NAME}`
-    //     return filePath;
-    // }
 }

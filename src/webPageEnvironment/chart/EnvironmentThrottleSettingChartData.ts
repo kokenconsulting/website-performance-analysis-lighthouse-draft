@@ -1,14 +1,16 @@
 import * as fs from 'fs';
-import { BaseReport } from '../../base/BaseReport.js';
+import { WebPageBaseReport } from '../../base/BaseReport.js';
 import { CONSTANTS } from '../../base/Constants.js';
 import { EnvironmentThrottleSettingChartDataModel } from './EnvironmentThrottleSettingChartDataModel.js';
+import { WebApplicationModel } from '../../webApplication/WebApplicationModel.js';
+import { WebPageModel } from '../../webPage/WebPageModel.js';
 
-export class EnvironmentThrottleSettingChartData extends BaseReport {
+export class EnvironmentThrottleSettingChartData extends WebPageBaseReport {
     private chartDataFilePath: string;
 
     constructor(
-        webPage: any,
-        webApplication: any,
+        webPage: WebPageModel,
+        webApplication: WebApplicationModel,
         reportFolder: string,
         logger: any,
         private cpuSlowDownMultiplierList: number[],

@@ -1,8 +1,10 @@
 import { BaseModel } from "../base/BaseModel.js";
+import { WebApplicationModel } from "../webApplication/WebApplicationModel.js";
+import { WebPageModel } from "../webPage/WebPageModel.js";
 
 export class ThrottledAuditResultModel extends BaseModel {
-    private webPage: any;
-    private webApplication: any;
+    private webPage: WebPageModel;
+    private webApplication: WebApplicationModel;
     private throttledAuditGroupId: string;
     private initiatedBy: string;
     private executionEnvironment: string;
@@ -13,7 +15,7 @@ export class ThrottledAuditResultModel extends BaseModel {
     private loadTimeInteractive: number;
     private loadTimeSpeedIndex: number;
 
-    constructor(webPage: any, webApplication: any, throttledAuditGroupId: string, initiatedBy: string, executionEnvironment: string, startDateTime: Date, endDateTime: Date, networkThrottle: any, cpuSlowDownMultiplier: number, loadTimeInteractive: number, loadTimeSpeedIndex: number) {
+    constructor(webPage: WebPageModel, webApplication: WebApplicationModel, throttledAuditGroupId: string, initiatedBy: string, executionEnvironment: string, startDateTime: Date, endDateTime: Date, networkThrottle: any, cpuSlowDownMultiplier: number, loadTimeInteractive: number, loadTimeSpeedIndex: number) {
         super();
         this.webPage = webPage;
         this.webApplication = webApplication;

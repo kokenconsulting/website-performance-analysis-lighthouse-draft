@@ -1,13 +1,14 @@
-import { BaseReport } from "../base/BaseReport.js";
 import { CONSTANTS } from "../base/Constants.js";
+import { ProcessMonitorBaseReport } from "../base/ProcessMonitorBaseReport.js";
 import { WebApplicationListReportModel } from "./WebApplicationListReportModel.js";
 import * as fs from 'fs';
 
-export class WebApplicationListReport extends BaseReport {
+export class WebApplicationListReport extends ProcessMonitorBaseReport {
     private reportFilePath: string;
 
     constructor(reportFolder: string, logger: any) {
-        super(null, null, reportFolder, logger);
+        
+        super(reportFolder, logger);
         this.reportFilePath = this.getReportFilePath();
     }
 

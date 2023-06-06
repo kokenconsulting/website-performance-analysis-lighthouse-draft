@@ -1,15 +1,17 @@
 import * as fs from 'fs';
 import { ThrottledAuditGroupSummaryChartDataModel } from './ThrottledAuditGroupSummaryChartDataModel.js';
 import { ThrottledAuditGroupSummaryReport } from '../reports/ThrottledAuditGroupSummaryReport.js';
-import { BaseReport } from '../../base/BaseReport.js';
+import { WebPageBaseReport } from '../../base/BaseReport.js';
 import { CONSTANTS } from '../../base/Constants.js';
+import { WebPageModel } from '../../webPage/WebPageModel.js';
+import { WebApplicationModel } from '../../webApplication/WebApplicationModel.js';
 
-export class ThrottledAuditGroupSummaryChartData extends BaseReport {
+export class ThrottledAuditGroupSummaryChartData extends WebPageBaseReport {
     private throttledAuditGroupId: string;
     private ThrottledAuditGroupSummaryReport: ThrottledAuditGroupSummaryReport;
     private webPageThrottledAuditSummaryChartDataFilePath: string;
 
-    constructor(webPage: any, webApplication: any, reportFolder: string, logger: any, throttledAuditGroupId: string) {
+    constructor(webPage: WebPageModel, webApplication: WebApplicationModel, reportFolder: string, logger: any, throttledAuditGroupId: string) {
         super(webPage, webApplication, reportFolder, logger);
         this.throttledAuditGroupId = throttledAuditGroupId;
         this.ThrottledAuditGroupSummaryReport = new ThrottledAuditGroupSummaryReport(webPage, webApplication, reportFolder, logger, throttledAuditGroupId);

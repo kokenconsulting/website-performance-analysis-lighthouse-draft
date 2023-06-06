@@ -9,7 +9,7 @@
 //     private allKeysFilePath: string;
 //     private allKeys: string[];
 
-//     constructor(webPage: any, webApplication: any, reportFolder: string, logger: any) {
+//     constructor(webPage: WebPageModel, webApplication: WebApplicationModel, reportFolder: string, logger: any) {
 //         super(webPage, webApplication, reportFolder, logger);
 //         this.flatData = [];
 //         this.reportObject = {};

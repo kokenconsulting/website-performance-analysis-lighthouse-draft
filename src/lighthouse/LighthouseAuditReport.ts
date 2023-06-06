@@ -1,15 +1,17 @@
-import { BaseReport } from "../base/BaseReport.js";
+import { WebPageBaseReport } from "../base/BaseReport.js";
 import { CONSTANTS } from "../base/Constants.js";
 import * as fs from 'fs';
 import * as path from 'path';
+import { WebPageModel } from "../webPage/WebPageModel.js";
+import { WebApplicationModel } from "../webApplication/WebApplicationModel.js";
 
-export class LighthouseAuditReport extends BaseReport {
+export class LighthouseAuditReport extends WebPageBaseReport {
     private throttledAuditGroupId: string;
     private cpuSlowDownMultiplier: number;
     private networkSpeed: any;
     private reportFileName: string;
 
-    constructor(webPage: any, webApplication: any, reportFolder: string, logger: any, throttledAuditGroupId: string, cpuSlowDownMultiplier: number, networkSpeed: any) {
+    constructor(webPage: WebPageModel, webApplication: WebApplicationModel, reportFolder: string, logger: any, throttledAuditGroupId: string, cpuSlowDownMultiplier: number, networkSpeed: any) {
         super(webPage, webApplication, reportFolder, logger);
         this.throttledAuditGroupId = throttledAuditGroupId;
         this.cpuSlowDownMultiplier = cpuSlowDownMultiplier;

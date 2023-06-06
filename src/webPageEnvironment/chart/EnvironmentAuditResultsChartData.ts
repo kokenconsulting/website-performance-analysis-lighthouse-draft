@@ -4,10 +4,10 @@ import { EnvironmentSpecificThrottleSettingChartData } from './EnvironmentSpecif
 import { EnvironmentThrottleSettingChartData } from './EnvironmentThrottleSettingChartData.js';
 import { ThrottledAuditGroupSummaryReport } from '../../ThrottledAuditGroup/reports/ThrottledAuditGroupSummaryReport.js';
 import { WebPageEnvironmentAuditListReport } from '../report/WebPageEnvironmentAuditListReport.js';
-import { BaseReport } from '../../base/BaseReport.js';
+import { WebPageBaseReport } from '../../base/BaseReport.js';
 import { CONSTANTS } from '../../base/Constants.js';
 
-export class EnvironmentAuditResultsChartData extends BaseReport {
+export class EnvironmentAuditResultsChartData extends WebPageBaseReport {
     private webPageThrottledAuditSummaryReport: WebPageEnvironmentAuditListReport;
     private chartDataFilePath: string;
     private allAuditResultList: any[];

@@ -1,14 +1,16 @@
 import { BaseModel } from "../../base/BaseModel.js";
+import { WebApplicationModel } from "../../webApplication/WebApplicationModel.js";
+import { WebPageModel } from "../../webPage/WebPageModel.js";
 
 // app information class that consist of projectname, gitrepourl, gitbranchname
 export class ThrottledAuditGroupSummaryChartDataModel extends BaseModel {
-    private webPage: any;
-    private webApplication: any;
+    private webPage: WebPageModel;
+    private webApplication: WebApplicationModel;
     private throttledAuditGroupId: string;
     private networkSpeedList: number[];
     private cpuSlowDownMultiplierResultsList: any;
 
-    constructor(webPage: any, webApplication: any, throttledAuditGroupId: string, networkSpeedList: number[], cpuSlowDownMultiplierResultsList: any) {
+    constructor(webPage: WebPageModel, webApplication: WebApplicationModel, throttledAuditGroupId: string, networkSpeedList: number[], cpuSlowDownMultiplierResultsList: any) {
         super();
         this.webPage = webPage;
         this.webApplication = webApplication;
