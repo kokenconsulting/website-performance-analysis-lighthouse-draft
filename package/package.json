@@ -1,14 +1,14 @@
 {
   "name": "website-performance-analysis-lighthouse-draft",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.1.4",
   "description": "Website Performance Analysis tool using Google Lighthouse",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "npm run clean;npm install",
-    "build": "tsc",
+    "build": "tsc --module commonjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "M. Ali Koeken",
