@@ -1,6 +1,6 @@
 import { LighthouseAuditEngine } from '../lighthouse/LighthouseAuditEngine.js';
 import { ThrottledAuditReport } from './ThrottledAuditReport.js';
-import { EngineBase } from '../base/EngineBase.js';
+import { EngineBase } from '../Base_2/EngineBase.js';
 import { WebPageModel } from '../webPage/WebPageModel.js';
 import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
 import { ProcessLogger } from '../Log/ProcessLogger.js';

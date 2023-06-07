@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import { ThrottledAuditGroupSummaryChartDataModel } from './ThrottledAuditGroupSummaryChartDataModel.js';
 import { ThrottledAuditGroupSummaryReport } from '../reports/ThrottledAuditGroupSummaryReport.js';
-import { WebPageBaseReport } from '../../base/BaseReport.js';
-import { CONSTANTS } from '../../base/Constants.js';
+import { WebPageBaseReport } from '../../Base_2/BaseReport.js';
+import { CONSTANTS } from '../../Base_2/Constants.js';
 import { WebPageModel } from '../../webPage/WebPageModel.js';
 import { WebApplicationModel } from '../../webApplication/WebApplicationModel.js';
 import { ProcessLogger } from '../../Log/ProcessLogger.js';

@@ -1,6 +1,6 @@
 import * as fs from 'fs';
-import { WebPageBaseReport } from '../../base/BaseReport.js';
-import { CONSTANTS } from '../../base/Constants.js';
+import { WebPageBaseReport } from '../../Base_2/BaseReport.js';
+import { CONSTANTS } from '../../Base_2/Constants.js';
 import { EnvironmentThrottleSettingChartDataModel } from './EnvironmentThrottleSettingChartDataModel.js';
 import { WebApplicationModel } from '../../webApplication/WebApplicationModel.js';
 import { WebPageModel } from '../../webPage/WebPageModel.js';

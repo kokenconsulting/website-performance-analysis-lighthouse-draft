@@ -1,4 +1,4 @@
-import { BaseModel } from "../../base/BaseModel.js";
+import { BaseModel } from "../../Base_2/BaseModel.js";
 import { WebApplication } from "../../index.js";
 import { WebApplicationModel } from "../../webApplication/WebApplicationModel.js";
 import { WebPageModel } from "../../webPage/WebPageModel.js";

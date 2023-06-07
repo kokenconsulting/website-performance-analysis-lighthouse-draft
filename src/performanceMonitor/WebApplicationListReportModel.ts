@@ -1,4 +1,4 @@
-import { BaseModel } from '../base/BaseModel.js';
+import { BaseModel } from '../Base_2/BaseModel.js';
 
 export class WebApplicationListReportModel extends BaseModel {
     private webApplicationList: string[];
