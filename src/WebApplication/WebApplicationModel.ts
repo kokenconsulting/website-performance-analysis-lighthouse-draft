@@ -1,0 +1,15 @@
+import { BaseModel } from '../Base/BaseModel.js';
+
+export class WebApplicationModel extends BaseModel {
+  constructor(
+    public id: string,
+    public name: string,
+    public version: string,
+    public environment: string,
+    public gitRepoUrl: string,
+    public gitBranchName: string,
+    public initiatedBy: string
+  ) {
+    super();
+  }
+}

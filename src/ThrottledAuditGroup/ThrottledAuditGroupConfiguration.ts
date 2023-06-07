@@ -1,5 +1,5 @@
-import { WebApplicationModel } from "../webApplication/WebApplicationModel.js";
-import { WebPageModel } from "../webPage/WebPageModel.js";
+import { WebApplicationModel } from "../WebApplication/WebApplicationModel.js";
+import { WebPageModel } from "../WebPage/WebPageModel.js";
 
 export class ThrottledAuditGroupConfiguration {
     public webPage: WebPageModel;

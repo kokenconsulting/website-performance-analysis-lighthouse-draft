@@ -1,12 +1,12 @@
-import { WebPageBaseReport } from "../../base/BaseReport.js";
-import { CONSTANTS } from "../../base/Constants.js";
-import { ThrottledAuditReport } from "../../throttledAudit/ThrottledAuditReport.js";
+import { WebPageBaseReport } from "../../Base/BaseReport.js";
+import { CONSTANTS } from "../../Base/Constants.js";
+import { ThrottledAuditReport } from "../../ThrottledAudit/ThrottledAuditReport.js";
 import { ThrottledAuditGroupSummaryReportModel } from "./ThrottledAuditGroupSummaryReportModel.js";
 import * as fs from 'fs';
 import * as path from 'path';
-import { WebPageModel } from "../../webPage/WebPageModel.js";
-import { WebApplicationModel } from "../../webApplication/WebApplicationModel.js";
-import { ProcessLogger } from "../../log/ProcessLogger.js";
+import { WebPageModel } from "../../WebPage/WebPageModel.js";
+import { WebApplicationModel } from "../../WebApplication/WebApplicationModel.js";
+import { ProcessLogger } from "../../Log/ProcessLogger.js";
 
 export class ThrottledAuditGroupSummaryReport extends WebPageBaseReport {
     private throttledAuditGroupId: string;

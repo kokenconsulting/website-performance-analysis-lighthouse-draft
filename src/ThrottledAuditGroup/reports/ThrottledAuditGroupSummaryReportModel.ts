@@ -1,7 +1,7 @@
-import { BaseModel } from "../../base/BaseModel.js";
+import { BaseModel } from "../../Base/BaseModel.js";
 import { WebApplication } from "../../index.js";
-import { WebApplicationModel } from "../../webApplication/WebApplicationModel.js";
-import { WebPageModel } from "../../webPage/WebPageModel.js";
+import { WebApplicationModel } from "../../WebApplication/WebApplicationModel.js";
+import { WebPageModel } from "../../WebPage/WebPageModel.js";
 
 // app information class that consist of projectname, gitrepourl, gitbranchname
 export class ThrottledAuditGroupSummaryReportModel extends BaseModel {
