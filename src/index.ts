@@ -3,7 +3,7 @@ import { ThrottledAuditGroupEngine } from './ThrottledAuditGroup/ThrottledAuditG
 //import { AuditListReport } from './webApplication/AuditListReport.js';
 import { ThrottledAuditGroupConfiguration } from './ThrottledAuditGroup/ThrottledAuditGroupConfiguration.js';
 import { ThrottlingSettings } from './throttling/ThrottlingSettings.js';
-import { PerformanceMonitorOrchestrator } from './performanceMonitor/PerformanceMonitorOrchestrator.js';
+import { PerformanceMonitorOrchestrator } from './PerformanceMonitor_2/PerformanceMonitorOrchestrator.js';
 
 export {
   WebApplicationModel as WebApplication,
