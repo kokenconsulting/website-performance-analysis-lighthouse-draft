@@ -4,8 +4,8 @@ import { EnvironmentSpecificThrottleSettingChartData } from './EnvironmentSpecif
 import { EnvironmentThrottleSettingChartData } from './EnvironmentThrottleSettingChartData.js';
 import { ThrottledAuditGroupSummaryReport } from '../../ThrottledAuditGroup/reports/ThrottledAuditGroupSummaryReport.js';
 import { WebPageEnvironmentAuditListReport } from '../report/WebPageEnvironmentAuditListReport.js';
-import { WebPageBaseReport } from '../../Base_2/BaseReport.js';
-import { CONSTANTS } from '../../Base_2/Constants.js';
+import { WebPageBaseReport } from '../../Base/BaseReport.js';
+import { CONSTANTS } from '../../Base/Constants.js';
 import { ProcessLogger } from '../../Log/ProcessLogger.js';
 import { WebPageModel } from '../../webPage/WebPageModel.js';
 import { WebApplicationModel } from '../../webApplication/WebApplicationModel.js';

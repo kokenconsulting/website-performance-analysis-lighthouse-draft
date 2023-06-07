@@ -1,4 +1,4 @@
-import { BaseModel } from '../../Base_2/BaseModel.js';
+import { BaseModel } from '../../Base/BaseModel.js';
 
 export class EnvironmentAuditResultsChartDataModel extends BaseModel {
   constructor(

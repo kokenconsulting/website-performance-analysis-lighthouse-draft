@@ -1,6 +1,6 @@
 import * as chromeLauncher from 'chrome-launcher';
 import lighthouse, { Config, Flags, SharedFlagsSettings } from 'lighthouse';
-import { EngineBase } from '../Base_2/EngineBase.js';
+import { EngineBase } from '../Base/EngineBase.js';
 import { LighthouseAuditReport } from './LighthouseAuditReport.js';
 import { ProcessLogger } from '../Log/ProcessLogger.js';
 import { WebPageModel } from '../webPage/WebPageModel.js';

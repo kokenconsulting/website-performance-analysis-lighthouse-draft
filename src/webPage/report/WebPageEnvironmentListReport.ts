@@ -1,5 +1,5 @@
-import { WebPageBaseReport } from "../../Base_2/BaseReport.js";
-import { CONSTANTS } from "../../Base_2/Constants.js";
+import { WebPageBaseReport } from "../../Base/BaseReport.js";
+import { CONSTANTS } from "../../Base/Constants.js";
 import { ProcessLogger } from "../../Log/ProcessLogger.js";
 import { WebApplicationModel } from "../../webApplication/WebApplicationModel.js";
 import { WebPageModel } from "../WebPageModel.js";

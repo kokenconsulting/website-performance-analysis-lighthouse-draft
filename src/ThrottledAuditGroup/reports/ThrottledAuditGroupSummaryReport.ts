@@ -1,5 +1,5 @@
-import { WebPageBaseReport } from "../../Base_2/BaseReport.js";
-import { CONSTANTS } from "../../Base_2/Constants.js";
+import { WebPageBaseReport } from "../../Base/BaseReport.js";
+import { CONSTANTS } from "../../Base/Constants.js";
 import { ThrottledAuditReport } from "../../throttledAudit/ThrottledAuditReport.js";
 import { ThrottledAuditGroupSummaryReportModel } from "./ThrottledAuditGroupSummaryReportModel.js";
 import * as fs from 'fs';

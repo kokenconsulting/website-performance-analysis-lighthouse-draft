@@ -1,5 +1,5 @@
-import { WebPageBaseReport } from "../Base_2/BaseReport.js";
-import { CONSTANTS } from "../Base_2/Constants.js";
+import { WebPageBaseReport } from "../Base/BaseReport.js";
+import { CONSTANTS } from "../Base/Constants.js";
 import * as fs from 'fs';
 import * as path from 'path';
 import { WebPageModel } from "../webPage/WebPageModel.js";
