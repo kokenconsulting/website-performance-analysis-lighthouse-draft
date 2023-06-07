@@ -1,5 +1,5 @@
 import { CONSTANTS } from './Constants.js';
-import { ProcessLogger } from '../log/ProcessLogger.js';
+import { ProcessLogger } from '../log_2/ProcessLogger.js';
 import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
 import { ProcessMonitorBaseReport } from './ProcessMonitorBaseReport.js';
 

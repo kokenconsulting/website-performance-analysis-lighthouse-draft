@@ -3,7 +3,7 @@ import { ThrottledAuditReport } from './ThrottledAuditReport.js';
 import { EngineBase } from '../base/EngineBase.js';
 import { WebPageModel } from '../webPage/WebPageModel.js';
 import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
-import { ProcessLogger } from '../log/ProcessLogger.js';
+import { ProcessLogger } from '../log_2/ProcessLogger.js';
 
 export class ThrottledAuditEngine extends EngineBase {
     private webPage: WebPageModel;

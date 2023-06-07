@@ -5,7 +5,7 @@ import { ThrottlingSettings } from '../throttling/ThrottlingSettings.js';
 import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
 import { WebPageModel } from '../webPage/WebPageModel.js';
 import { ThrottledAuditGroupEngine } from '../ThrottledAuditGroup/ThrottledAuditGroupEngine.js';
-import { ProcessLogger } from '../log/ProcessLogger.js';
+import { ProcessLogger } from '../log_2/ProcessLogger.js';
 //import { AuditListReport } from '../webApplication/AuditListReport.js';
 //import { WebApplicationThrottledAuditResultsReport } from '../webApplication/WebApplicationThrottledAuditResultsReport.js';
 import { ThrottledAuditGroupSummaryReport } from '../ThrottledAuditGroup/reports/ThrottledAuditGroupSummaryReport.js'

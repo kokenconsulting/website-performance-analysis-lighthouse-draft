@@ -6,7 +6,7 @@ import { ThrottledAuditGroupSummaryReport } from '../../ThrottledAuditGroup/repo
 import { WebPageEnvironmentAuditListReport } from '../report/WebPageEnvironmentAuditListReport.js';
 import { WebPageBaseReport } from '../../base/BaseReport.js';
 import { CONSTANTS } from '../../base/Constants.js';
-import { ProcessLogger } from '../../log/ProcessLogger.js';
+import { ProcessLogger } from '../../log_2/ProcessLogger.js';
 import { WebPageModel } from '../../webPage/WebPageModel.js';
 import { WebApplicationModel } from '../../webApplication/WebApplicationModel.js';
 
