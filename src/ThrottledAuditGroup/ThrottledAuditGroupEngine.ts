@@ -1,7 +1,7 @@
 import { EngineBase } from "../Base/EngineBase.js";
 import { v4 as uuidv4 } from "uuid";
-import { ThrottledAuditEngine } from "../ThrottledAudit_2/ThrottledAuditEngine.js";
-import { ThrottlingManager } from "../Throttling_2/ThrottlingManager.js";
+import { ThrottledAuditEngine } from "../ThrottledAudit/ThrottledAuditEngine.js";
+import { ThrottlingManager } from "../Throttling/ThrottlingManager.js";
 import { ThrottledAuditGroupSummaryReport } from '../ThrottledAuditGroup/reports/ThrottledAuditGroupSummaryReport.js'
 import { ThrottledAuditGroupSummaryChartData } from '../ThrottledAuditGroup/chart/ThrottledAuditGroupSummaryChartData.js'
 import { ThrottledAuditGroupConfiguration } from '../ThrottledAuditGroup/ThrottledAuditGroupConfiguration.js';

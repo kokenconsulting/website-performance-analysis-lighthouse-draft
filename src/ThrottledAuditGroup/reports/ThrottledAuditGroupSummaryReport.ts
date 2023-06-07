@@ -1,6 +1,6 @@
 import { WebPageBaseReport } from "../../Base/BaseReport.js";
 import { CONSTANTS } from "../../Base/Constants.js";
-import { ThrottledAuditReport } from "../../ThrottledAudit_2/ThrottledAuditReport.js";
+import { ThrottledAuditReport } from "../../ThrottledAudit/ThrottledAuditReport.js";
 import { ThrottledAuditGroupSummaryReportModel } from "./ThrottledAuditGroupSummaryReportModel.js";
 import * as fs from 'fs';
 import * as path from 'path';

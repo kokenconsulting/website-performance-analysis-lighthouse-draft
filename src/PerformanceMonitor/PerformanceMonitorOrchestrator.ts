@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { ThrottledAuditGroupConfiguration } from '../ThrottledAuditGroup/ThrottledAuditGroupConfiguration.js';
-import { ThrottlingSettings } from '../Throttling_2/ThrottlingSettings.js';
+import { ThrottlingSettings } from '../Throttling/ThrottlingSettings.js';
 import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
 import { WebPageModel } from '../webPage/WebPageModel.js';
 import { ThrottledAuditGroupEngine } from '../ThrottledAuditGroup/ThrottledAuditGroupEngine.js';
