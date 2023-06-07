@@ -1,4 +1,4 @@
-import { LighthouseAuditEngine } from '../lighthouse/LighthouseAuditEngine.js';
+import { LighthouseAuditEngine } from '../Lighthouse_2/LighthouseAuditEngine.js';
 import { ThrottledAuditReport } from './ThrottledAuditReport.js';
 import { EngineBase } from '../Base/EngineBase.js';
 import { WebPageModel } from '../webPage/WebPageModel.js';

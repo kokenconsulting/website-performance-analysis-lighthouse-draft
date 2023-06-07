@@ -1,6 +1,6 @@
 import { WebPageBaseReport } from "../Base/BaseReport.js";
 import { ThrottledAuditResultModel } from "./ThrottledAuditResultModel.js";
-import { LighthouseAuditReport } from '../lighthouse/LighthouseAuditReport.js';
+import { LighthouseAuditReport } from '../Lighthouse_2/LighthouseAuditReport.js';
 import * as fs from 'fs';
 import * as path from 'path';
 import { WebPageModel } from "../webPage/WebPageModel.js";
