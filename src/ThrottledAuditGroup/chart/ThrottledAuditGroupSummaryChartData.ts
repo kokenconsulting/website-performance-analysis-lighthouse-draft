@@ -5,13 +5,14 @@ import { WebPageBaseReport } from '../../base/BaseReport.js';
 import { CONSTANTS } from '../../base/Constants.js';
 import { WebPageModel } from '../../webPage/WebPageModel.js';
 import { WebApplicationModel } from '../../webApplication/WebApplicationModel.js';
+import { ProcessLogger } from '../../log/ProcessLogger.js';
 
 export class ThrottledAuditGroupSummaryChartData extends WebPageBaseReport {
     private throttledAuditGroupId: string;
     private ThrottledAuditGroupSummaryReport: ThrottledAuditGroupSummaryReport;
     private webPageThrottledAuditSummaryChartDataFilePath: string;
 
-    constructor(webPage: WebPageModel, webApplication: WebApplicationModel, reportFolder: string, logger: any, throttledAuditGroupId: string) {
+    constructor(webPage: WebPageModel, webApplication: WebApplicationModel, reportFolder: string, logger: ProcessLogger, throttledAuditGroupId: string) {
         super(webPage, webApplication, reportFolder, logger);
         this.throttledAuditGroupId = throttledAuditGroupId;
         this.ThrottledAuditGroupSummaryReport = new ThrottledAuditGroupSummaryReport(webPage, webApplication, reportFolder, logger, throttledAuditGroupId);

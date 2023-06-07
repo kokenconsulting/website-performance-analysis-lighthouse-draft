@@ -1,5 +1,6 @@
 import { WebPageBaseReport } from "../../base/BaseReport.js";
 import { CONSTANTS } from "../../base/Constants.js";
+import { ProcessLogger } from "../../log/ProcessLogger.js";
 import { WebApplicationModel } from "../../webApplication/WebApplicationModel.js";
 import { WebPageModel } from "../../webPage/WebPageModel.js";
 import { WebPageEnvironmentAuditListReportModel } from "./WebPageEnvironmentAuditListReportModel.js";
@@ -12,7 +13,7 @@ export class WebPageEnvironmentAuditListReport extends WebPageBaseReport {
         webPage: WebPageModel,
         webApplication: WebApplicationModel,
         reportFolder: string,
-        logger: any
+        logger: ProcessLogger
     ) {
         super(webPage, webApplication, reportFolder, logger);
         this.reportFilePath = this.getReportFilePath();

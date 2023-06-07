@@ -5,6 +5,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { WebPageModel } from "../webPage/WebPageModel.js";
 import { WebApplicationModel } from "../webApplication/WebApplicationModel.js";
+import { ProcessLogger } from "../log/ProcessLogger.js";
 
 export class ThrottledAuditReport extends WebPageBaseReport {
     private throttledAuditGroupId: string;
@@ -13,7 +14,7 @@ export class ThrottledAuditReport extends WebPageBaseReport {
     private lighthouseReport: LighthouseAuditReport;
     private reportFilePath: string;
 
-    constructor(webPage: WebPageModel, webApplication: WebApplicationModel, reportFolder: string, logger: any, throttledAuditGroupId: string, cpuSlowDownMultiplier: number, networkSpeed: any) {
+    constructor(webPage: WebPageModel, webApplication: WebApplicationModel, reportFolder: string, logger: ProcessLogger, throttledAuditGroupId: string, cpuSlowDownMultiplier: number, networkSpeed: any) {
         super(webPage, webApplication, reportFolder, logger);
         this.throttledAuditGroupId = throttledAuditGroupId;
         this.cpuSlowDownMultiplier = cpuSlowDownMultiplier;

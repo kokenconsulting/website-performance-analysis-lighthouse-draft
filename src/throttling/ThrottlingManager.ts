@@ -1,5 +1,5 @@
 import { start, stop } from '@sitespeed.io/throttle';
-import { ProcessLogger } from '../log/ProcessLogger_Rename.js'
+import { ProcessLogger } from '../log/ProcessLogger.js'
 
 
 export class ThrottlingManager {

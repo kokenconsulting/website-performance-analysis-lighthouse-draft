@@ -6,12 +6,13 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { WebPageModel } from "../../webPage/WebPageModel.js";
 import { WebApplicationModel } from "../../webApplication/WebApplicationModel.js";
+import { ProcessLogger } from "../../log/ProcessLogger.js";
 
 export class ThrottledAuditGroupSummaryReport extends WebPageBaseReport {
     private throttledAuditGroupId: string;
     private reportFilePath: string;
 
-    constructor(webPage: WebPageModel, webApplication: WebApplicationModel, reportFolder: string, logger: any, throttledAuditGroupId: string) {
+    constructor(webPage: WebPageModel, webApplication: WebApplicationModel, reportFolder: string, logger: ProcessLogger, throttledAuditGroupId: string) {
         super(webPage, webApplication, reportFolder, logger);
         this.webApplication = webApplication;
         this.throttledAuditGroupId = throttledAuditGroupId;

@@ -2,7 +2,7 @@ import * as chromeLauncher from 'chrome-launcher';
 import lighthouse, { Config, Flags, SharedFlagsSettings } from 'lighthouse';
 import { EngineBase } from '../base/EngineBase.js';
 import { LighthouseAuditReport } from './LighthouseAuditReport.js';
-import { ProcessLogger } from '../log/ProcessLogger_Rename.js';
+import { ProcessLogger } from '../log/ProcessLogger.js';
 import { WebPageModel } from '../webPage/WebPageModel.js';
 import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
 interface NetworkSpeed {

@@ -5,6 +5,7 @@ import { ThrottlingManager } from "../throttling/ThrottlingManager.js";
 import { ThrottledAuditGroupSummaryReport } from '../ThrottledAuditGroup/reports/ThrottledAuditGroupSummaryReport.js'
 import { ThrottledAuditGroupSummaryChartData } from '../ThrottledAuditGroup/chart/ThrottledAuditGroupSummaryChartData.js'
 import { ThrottledAuditGroupConfiguration } from '../ThrottledAuditGroup/ThrottledAuditGroupConfiguration.js';
+import { ProcessLogger } from "../log/ProcessLogger.js";
 
 export class ThrottledAuditGroupEngine extends EngineBase {
   private webPageThrottledAuditConfiguration: ThrottledAuditGroupConfiguration;
@@ -13,7 +14,7 @@ export class ThrottledAuditGroupEngine extends EngineBase {
   private cpuSlowdownMultiplierArray: number[];
   private networkSpeedArray: any[];
 
-  constructor(webPageThrottledAuditConfiguration: ThrottledAuditGroupConfiguration, logger: any, throttledAuditGroupId: string | null = null) {
+  constructor(webPageThrottledAuditConfiguration: ThrottledAuditGroupConfiguration, logger: ProcessLogger, throttledAuditGroupId: string | null = null) {
     super(logger);
     this.webPageThrottledAuditConfiguration = webPageThrottledAuditConfiguration;
     this.reportFolderFullPath = webPageThrottledAuditConfiguration.reportFolderFullPath;
