@@ -10,11 +10,11 @@ import { ProcessLogger } from '../log/ProcessLogger.js';
 //import { WebApplicationThrottledAuditResultsReport } from '../webApplication/WebApplicationThrottledAuditResultsReport.js';
 import { ThrottledAuditGroupSummaryReport } from '../ThrottledAuditGroup/reports/ThrottledAuditGroupSummaryReport.js'
 import { ThrottledAuditGroupSummaryChartData } from '../ThrottledAuditGroup/chart/ThrottledAuditGroupSummaryChartData.js'
-import { WebPageEnvironmentAuditListReport } from '../webPageEnvironment/report/WebPageEnvironmentAuditListReport.js'
+import { WebPageEnvironmentAuditListReport } from '../Environment/report/WebPageEnvironmentAuditListReport.js'
 import { WebApplicationListReport } from './WebApplicationListReport.js';
 import { WebApplicationWebPageListReport } from '../webApplication/report/WebApplicationWebPageListReport.js';
 import { WebPageEnvironmentListReport } from '../webPage/report/WebPageEnvironmentListReport.js';
-import { EnvironmentAuditResultsChartData } from '../webPageEnvironment/chart/EnvironmentAuditResultsChartData.js';
+import { EnvironmentAuditResultsChartData } from '../Environment/chart/EnvironmentAuditResultsChartData.js';
 
 
 export class PerformanceMonitorOrchestrator {
