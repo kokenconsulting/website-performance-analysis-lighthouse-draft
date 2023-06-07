@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import { CONSTANTS } from './Constants.js';
-import { ProcessLogger } from '../log_2/ProcessLogger.js';
+import { ProcessLogger } from '../Log/ProcessLogger.js';
 
 export class ProcessMonitorBaseReport {
     

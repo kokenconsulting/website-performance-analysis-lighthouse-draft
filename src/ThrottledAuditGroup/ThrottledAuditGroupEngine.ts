@@ -5,7 +5,7 @@ import { ThrottlingManager } from "../throttling/ThrottlingManager.js";
 import { ThrottledAuditGroupSummaryReport } from '../ThrottledAuditGroup/reports/ThrottledAuditGroupSummaryReport.js'
 import { ThrottledAuditGroupSummaryChartData } from '../ThrottledAuditGroup/chart/ThrottledAuditGroupSummaryChartData.js'
 import { ThrottledAuditGroupConfiguration } from '../ThrottledAuditGroup/ThrottledAuditGroupConfiguration.js';
-import { ProcessLogger } from "../log_2/ProcessLogger.js";
+import { ProcessLogger } from "../Log/ProcessLogger.js";
 
 export class ThrottledAuditGroupEngine extends EngineBase {
   private webPageThrottledAuditConfiguration: ThrottledAuditGroupConfiguration;

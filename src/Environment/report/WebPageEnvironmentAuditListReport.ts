@@ -1,6 +1,6 @@
 import { WebPageBaseReport } from "../../base/BaseReport.js";
 import { CONSTANTS } from "../../base/Constants.js";
-import { ProcessLogger } from "../../log_2/ProcessLogger.js";
+import { ProcessLogger } from "../../Log/ProcessLogger.js";
 import { WebApplicationModel } from "../../webApplication/WebApplicationModel.js";
 import { WebPageModel } from "../../webPage/WebPageModel.js";
 import { WebPageEnvironmentAuditListReportModel } from "./WebPageEnvironmentAuditListReportModel.js";

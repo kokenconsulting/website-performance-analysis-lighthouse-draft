@@ -4,7 +4,7 @@ import { CONSTANTS } from '../../base/Constants.js';
 import { EnvironmentThrottleSettingChartDataModel } from './EnvironmentThrottleSettingChartDataModel.js';
 import { WebApplicationModel } from '../../webApplication/WebApplicationModel.js';
 import { WebPageModel } from '../../webPage/WebPageModel.js';
-import { ProcessLogger } from '../../log_2/ProcessLogger.js';
+import { ProcessLogger } from '../../Log/ProcessLogger.js';
 
 export class EnvironmentThrottleSettingChartData extends WebPageBaseReport {
     private chartDataFilePath: string;

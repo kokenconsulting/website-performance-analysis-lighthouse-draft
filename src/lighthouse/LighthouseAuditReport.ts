@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { WebPageModel } from "../webPage/WebPageModel.js";
 import { WebApplicationModel } from "../webApplication/WebApplicationModel.js";
-import { ProcessLogger } from "../log_2/ProcessLogger.js";
+import { ProcessLogger } from "../Log/ProcessLogger.js";
 
 export class LighthouseAuditReport extends WebPageBaseReport {
     private throttledAuditGroupId: string;

@@ -1,4 +1,4 @@
-import { ProcessLogger } from "../log_2/ProcessLogger.js";
+import { ProcessLogger } from "../Log/ProcessLogger.js";
 
 export class EngineBase {
     public logger: ProcessLogger;

@@ -1,6 +1,6 @@
 import { CONSTANTS } from "../base/Constants.js";
 import { ProcessMonitorBaseReport } from "../base/ProcessMonitorBaseReport.js";
-import { ProcessLogger } from "../log_2/ProcessLogger.js";
+import { ProcessLogger } from "../Log/ProcessLogger.js";
 import { WebApplicationListReportModel } from "./WebApplicationListReportModel.js";
 import * as fs from 'fs';
 
