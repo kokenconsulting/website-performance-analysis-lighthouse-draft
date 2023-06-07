@@ -3,8 +3,8 @@ import { ThrottledAuditResultModel } from "./ThrottledAuditResultModel.js";
 import { LighthouseAuditReport } from '../Lighthouse/LighthouseAuditReport.js';
 import * as fs from 'fs';
 import * as path from 'path';
-import { WebPageModel } from "../webPage/WebPageModel.js";
-import { WebApplicationModel } from "../webApplication/WebApplicationModel.js";
+import { WebPageModel } from "../WebPage/WebPageModel.js";
+import { WebApplicationModel } from "../WebApplication/WebApplicationModel.js";
 import { ProcessLogger } from "../Log/ProcessLogger.js";
 
 export class ThrottledAuditReport extends WebPageBaseReport {

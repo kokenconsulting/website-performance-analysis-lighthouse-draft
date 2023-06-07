@@ -2,18 +2,18 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { ThrottledAuditGroupConfiguration } from '../ThrottledAuditGroup/ThrottledAuditGroupConfiguration.js';
 import { ThrottlingSettings } from '../Throttling/ThrottlingSettings.js';
-import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
-import { WebPageModel } from '../webPage/WebPageModel.js';
+import { WebApplicationModel } from '../WebApplication/WebApplicationModel.js';
+import { WebPageModel } from '../WebPage/WebPageModel.js';
 import { ThrottledAuditGroupEngine } from '../ThrottledAuditGroup/ThrottledAuditGroupEngine.js';
 import { ProcessLogger } from '../Log/ProcessLogger.js';
-//import { AuditListReport } from '../webApplication/AuditListReport.js';
-//import { WebApplicationThrottledAuditResultsReport } from '../webApplication/WebApplicationThrottledAuditResultsReport.js';
+//import { AuditListReport } from '../WebApplication/AuditListReport.js';
+//import { WebApplicationThrottledAuditResultsReport } from '../WebApplication/WebApplicationThrottledAuditResultsReport.js';
 import { ThrottledAuditGroupSummaryReport } from '../ThrottledAuditGroup/reports/ThrottledAuditGroupSummaryReport.js'
 import { ThrottledAuditGroupSummaryChartData } from '../ThrottledAuditGroup/chart/ThrottledAuditGroupSummaryChartData.js'
 import { WebPageEnvironmentAuditListReport } from '../Environment/report/WebPageEnvironmentAuditListReport.js'
 import { WebApplicationListReport } from './WebApplicationListReport.js';
-import { WebApplicationWebPageListReport } from '../webApplication/report/WebApplicationWebPageListReport.js';
-import { WebPageEnvironmentListReport } from '../webPage/report/WebPageEnvironmentListReport.js';
+import { WebApplicationWebPageListReport } from '../WebApplication/report/WebApplicationWebPageListReport.js';
+import { WebPageEnvironmentListReport } from '../WebPage/report/WebPageEnvironmentListReport.js';
 import { EnvironmentAuditResultsChartData } from '../Environment/chart/EnvironmentAuditResultsChartData.js';
 
 

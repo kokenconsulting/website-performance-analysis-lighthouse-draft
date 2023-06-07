@@ -3,8 +3,8 @@ import lighthouse, { Config, Flags, SharedFlagsSettings } from 'lighthouse';
 import { EngineBase } from '../Base/EngineBase.js';
 import { LighthouseAuditReport } from './LighthouseAuditReport.js';
 import { ProcessLogger } from '../Log/ProcessLogger.js';
-import { WebPageModel } from '../webPage/WebPageModel.js';
-import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
+import { WebPageModel } from '../WebPage/WebPageModel.js';
+import { WebApplicationModel } from '../WebApplication/WebApplicationModel.js';
 interface NetworkSpeed {
   rttMs: number;
   throughputKbps: number;

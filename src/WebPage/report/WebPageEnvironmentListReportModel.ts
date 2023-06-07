@@ -1,5 +1,5 @@
 import { BaseModel } from '../../Base/BaseModel.js';
-import { WebApplicationModel } from '../../webApplication/WebApplicationModel.js';
+import { WebApplicationModel } from '../../WebApplication/WebApplicationModel.js';
 import { WebPageModel } from '../WebPageModel.js';
 
 export class WebPageEnvironmentListReportModel extends BaseModel {

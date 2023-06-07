@@ -1,7 +1,7 @@
 import { CONSTANTS } from './Constants.js';
 import { ProcessLogger } from '../Log/ProcessLogger.js';
-import { WebPageModel } from '../webPage/WebPageModel.js';
-import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
+import { WebPageModel } from '../WebPage/WebPageModel.js';
+import { WebApplicationModel } from '../WebApplication/WebApplicationModel.js';
 import { WebApplicationBaseReport } from './WebApplicationBaseReport.js';
 
 export class WebPageBaseReport extends WebApplicationBaseReport{

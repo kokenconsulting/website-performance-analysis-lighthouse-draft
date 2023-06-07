@@ -2,8 +2,8 @@ import * as fs from 'fs';
 import { WebPageBaseReport } from '../../Base/BaseReport.js';
 import { CONSTANTS } from '../../Base/Constants.js';
 import { EnvironmentSpecificThrottleSettingChartDataModel } from './EnvironmentSpecificThrottleSettingChartDataModel.js';
-import { WebPageModel } from '../../webPage/WebPageModel.js';
-import { WebApplicationModel } from '../../webApplication/WebApplicationModel.js';
+import { WebPageModel } from '../../WebPage/WebPageModel.js';
+import { WebApplicationModel } from '../../WebApplication/WebApplicationModel.js';
 import { ProcessLogger } from '../../Log/ProcessLogger.js';
 
 export class EnvironmentSpecificThrottleSettingChartData extends WebPageBaseReport {

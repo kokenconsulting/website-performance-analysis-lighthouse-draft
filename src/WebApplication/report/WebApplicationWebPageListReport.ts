@@ -1,7 +1,7 @@
 import { WebPageBaseReport } from "../../Base/BaseReport.js";
 import { CONSTANTS } from "../../Base/Constants.js";
 import { ProcessLogger } from "../../Log/ProcessLogger.js";
-import { WebPageModel } from "../../webPage/WebPageModel.js";
+import { WebPageModel } from "../../WebPage/WebPageModel.js";
 import { WebApplicationModel } from "../WebApplicationModel.js";
 import { WebApplicationWebPageListReporttModel } from "./WebApplicationWebPageListReportModel.js";
 import * as fs from 'fs';

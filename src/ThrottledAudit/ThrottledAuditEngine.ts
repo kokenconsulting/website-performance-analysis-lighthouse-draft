@@ -1,8 +1,8 @@
 import { LighthouseAuditEngine } from '../Lighthouse/LighthouseAuditEngine.js';
 import { ThrottledAuditReport } from './ThrottledAuditReport.js';
 import { EngineBase } from '../Base/EngineBase.js';
-import { WebPageModel } from '../webPage/WebPageModel.js';
-import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
+import { WebPageModel } from '../WebPage/WebPageModel.js';
+import { WebApplicationModel } from '../WebApplication/WebApplicationModel.js';
 import { ProcessLogger } from '../Log/ProcessLogger.js';
 
 export class ThrottledAuditEngine extends EngineBase {

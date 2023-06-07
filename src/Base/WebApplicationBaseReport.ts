@@ -1,6 +1,6 @@
 import { CONSTANTS } from './Constants.js';
 import { ProcessLogger } from '../Log/ProcessLogger.js';
-import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
+import { WebApplicationModel } from '../WebApplication/WebApplicationModel.js';
 import { ProcessMonitorBaseReport } from './ProcessMonitorBaseReport.js';
 
 export class WebApplicationBaseReport extends ProcessMonitorBaseReport{
