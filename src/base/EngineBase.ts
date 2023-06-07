@@ -1,7 +1,9 @@
-export class EngineBase {
-    public logger: any;
+import { ProcessLogger } from "../log/ProcessLogger.js";
 
-    constructor(logger: any) {
+export class EngineBase {
+    public logger: ProcessLogger;
+
+    constructor(logger: ProcessLogger) {
         this.logger = logger;
     }
 }

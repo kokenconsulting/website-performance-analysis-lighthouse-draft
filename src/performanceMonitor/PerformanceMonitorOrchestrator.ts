@@ -2,10 +2,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { ThrottledAuditGroupConfiguration } from '../ThrottledAuditGroup/ThrottledAuditGroupConfiguration.js';
 import { ThrottlingSettings } from '../throttling/ThrottlingSettings.js';
-import { WebApplication } from '../webApplication/WebApplicationModel.js';
+import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
 import { WebPageModel } from '../webPage/WebPageModel.js';
 import { ThrottledAuditGroupEngine } from '../ThrottledAuditGroup/ThrottledAuditGroupEngine.js';
-import { ProcessLogger } from '../log/ProcessLogger_Rename.js';
+import { ProcessLogger } from '../log/ProcessLogger.js';
 //import { AuditListReport } from '../webApplication/AuditListReport.js';
 //import { WebApplicationThrottledAuditResultsReport } from '../webApplication/WebApplicationThrottledAuditResultsReport.js';
 import { ThrottledAuditGroupSummaryReport } from '../ThrottledAuditGroup/reports/ThrottledAuditGroupSummaryReport.js'
@@ -21,7 +21,7 @@ export class PerformanceMonitorOrchestrator {
     private logger: ProcessLogger;
     private config: any;
     private webPage: WebPageModel;
-    private webApplication: WebApplication;
+    private webApplication: WebApplicationModel;
     private webPageAuditConfiguration: ThrottledAuditGroupConfiguration;
     private webpageThrottledAuditEngine: ThrottledAuditGroupEngine;
     // private auditListReport: AuditListReport;
@@ -40,7 +40,7 @@ export class PerformanceMonitorOrchestrator {
             this.config.WebPage.Description
         );
 
-        this.webApplication = new WebApplication(
+        this.webApplication = new WebApplicationModel(
             this.config.Application.Id,
             this.config.Application.Name,
             this.config.Application.Version,

@@ -68,3 +68,8 @@ npm publish
 ```` shell
 npm i -g website-performance-analysis-lighthouse-draft 
 ````
+
+
+## Notes
+
+git remote set-url origin git@github.com-kokenconsulting:kokenconsulting/website-performance-analysis-lighthouse-draft.git

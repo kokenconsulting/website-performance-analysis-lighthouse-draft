@@ -1,9 +1,11 @@
 import { BaseModel } from '../../base/BaseModel.js';
+import { WebApplicationModel } from '../../webApplication/WebApplicationModel.js';
+import { WebPageModel } from '../../webPage/WebPageModel.js';
 
 export class EnvironmentSpecificThrottleSettingChartDataModel extends BaseModel {
   constructor(
-    private webPage: any,
-    private webApplication: any,
+    private webPage: WebPageModel,
+    private webApplication: WebApplicationModel,
     private cpuSlowDownMultiplier: number,
     private networkSpeed: number,
     private labels: string[],

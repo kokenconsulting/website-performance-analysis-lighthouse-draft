@@ -1,17 +1,20 @@
-import { LighthouseAuditEngine } from '../lighthouse/LighthouseAuditEngine_2.js';
+import { LighthouseAuditEngine } from '../lighthouse/LighthouseAuditEngine.js';
 import { ThrottledAuditReport } from './ThrottledAuditReport.js';
 import { EngineBase } from '../base/EngineBase.js';
+import { WebPageModel } from '../webPage/WebPageModel.js';
+import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
+import { ProcessLogger } from '../log/ProcessLogger.js';
 
 export class ThrottledAuditEngine extends EngineBase {
-    private webPage: any;
-    private webApplication: any;
+    private webPage: WebPageModel;
+    private webApplication: WebApplicationModel;
     private reportFolder: string;
     private throttledAuditGroupId: string;
     private networkSpeed: any;
     private cpuSlowdownMultiplier: number;
     private lighthouseEngine: LighthouseAuditEngine;
 
-    constructor(webPage: any, webApplication: any, reportFolder: string, logger: any, throttledAuditGroupId: string, isExternalThrottlingUsed: boolean, cpuSlowdownMultiplier: number, networkSpeed: any) {
+    constructor(webPage: WebPageModel, webApplication: WebApplicationModel, reportFolder: string, logger: ProcessLogger, throttledAuditGroupId: string, isExternalThrottlingUsed: boolean, cpuSlowdownMultiplier: number, networkSpeed: any) {
         super(logger);
         this.webPage = webPage;
         this.webApplication = webApplication;

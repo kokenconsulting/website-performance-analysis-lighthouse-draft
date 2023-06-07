@@ -1,17 +1,19 @@
-import { BaseReport } from "../../base/BaseReport.js";
+import { WebPageBaseReport } from "../../base/BaseReport.js";
 import { CONSTANTS } from "../../base/Constants.js";
+import { ProcessLogger } from "../../log/ProcessLogger.js";
+import { WebApplicationModel } from "../../webApplication/WebApplicationModel.js";
+import { WebPageModel } from "../../webPage/WebPageModel.js";
 import { WebPageEnvironmentAuditListReportModel } from "./WebPageEnvironmentAuditListReportModel.js";
 import * as fs from 'fs';
-import * as path from 'path';
 
-export class WebPageEnvironmentAuditListReport extends BaseReport {
+export class WebPageEnvironmentAuditListReport extends WebPageBaseReport {
     private reportFilePath: string;
 
     constructor(
-        webPage: any,
-        webApplication: any,
+        webPage: WebPageModel,
+        webApplication: WebApplicationModel,
         reportFolder: string,
-        logger: any
+        logger: ProcessLogger
     ) {
         super(webPage, webApplication, reportFolder, logger);
         this.reportFilePath = this.getReportFilePath();

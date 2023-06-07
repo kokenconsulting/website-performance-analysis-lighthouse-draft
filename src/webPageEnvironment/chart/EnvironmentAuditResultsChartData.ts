@@ -4,16 +4,19 @@ import { EnvironmentSpecificThrottleSettingChartData } from './EnvironmentSpecif
 import { EnvironmentThrottleSettingChartData } from './EnvironmentThrottleSettingChartData.js';
 import { ThrottledAuditGroupSummaryReport } from '../../ThrottledAuditGroup/reports/ThrottledAuditGroupSummaryReport.js';
 import { WebPageEnvironmentAuditListReport } from '../report/WebPageEnvironmentAuditListReport.js';
-import { BaseReport } from '../../base/BaseReport.js';
+import { WebPageBaseReport } from '../../base/BaseReport.js';
 import { CONSTANTS } from '../../base/Constants.js';
+import { ProcessLogger } from '../../log/ProcessLogger.js';
+import { WebPageModel } from '../../webPage/WebPageModel.js';
+import { WebApplicationModel } from '../../webApplication/WebApplicationModel.js';
 
-export class EnvironmentAuditResultsChartData extends BaseReport {
+export class EnvironmentAuditResultsChartData extends WebPageBaseReport {
     private webPageThrottledAuditSummaryReport: WebPageEnvironmentAuditListReport;
     private chartDataFilePath: string;
     private allAuditResultList: any[];
     private environmentUnsortedCompleteAuditDetails: any;
 
-    constructor(webPage: any, webApplication: any, reportFolder: string, logger: any) {
+    constructor(webPage: WebPageModel, webApplication: WebApplicationModel, reportFolder: string, logger: ProcessLogger) {
         super(webPage, webApplication, reportFolder, logger);
         this.webPageThrottledAuditSummaryReport = new WebPageEnvironmentAuditListReport(webPage, webApplication, reportFolder, logger);
         this.chartDataFilePath = this.getReportFilePath();
@@ -46,12 +49,6 @@ export class EnvironmentAuditResultsChartData extends BaseReport {
             }
         }
     }
-
-    // private getSessionSummaryInformation(): any {
-    //     const auditSummaryPath = this.getReportFilePath(this.throttledAuditGroupId);
-    //     const auditSummaryDataJson = JSON.parse(fs.readFileSync(auditSummaryPath, 'utf8'));
-    //     return auditSummaryDataJson;
-    // }
 
     public getReport(): any {
         //TODO - return as ThrottledAuditGroupSummaryChartDataModel

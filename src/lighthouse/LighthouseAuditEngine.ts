@@ -2,7 +2,9 @@ import * as chromeLauncher from 'chrome-launcher';
 import lighthouse, { Config, Flags, SharedFlagsSettings } from 'lighthouse';
 import { EngineBase } from '../base/EngineBase.js';
 import { LighthouseAuditReport } from './LighthouseAuditReport.js';
-import { ProcessLogger } from '../log/ProcessLogger_Rename.js';
+import { ProcessLogger } from '../log/ProcessLogger.js';
+import { WebPageModel } from '../webPage/WebPageModel.js';
+import { WebApplicationModel } from '../webApplication/WebApplicationModel.js';
 interface NetworkSpeed {
   rttMs: number;
   throughputKbps: number;
@@ -15,15 +17,15 @@ interface CustomFlagsSettings extends SharedFlagsSettings {
   customSettings?: Record<string, unknown>;
 }
 export class LighthouseAuditEngine extends EngineBase {
-  private webPage: any;
+  private webPage: WebPageModel;
   private networkSpeed: NetworkSpeed;
   private cpuSlowdownMultiplier: number;
   private externalNetworkSpeed: NetworkSpeed | null;
   private report: LighthouseAuditReport;
 
   constructor(
-    webPage: any,
-    webApplication: any,
+    webPage: WebPageModel,
+    webApplication: WebApplicationModel,
     reportFolder: string,
     logger: ProcessLogger,
     throttledAuditGroupId: string,
